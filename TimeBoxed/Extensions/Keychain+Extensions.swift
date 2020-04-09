@@ -13,6 +13,13 @@ extension Keychain {
     func string(forKey key: Keychain.Keys) -> String? {
         return try? get(key.rawValue)
     }
+    func string(for name: String) -> String? {
+        return try? get(name)
+    }
+    func set(_ value: String, for name: String) {
+        try? set(value, key: name)
+    }
+
     func set(_ value: String, forKey key: Keychain.Keys) {
         try? set(value, key: key.rawValue)
     }

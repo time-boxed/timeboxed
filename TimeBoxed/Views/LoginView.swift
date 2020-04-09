@@ -40,7 +40,22 @@ struct LoginView: View {
     }
 
     func Login() {
-        print("Button tapped")
+        var request = URLComponents()
+        let parts = username.components(separatedBy: "@")
+        request.host = parts[1]
+        request.path = "/api/pomodoro"
+        request.scheme = "https"
+
+        URLSession.shared.authedRequest(url: request, method: .GET, username: parts[0], password: password) { (result) in
+            switch result {
+            case .success:
+                Settings.defaults.set(value: self.username, forKey: .currentUser)
+                Settings.keychain.set(self.password, for: self.username)
+            case .failure(let error):
+                print(error)
+            }
+
+        }
     }
 }
 

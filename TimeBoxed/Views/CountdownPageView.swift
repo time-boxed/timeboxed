@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CountdownPageView: View {
+    @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
+
     var body: some View {
         VStack {
             Text("Title")

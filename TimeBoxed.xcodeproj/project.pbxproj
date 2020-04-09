@@ -25,6 +25,9 @@
 		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
 		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
 		C19BA174243F35E8004795A7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA173243F35E8004795A7 /* LoginView.swift */; };
+		C19BA17B243F38C7004795A7 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA17A243F38C7004795A7 /* URLSession+Extensions.swift */; };
+		C19BA17D243F3922004795A7 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA17C243F3922004795A7 /* OSLog+Extensions.swift */; };
+		C19BA17F243F3AB5004795A7 /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA17E243F3AB5004795A7 /* JSON+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +49,9 @@
 		C19BA16F243F3407004795A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C19BA171243F346D004795A7 /* Keychain+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Extensions.swift"; sourceTree = "<group>"; };
 		C19BA173243F35E8004795A7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C19BA17A243F38C7004795A7 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
+		C19BA17C243F3922004795A7 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
+		C19BA17E243F3AB5004795A7 /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +133,10 @@
 		C19BA16C243F33AA004795A7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C19BA17E243F3AB5004795A7 /* JSON+Extensions.swift */,
 				C19BA171243F346D004795A7 /* Keychain+Extensions.swift */,
+				C19BA17C243F3922004795A7 /* OSLog+Extensions.swift */,
+				C19BA17A243F38C7004795A7 /* URLSession+Extensions.swift */,
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
 			);
 			path = Extensions;
@@ -217,13 +226,16 @@
 				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
+				C19BA17F243F3AB5004795A7 /* JSON+Extensions.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
+				C19BA17D243F3922004795A7 /* OSLog+Extensions.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
+				C19BA17B243F38C7004795A7 /* URLSession+Extensions.swift in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
