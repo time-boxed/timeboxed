@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,12 @@
 		C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
+		C19BA168243F3331004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftPackageProductDependency */; };
+		C19BA16B243F3396004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */; };
+		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
+		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
+		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
+		C19BA174243F35E8004795A7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA173243F35E8004795A7 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +42,10 @@
 		C19BA160243F31D0004795A7 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		C19BA162243F321F004795A7 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		C19BA164243F3243004795A7 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		C19BA16F243F3407004795A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C19BA171243F346D004795A7 /* Keychain+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Extensions.swift"; sourceTree = "<group>"; };
+		C19BA173243F35E8004795A7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C19BA16B243F3396004795A7 /* BuildFile in Frameworks */,
+				C19BA168243F3331004795A7 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +82,7 @@
 		C19BA140243F2E33004795A7 /* TimeBoxed */ = {
 			isa = PBXGroup;
 			children = (
+				C19BA16C243F33AA004795A7 /* Extensions */,
 				C19BA149243F2E36004795A7 /* Preview Content */,
 				C19BA15C243F317B004795A7 /* Views */,
 				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
@@ -78,6 +91,7 @@
 				C19BA14F243F2E36004795A7 /* Info.plist */,
 				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
 				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
+				C19BA16F243F3407004795A7 /* Settings.swift */,
 			);
 			path = TimeBoxed;
 			sourceTree = "<group>";
@@ -97,6 +111,7 @@
 				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
 				C19BA160243F31D0004795A7 /* FavoriteView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
+				C19BA173243F35E8004795A7 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,6 +122,15 @@
 				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		C19BA16C243F33AA004795A7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C19BA171243F346D004795A7 /* Keychain+Extensions.swift */,
+				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +149,10 @@
 			dependencies = (
 			);
 			name = TimeBoxed;
+			packageProductDependencies = (
+				C19BA167243F3331004795A7 /* SwiftPackageProductDependency */,
+				C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */,
+			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
 			productType = "com.apple.product-type.application";
@@ -153,6 +181,10 @@
 				Base,
 			);
 			mainGroup = C19BA135243F2E33004795A7;
+			packageReferences = (
+				C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */,
+				C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */,
+			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -182,12 +214,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
+				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
+				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
+				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
+				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,6 +419,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.1;
+			};
+		};
+		C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C19BA167243F3331004795A7 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */;
+			productName = SwiftMQTT;
+		};
+		C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C19BA136243F2E33004795A7 /* Project object */;
 }
