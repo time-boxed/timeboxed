@@ -13,6 +13,12 @@
 		C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA147243F2E36004795A7 /* Assets.xcassets */; };
 		C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */; };
 		C19BA14E243F2E36004795A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */; };
+		C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA155243F2E8F004795A7 /* CountdownPageView.swift */; };
+		C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15A243F2F7C004795A7 /* CountdownView.swift */; };
+		C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryView.swift */; };
+		C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteView.swift */; };
+		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
+		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C19BA14D243F2E36004795A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C19BA14F243F2E36004795A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C19BA155243F2E8F004795A7 /* CountdownPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownPageView.swift; sourceTree = "<group>"; };
+		C19BA15A243F2F7C004795A7 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		C19BA15E243F31A4004795A7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		C19BA160243F31D0004795A7 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		C19BA162243F321F004795A7 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		C19BA164243F3243004795A7 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,8 +52,10 @@
 		C19BA135243F2E33004795A7 = {
 			isa = PBXGroup;
 			children = (
-				C19BA140243F2E33004795A7 /* TimeBoxed */,
 				C19BA13F243F2E33004795A7 /* Products */,
+				C19BA140243F2E33004795A7 /* TimeBoxed */,
+				C19BA162243F321F004795A7 /* Makefile */,
+				C19BA164243F3243004795A7 /* swiftgen.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +70,14 @@
 		C19BA140243F2E33004795A7 /* TimeBoxed */ = {
 			isa = PBXGroup;
 			children = (
-				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
-				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
-				C19BA145243F2E33004795A7 /* ContentView.swift */,
-				C19BA147243F2E36004795A7 /* Assets.xcassets */,
-				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
-				C19BA14F243F2E36004795A7 /* Info.plist */,
 				C19BA149243F2E36004795A7 /* Preview Content */,
+				C19BA15C243F317B004795A7 /* Views */,
+				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
+				C19BA147243F2E36004795A7 /* Assets.xcassets */,
+				C19BA145243F2E33004795A7 /* ContentView.swift */,
+				C19BA14F243F2E36004795A7 /* Info.plist */,
+				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
+				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
 			);
 			path = TimeBoxed;
 			sourceTree = "<group>";
@@ -73,6 +88,25 @@
 				C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C19BA15C243F317B004795A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C19BA15D243F3189004795A7 /* Elements */,
+				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
+				C19BA160243F31D0004795A7 /* FavoriteView.swift */,
+				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C19BA15D243F3189004795A7 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +170,7 @@
 				C19BA14E243F2E36004795A7 /* LaunchScreen.storyboard in Resources */,
 				C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */,
 				C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */,
+				C19BA165243F3243004795A7 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +182,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
+				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
+				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
+				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
+				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
+				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +201,7 @@
 				C19BA14D243F2E36004795A7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
