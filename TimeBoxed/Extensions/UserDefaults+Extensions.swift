@@ -31,7 +31,7 @@ extension UserDefaults {
     }
 
     func object<T: Decodable>(forKey: UserDefaults.Keys) -> T? {
-        guard let data = data(forKey: forKey.rawValue) else {return nil}
+        guard let data = data(forKey: forKey.rawValue) else { return nil }
         return try? PropertyListDecoder().decode(T.self, from: data) as T
     }
 
@@ -61,7 +61,7 @@ extension UserDefaults {
         removeObject(forKey: key.rawValue)
     }
 
-    func checkDefault(_ defaultValue: String, forKey key: UserDefaults.Keys ) {
+    func checkDefault(_ defaultValue: String, forKey key: UserDefaults.Keys) {
         if string(forKey: key) == nil {
             set(defaultValue, forKey: key.rawValue)
         }

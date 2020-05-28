@@ -3,7 +3,7 @@
 format:
 	swiftgen
 	synx TimeBoxed.xcodeproj
-	swiftlint autocorrect
+	swift-format format --in-place --recursive TimeBoxed
 
 .PHONY:	beta
 beta:

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
 		C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA141243F2E33004795A7 /* AppDelegate.swift */; };
 		C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA143243F2E33004795A7 /* SceneDelegate.swift */; };
 		C19BA146243F2E33004795A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA145243F2E33004795A7 /* ContentView.swift */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
+		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
 		C19BA13E243F2E33004795A7 /* TimeBoxed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoxed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19BA141243F2E33004795A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C19BA143243F2E33004795A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +70,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		876EF076245E90650021687C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				876EF077245E90790021687C /* Pomodoro.swift */,
+				C19BA16F243F3407004795A7 /* Settings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C19BA135243F2E33004795A7 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				C19BA16C243F33AA004795A7 /* Extensions */,
+				876EF076245E90650021687C /* Models */,
 				C19BA149243F2E36004795A7 /* Preview Content */,
 				C19BA15C243F317B004795A7 /* Views */,
 				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
@@ -97,7 +110,7 @@
 				C19BA14F243F2E36004795A7 /* Info.plist */,
 				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
 				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
-				C19BA16F243F3407004795A7 /* Settings.swift */,
+				87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */,
 			);
 			path = TimeBoxed;
 			sourceTree = "<group>";
@@ -230,6 +243,7 @@
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
+				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA17D243F3922004795A7 /* OSLog+Extensions.swift in Sources */,
@@ -373,6 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TimeBoxed/TimeBoxed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeBoxed/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;
@@ -393,6 +408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TimeBoxed/TimeBoxed.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeBoxed/Preview Content\"";
 				DEVELOPMENT_TEAM = QX3B8ZS54S;

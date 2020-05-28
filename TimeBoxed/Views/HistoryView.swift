@@ -6,11 +6,36 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 struct HistoryView: View {
+    @State private var viewModel = [Pomodoro]()
+    @State private var cancellable: AnyCancellable?
+
+    func loadData() {
+        cancellable = Pomodoro.list()
+            .receive(on: DispatchQueue.main)
+            .replaceError(with: [])
+            .assign(to: \.viewModel, on: self)
+    }
+
     var body: some View {
-        Text("History")
+        List(viewModel) { item in
+            HStack() {
+                VStack(alignment: .leading) {
+                    Text(item.title)
+                        .font(.headline)
+                    Text(item.category)
+                }
+                VStack(alignment: .trailing) {
+                    Text("\(item.start)")
+                    Text("\(item.end)")
+                }
+            }
+
+        }
+        .onAppear { self.loadData() }
     }
 }
 

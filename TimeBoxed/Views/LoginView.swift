@@ -22,7 +22,7 @@ struct LoginView: View {
                 .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
-                .keyboardType(/*@START_MENU_TOKEN@*/.emailAddress/*@END_MENU_TOKEN@*/)
+                .keyboardType( /*@START_MENU_TOKEN@*/.emailAddress /*@END_MENU_TOKEN@*/)
             SecureField("Password", text: $password)
                 .padding()
                 .cornerRadius(5.0)
@@ -46,7 +46,9 @@ struct LoginView: View {
         request.path = "/api/pomodoro"
         request.scheme = "https"
 
-        URLSession.shared.authedRequest(url: request, method: .GET, username: parts[0], password: password) { (result) in
+        URLSession.shared.authedRequest(
+            url: request, method: .GET, username: parts[0], password: password
+        ) { (result) in
             switch result {
             case .success:
                 Settings.defaults.set(value: self.username, forKey: .currentUser)

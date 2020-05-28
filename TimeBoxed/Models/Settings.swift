@@ -24,7 +24,7 @@ extension Keychain {
 }
 
 struct Settings {
-    static let identifier = "group.net.kungfudiscomonkey.timebox"
+    static let identifier = "net.kungfudiscomonkey.Timebox"
     static let defaults = UserDefaults(suiteName: Settings.identifier)!
-    static let keychain = Keychain(accessGroup: Settings.identifier)
+    static let keychain = Keychain(service: Settings.identifier)
 }
