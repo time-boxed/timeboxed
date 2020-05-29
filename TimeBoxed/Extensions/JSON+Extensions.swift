@@ -12,7 +12,7 @@ enum DateError: String, Error {
     case invalidDate
 }
 
-func dateDecode(decoder: Decoder) throws -> Date {
+func djangoDateDecoder(decoder: Decoder) throws -> Date {
     let container = try decoder.singleValueContainer()
     let dateStr = try container.decode(String.self)
 
@@ -59,7 +59,7 @@ extension Encodable {
 extension Decodable {
     static func fromData<T: Decodable>(_ message: Data) -> T? {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .custom(dateDecode)
+        decoder.dateDecodingStrategy = .custom(djangoDateDecoder)
         do {
             return try decoder.decode(T.self, from: message)
         } catch let error {

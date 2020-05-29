@@ -29,7 +29,7 @@ struct Favorite: Codable, Identifiable {
 extension Favorite: API {
     static func list() -> AnyPublisher<[Favorite], Error> {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .custom(djangoDateDecoder)
 
         return request(path: "/api/favorite")
             .map { $0.data }
