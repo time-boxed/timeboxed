@@ -25,24 +25,12 @@ struct Pomodoro: Codable, Identifiable {
     }
 }
 
-extension Pomodoro {
+extension Pomodoro: API {
     static func list() -> AnyPublisher<[Pomodoro], Error> {
-        var request = URLComponents()
-        let username = Settings.defaults.string(forKey: .currentUser)!
-        let parts = username.components(separatedBy: "@")
-
-        request.host = parts[1]
-        request.scheme = "https"
-        request.host = parts[1]
-        request.path = "/api/pomodoro"
-
-        request.user = parts[0]
-        request.password = Settings.keychain.string(for: username)
-
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        return URLSession.shared.dataTaskPublisher(for: request.url!)
+        return request(path: "/api/pomodoro")
             .map { $0.data }
             .decode(type: Pomodoro.List.self, decoder: decoder)
             .map(\.results)
