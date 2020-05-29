@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
+		87F95B2A24808A8C00255B29 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2924808A8C00255B29 /* Base.swift */; };
+		87F95B2C24808D0400255B29 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2B24808D0400255B29 /* Favorite.swift */; };
+		87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2D2480930200255B29 /* FavoriteRowView.swift */; };
+		87F95B302480933100255B29 /* HistoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2F2480933100255B29 /* HistoryRowView.swift */; };
+		87F95B322480944700255B29 /* DurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B312480944700255B29 /* DurationView.swift */; };
+		87F95B342480978200255B29 /* DateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B332480978200255B29 /* DateTimeView.swift */; };
 		C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA141243F2E33004795A7 /* AppDelegate.swift */; };
 		C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA143243F2E33004795A7 /* SceneDelegate.swift */; };
 		C19BA146243F2E33004795A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA145243F2E33004795A7 /* ContentView.swift */; };
@@ -34,6 +40,12 @@
 /* Begin PBXFileReference section */
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
+		87F95B2924808A8C00255B29 /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		87F95B2B24808D0400255B29 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		87F95B2D2480930200255B29 /* FavoriteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowView.swift; sourceTree = "<group>"; };
+		87F95B2F2480933100255B29 /* HistoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRowView.swift; sourceTree = "<group>"; };
+		87F95B312480944700255B29 /* DurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationView.swift; sourceTree = "<group>"; };
+		87F95B332480978200255B29 /* DateTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeView.swift; sourceTree = "<group>"; };
 		C19BA13E243F2E33004795A7 /* TimeBoxed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoxed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19BA141243F2E33004795A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C19BA143243F2E33004795A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +85,8 @@
 		876EF076245E90650021687C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				87F95B2924808A8C00255B29 /* Base.swift */,
+				87F95B2B24808D0400255B29 /* Favorite.swift */,
 				876EF077245E90790021687C /* Pomodoro.swift */,
 				C19BA16F243F3407004795A7 /* Settings.swift */,
 			);
@@ -139,6 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
+				87F95B332480978200255B29 /* DateTimeView.swift */,
+				87F95B312480944700255B29 /* DurationView.swift */,
+				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
+				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -240,15 +258,21 @@
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
 				C19BA17F243F3AB5004795A7 /* JSON+Extensions.swift in Sources */,
+				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
+				87F95B322480944700255B29 /* DurationView.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
+				87F95B342480978200255B29 /* DateTimeView.swift in Sources */,
+				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
+				87F95B2A24808A8C00255B29 /* Base.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA17D243F3922004795A7 /* OSLog+Extensions.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
+				87F95B2C24808D0400255B29 /* Favorite.swift in Sources */,
 				C19BA17B243F38C7004795A7 /* URLSession+Extensions.swift in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,
 			);

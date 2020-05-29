@@ -22,20 +22,9 @@ struct HistoryView: View {
 
     var body: some View {
         List(viewModel) { item in
-            HStack() {
-                VStack(alignment: .leading) {
-                    Text(item.title)
-                        .font(.headline)
-                    Text(item.category)
-                }
-                VStack(alignment: .trailing) {
-                    Text("\(item.start)")
-                    Text("\(item.end)")
-                }
-            }
-
+            HistoryRowView(pomodoro: item)
         }
-        .onAppear { self.loadData() }
+        .onAppear(perform: loadData)
     }
 }
 
