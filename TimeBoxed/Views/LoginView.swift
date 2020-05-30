@@ -10,6 +10,8 @@ import Combine
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.presentationMode) var presentation
+
     @State var username: String = ""
     @State var password: String = ""
     @State private var cancellable: AnyCancellable?
@@ -52,6 +54,7 @@ struct LoginView: View {
                 receiveValue: { _ in
                     Settings.defaults.set(value: self.username, forKey: .currentUser)
                     Settings.keychain.set(self.password, for: self.username)
+                    self.presentation.wrappedValue.dismiss()
                 })
     }
 }

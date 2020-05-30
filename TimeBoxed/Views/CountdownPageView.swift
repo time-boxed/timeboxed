@@ -15,6 +15,7 @@ struct CountdownPageView: View {
     @State private var cancellable: AnyCancellable?
 
     func loadData() {
+        guard currentUser != nil else { return }
         cancellable = Pomodoro.list()
             .receive(on: DispatchQueue.main)
             .replaceError(with: [])
@@ -32,21 +33,27 @@ struct CountdownPageView: View {
                 CountdownView(date: viewModel!.end)
                     .font(.largeTitle)
 
-            } else {
-                Text("Loading").onAppear(perform: self.loadData)
             }
             Divider()
 
-            Button(action: {}) {
+            Button(action: actionAddPomodoro) {
                 Text("25 Min")
             }
             .buttonStyle(ActionButtonStyle())
 
-            Button(action: {}) {
+            Button(action: actionAddHour) {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
-        }
+        }.onAppear(perform: loadData)
+    }
+    
+    func actionAddPomodoro() {
+        
+    }
+    
+    func actionAddHour() {
+        
     }
 }
 

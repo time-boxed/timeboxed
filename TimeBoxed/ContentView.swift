@@ -10,39 +10,42 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
+    @State private var showLogin = false
     @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
-
+    
     @ViewBuilder
     var body: some View {
-        if currentUser != nil {
-            TabView(selection: $selection) {
-                CountdownPageView()
-                    .tabItem {
-                        VStack {
-                            Image("first")
-                            Text("Active")
-                        }
-                }
-                .tag(0)
-                FavoriteView()
-                    .tabItem {
-                        VStack {
-                            Image("second")
-                            Text("Favorite")
-                        }
-                }
-                .tag(1)
-                HistoryView()
-                    .tabItem {
-                        VStack {
-                            Image("second")
-                            Text("History")
-                        }
-                }
-                .tag(2)
+        TabView(selection: $selection) {
+            CountdownPageView()
+                .tabItem {
+                    VStack {
+                        Image("first")
+                        Text("Active")
+                    }
             }
-        } else {
+            .tag(0)
+            FavoriteView()
+                .tabItem {
+                    VStack {
+                        Image("second")
+                        Text("Favorite")
+                    }
+            }
+            .tag(1)
+            HistoryView()
+                .tabItem {
+                    VStack {
+                        Image("second")
+                        Text("History")
+                    }
+            }
+            .tag(2)
+        }
+        .sheet(isPresented: $showLogin) {
             LoginView()
+        }
+        .onAppear {
+            self.showLogin = self.currentUser == nil
         }
     }
 }
