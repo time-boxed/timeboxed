@@ -34,14 +34,14 @@ extension URLSession {
 
         var request = URLRequest(url: url.url!)
         request.addBasicAuth(username: parts[0], password: password)
-        
+
         os_log(.debug, "Querying %{public}s for %{public}s", url.string!, parts[0])
 
         return dataTaskPublisher(for: request)
     }
     func dataTaskPublisher(path: String) -> URLSession.DataTaskPublisher {
-        let login = Settings.defaults.string(forKey: .currentUser)!
-        let password = Settings.keychain.string(for: login)!
+        let login = Settings.defaults.string(forKey: .currentUser) ?? "@"
+        let password = Settings.keychain.string(for: login) ?? ""
 
         return dataTaskPublisher(path: path, login: login, password: password)
     }
