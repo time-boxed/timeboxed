@@ -32,7 +32,7 @@ struct HistoryView: View {
         NavigationView {
             List {
                 ForEach(HistoryGroup.from(store.pomodoros), id: \.date) { gr in
-                    Section(header: DateTimeView(date: gr.date)) {
+                    Section(header: DateView(date: gr.date)) {
                         ForEach(gr.items) { p in
                             NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
                                 HistoryRowView(pomodoro: p)

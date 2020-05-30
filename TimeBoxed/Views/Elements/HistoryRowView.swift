@@ -10,24 +10,25 @@ import SwiftUI
 
 struct HistoryRowView: View {
     var pomodoro: Pomodoro
-
+    
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
+            HStack(alignment: .top) {
                 Text(pomodoro.title)
                     .font(.title)
-                Text(pomodoro.category)
-                    .font(.footnote)
-            }
-            Spacer()
-            VStack(alignment: .trailing) {
-                DateTimeView(date: pomodoro.start, style: .short)
-                    .font(.caption)
                 Spacer()
-                DateTimeView(date: pomodoro.end, style: .short)
-                    .font(.caption)
+                VStack {
+                    TimeView(date: pomodoro.start, style: .medium)
+                    Spacer()
+                    TimeView(date: pomodoro.end, style: .medium)
+                    Spacer()
+                    IntervalView(elapsed: pomodoro.end.timeIntervalSince(pomodoro.start))
+                }.font(.caption)
             }
+            Text(pomodoro.category)
+                .font(.footnote)
         }
+        
     }
 }
 
@@ -40,7 +41,7 @@ struct HistoryRowView_Previews: PreviewProvider {
         category: "Test Category",
         memo: "Some memo here"
     )
-
+    
     static var previews: some View {
         HistoryRowView(pomodoro: data)
             .previewLayout(.fixed(width: 256, height: 44))

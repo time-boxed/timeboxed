@@ -45,4 +45,8 @@ final class FavoriteStore: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: \.favorites, on: self)
     }
+
+    func start(favorite: Favorite) {
+        print(favorite)
+    }
 }
