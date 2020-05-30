@@ -17,6 +17,7 @@ struct Favorite: Codable, Identifiable {
     let icon: URL?
     let html_link: URL
     let url: URL?
+    let count: Int
 
     struct List: Codable {
         let count: Int
@@ -40,6 +41,7 @@ final class FavoriteStore: ObservableObject {
             .map(\.results)
             .eraseToAnyPublisher()
             .replaceError(with: [])
+            .map { $0.sorted { $0.count > $1.count } }
             .receive(on: DispatchQueue.main)
             .assign(to: \.favorites, on: self)
     }
