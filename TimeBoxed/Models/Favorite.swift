@@ -26,12 +26,12 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
-extension Favorite: API {
+extension Favorite {
     static func list() -> AnyPublisher<[Favorite], Error> {
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .custom(djangoDateDecoder)
+        decoder.dateDecodingStrategy = .iso8601
 
-        return request(path: "/api/favorite")
+        return URLSession.shared.dataTaskPublisher(path: "/api/favorite")
             .map { $0.data }
             .decode(type: Favorite.List.self, decoder: decoder)
             .map(\.results)

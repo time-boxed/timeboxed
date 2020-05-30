@@ -13,7 +13,7 @@ struct CountdownPageView: View {
     @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
     @State private var viewModel: Pomodoro?
     @State private var cancellable: AnyCancellable?
-    
+
     func loadData() {
         cancellable = Pomodoro.list()
             .receive(on: DispatchQueue.main)
@@ -21,7 +21,7 @@ struct CountdownPageView: View {
             .map { $0.first }
             .assign(to: \.viewModel, on: self)
     }
-    
+
     @ViewBuilder
     var body: some View {
         VStack {
@@ -31,7 +31,7 @@ struct CountdownPageView: View {
                 Text(viewModel!.category)
                 CountdownView(date: viewModel!.end)
                     .font(.largeTitle)
-                
+
             } else {
                 Text("Loading").onAppear(perform: self.loadData)
             }
@@ -41,7 +41,7 @@ struct CountdownPageView: View {
                 Text("25 Min")
             }
             .buttonStyle(ActionButtonStyle())
-            
+
             Button(action: {}) {
                 Text("60 Min")
             }

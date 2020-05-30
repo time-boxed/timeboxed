@@ -25,12 +25,12 @@ struct Pomodoro: Codable, Identifiable {
     }
 }
 
-extension Pomodoro: API {
+extension Pomodoro {
     static func list() -> AnyPublisher<[Pomodoro], Error> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        return request(path: "/api/pomodoro")
+        return URLSession.shared.dataTaskPublisher(path: "/api/pomodoro")
             .map { $0.data }
             .decode(type: Pomodoro.List.self, decoder: decoder)
             .map(\.results)

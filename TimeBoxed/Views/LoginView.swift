@@ -6,14 +6,14 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State private var cancellable: AnyCancellable?
-    
+
     var body: some View {
         VStack {
             Text("Welcome!")
@@ -40,28 +40,21 @@ struct LoginView: View {
             }
         }
     }
-    
+
     func Login() {
-        var request = URLComponents()
-        let parts = username.components(separatedBy: "@")
-        request.host = parts[1]
-        request.path = "/api/pomodoro"
-        request.scheme = "https"
-        
-        request.user = parts[0]
-        request.password = password
-        
-        cancellable = URLSession.shared.dataTaskPublisher(for: request.url!)
+        cancellable = URLSession.shared
+            .dataTaskPublisher(path: "/api/pomodoro", login: username, password: password)
             .eraseToAnyPublisher()
-            .sink(receiveCompletion: { (error) in
-                print(error)
-            }, receiveValue: { _ in
-                Settings.defaults.set(value: self.username, forKey: .currentUser)
-                Settings.keychain.set(self.password, for: self.username)
-            })
+            .sink(
+                receiveCompletion: { (error) in
+                    print(error)
+                },
+                receiveValue: { _ in
+                    Settings.defaults.set(value: self.username, forKey: .currentUser)
+                    Settings.keychain.set(self.password, for: self.username)
+                })
     }
 }
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
