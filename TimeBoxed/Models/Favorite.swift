@@ -26,15 +26,21 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
-extension Favorite {
-    static func list() -> AnyPublisher<[Favorite], Error> {
+final class FavoriteStore: ObservableObject {
+    @Published private(set) var favorites = [Favorite]()
+    private var cancellable: AnyCancellable?
+
+    func fetch() {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        return URLSession.shared.dataTaskPublisher(path: "/api/favorite")
+        cancellable = URLSession.shared.dataTaskPublisher(path: "/api/favorite")
             .map { $0.data }
             .decode(type: Favorite.List.self, decoder: decoder)
             .map(\.results)
             .eraseToAnyPublisher()
+            .replaceError(with: [])
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.favorites, on: self)
     }
 }

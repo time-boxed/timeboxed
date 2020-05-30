@@ -10,23 +10,15 @@ import Combine
 import SwiftUI
 
 struct HistoryView: View {
-    @State private var viewModel = [Pomodoro]()
-    @State private var cancellable: AnyCancellable?
-
-    func loadData() {
-        cancellable = Pomodoro.list()
-            .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
-            .assign(to: \.viewModel, on: self)
-    }
+    @ObservedObject var store = PomodoroStore()
 
     var body: some View {
-        List(viewModel) { item in
+        List(store.pomodoros) { item in
             Section(header: Text("Examples")) {
                 HistoryRowView(pomodoro: item)
             }
         }
-        .onAppear(perform: loadData)
+        .onAppear(perform: store.fetch)
         .listStyle(GroupedListStyle())
     }
 }

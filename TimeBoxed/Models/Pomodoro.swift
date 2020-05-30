@@ -25,15 +25,20 @@ struct Pomodoro: Codable, Identifiable {
     }
 }
 
-extension Pomodoro {
-    static func list() -> AnyPublisher<[Pomodoro], Error> {
+final class PomodoroStore: ObservableObject {
+    @Published private(set) var pomodoros = [Pomodoro]()
+    private var cancellable: AnyCancellable?
+
+    func fetch() {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        return URLSession.shared.dataTaskPublisher(path: "/api/pomodoro")
+        cancellable = URLSession.shared.dataTaskPublisher(path: "/api/pomodoro")
             .map { $0.data }
             .decode(type: Pomodoro.List.self, decoder: decoder)
             .map(\.results)
-            .eraseToAnyPublisher()
+            .receive(on: DispatchQueue.main)
+            .replaceError(with: [])
+            .assign(to: \.pomodoros, on: self)
     }
 }

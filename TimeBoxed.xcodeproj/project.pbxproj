@@ -27,8 +27,8 @@
 		C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
-		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
-		C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* KeychainAccess */; };
+		C19BA168243F3331004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftPackageProductDependency */; };
+		C19BA16B243F3396004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */; };
 		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
 		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
 		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
@@ -70,8 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */,
-				C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */,
+				C19BA16B243F3396004795A7 /* BuildFile in Frameworks */,
+				C19BA168243F3331004795A7 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,8 +184,8 @@
 			);
 			name = TimeBoxed;
 			packageProductDependencies = (
-				C19BA167243F3331004795A7 /* SwiftMQTT */,
-				C19BA16A243F3396004795A7 /* KeychainAccess */,
+				C19BA167243F3331004795A7 /* SwiftPackageProductDependency */,
+				C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */,
 			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
@@ -216,8 +216,8 @@
 			);
 			mainGroup = C19BA135243F2E33004795A7;
 			packageReferences = (
-				C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */,
-				C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */,
+				C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
@@ -465,7 +465,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */ = {
+		C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
 			requirement = {
@@ -473,7 +473,7 @@
 				minimumVersion = 3.0.1;
 			};
 		};
-		C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+		C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
@@ -484,14 +484,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C19BA167243F3331004795A7 /* SwiftMQTT */ = {
+		C19BA167243F3331004795A7 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */;
+			package = C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */;
 			productName = SwiftMQTT;
 		};
-		C19BA16A243F3396004795A7 /* KeychainAccess */ = {
+		C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			package = C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */;
 			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */

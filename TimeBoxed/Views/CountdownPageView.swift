@@ -10,29 +10,20 @@ import Combine
 import SwiftUI
 
 struct CountdownPageView: View {
-    @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
-    @State private var viewModel: Pomodoro?
-    @State private var cancellable: AnyCancellable?
-
-    func loadData() {
-        guard currentUser != nil else { return }
-        cancellable = Pomodoro.list()
-            .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
-            .map { $0.first }
-            .assign(to: \.viewModel, on: self)
+    @ObservedObject var store = PomodoroStore()
+    private var current: Pomodoro? {
+        return store.pomodoros.first
     }
 
     @ViewBuilder
     var body: some View {
         VStack {
-            if viewModel != nil {
-                Text(viewModel!.title)
+            if current != nil {
+                Text(current!.title)
                     .font(.title)
-                Text(viewModel!.category)
-                CountdownView(date: viewModel!.end)
+                Text(current!.category)
+                CountdownView(date: current!.end)
                     .font(.largeTitle)
-
             }
             Divider()
 
@@ -45,15 +36,15 @@ struct CountdownPageView: View {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
-        }.onAppear(perform: loadData)
+        }.onAppear(perform: store.fetch)
     }
-    
+
     func actionAddPomodoro() {
-        
+
     }
-    
+
     func actionAddHour() {
-        
+
     }
 }
 
