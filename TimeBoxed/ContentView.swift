@@ -8,38 +8,48 @@
 
 import SwiftUI
 
+enum Tab {
+    case countdown
+    case favorites
+    case history
+}
+
 struct ContentView: View {
-    @State private var selection = 0
+    @State private var currentTab = Tab.countdown
+
     @State private var showLogin = false
     @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
-    
+
     @ViewBuilder
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $currentTab) {
             CountdownPageView()
                 .tabItem {
                     VStack {
                         Image("first")
                         Text("Active")
                     }
-            }
-            .tag(0)
+                }
+                .tag(Tab.countdown)
+
             FavoriteView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("Favorite")
                     }
-            }
-            .tag(1)
+                }
+                .tag(Tab.favorites)
+
             HistoryView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("History")
                     }
-            }
-            .tag(2)
+                }
+                .tag(Tab.history)
+
         }
         .sheet(isPresented: $showLogin) {
             LoginView()

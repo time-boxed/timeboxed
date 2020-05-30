@@ -10,9 +10,9 @@ import SwiftUI
 
 struct FavoriteRowView: View {
     @Environment(\.imageCache) var cache: ImageCache
-    
+
     var favorite: Favorite
-    
+
     var body: some View {
         HStack {
             Group {
@@ -23,10 +23,10 @@ struct FavoriteRowView: View {
                         placeholder: Text("Loading ..."),
                         configuration: { $0.resizable() }
                     )
-                        .frame(width: 32.0, height: 32.0)
+                    .frame(width: 32.0, height: 32.0)
                 }
             }
-            
+
             VStack(alignment: .leading) {
                 Text(favorite.title)
                     .font(.title)
@@ -38,10 +38,10 @@ struct FavoriteRowView: View {
                 DurationView(duration: favorite.duration)
                 Text("Count: \(favorite.count)")
                 Text(favorite.memo ?? "")
-                
+
             }.font(.caption)
         }
-        
+
     }
 }
 

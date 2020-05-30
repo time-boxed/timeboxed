@@ -26,21 +26,24 @@ extension HistoryGroup {
 }
 
 struct HistoryView: View {
-
     @ObservedObject var store = PomodoroStore()
 
     var body: some View {
-        List {
-            ForEach(HistoryGroup.from(store.pomodoros), id: \.date) { gr in
-                Section(header: DateTimeView(date: gr.date)) {
-                    ForEach(gr.items) { p in
-                        HistoryRowView(pomodoro: p)
+        NavigationView {
+            List {
+                ForEach(HistoryGroup.from(store.pomodoros), id: \.date) { gr in
+                    Section(header: DateTimeView(date: gr.date)) {
+                        ForEach(gr.items) { p in
+                            NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
+                                HistoryRowView(pomodoro: p)
+                            }
+                        }
                     }
                 }
             }
+            .listStyle(GroupedListStyle())
         }
         .onAppear(perform: store.fetch)
-        .listStyle(GroupedListStyle())
     }
 }
 

@@ -13,15 +13,19 @@ struct FavoriteView: View {
     @ObservedObject var store = FavoriteStore()
 
     var body: some View {
-        List(store.favorites) { item in
-            FavoriteRowView(favorite: item)
+        List {
+            ForEach(store.favorites) { item in
+                FavoriteRowView(favorite: item)
+            }
         }
         .onAppear(perform: store.fetch)
+        .listStyle(GroupedListStyle())
     }
 }
 
 struct FavoriteView_Previews: PreviewProvider {
+    static var device = PreviewDevice(rawValue: "iPhone SE")
     static var previews: some View {
-        FavoriteView().previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+        FavoriteView().previewDevice(device)
     }
 }
