@@ -8,14 +8,34 @@
 
 import Combine
 import SwiftUI
+import Foundation
+
+struct HistoryGroup {
+    let date : Date
+    let items : [Pomodoro]
+}
+
+extension HistoryGroup {
+    static func from(_ pomodoros: [Pomodoro]) -> [HistoryGroup] {
+        return Dictionary(grouping: pomodoros) { Calendar.current.startOfDay(for: $0.end) }
+            .map { HistoryGroup(date: $0, items: $1.sorted { $0.end > $1.end })}
+            .sorted { $0.date > $1.date
+        }
+    }
+}
 
 struct HistoryView: View {
+    
     @ObservedObject var store = PomodoroStore()
-
+    
     var body: some View {
-        List(store.pomodoros) { item in
-            Section(header: Text("Examples")) {
-                HistoryRowView(pomodoro: item)
+        List {
+            ForEach(HistoryGroup.from(store.pomodoros), id:\.date) { gr in
+                Section(header: DateTimeView(date: gr.date)) {
+                    ForEach(gr.items) {p in
+                        HistoryRowView(pomodoro: p)
+                    }
+                }
             }
         }
         .onAppear(perform: store.fetch)

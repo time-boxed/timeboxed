@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import os.log
 
 extension URLRequest {
     mutating func addBasicAuth(username: String, password: String) {
@@ -33,6 +34,8 @@ extension URLSession {
 
         var request = URLRequest(url: url.url!)
         request.addBasicAuth(username: parts[0], password: password)
+        
+        os_log(.debug, "Querying %{public}s for %{public}s", url.string!, parts[0])
 
         return dataTaskPublisher(for: request)
     }
