@@ -10,11 +10,12 @@ import SwiftUI
 
 struct DateTimeView: View {
     var date: Date
+    var style = DateFormatter.Style.medium
 
     var formatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.timeStyle = .medium
-        formatter.dateStyle = .medium
+        formatter.timeStyle = style
+        formatter.dateStyle = style
         return formatter
     }
 
@@ -25,6 +26,13 @@ struct DateTimeView: View {
 
 struct DateTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        DateTimeView(date: Date())
+        Group {
+            DateTimeView(date: Date(), style: .short)
+                .previewLayout(.sizeThatFits)
+            DateTimeView(date: Date(), style: .medium)
+                .previewLayout(.sizeThatFits)
+            DateTimeView(date: Date(), style: .long)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }

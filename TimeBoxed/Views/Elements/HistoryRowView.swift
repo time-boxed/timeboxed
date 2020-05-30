@@ -17,13 +17,14 @@ struct HistoryRowView: View {
                 Text(pomodoro.title)
                     .font(.title)
                 Text(pomodoro.category)
-                    .font(.caption)
+                    .font(.footnote)
             }
-
+            Spacer()
             VStack(alignment: .trailing) {
-                DateTimeView(date: pomodoro.start)
+                DateTimeView(date: pomodoro.start, style: .short)
                     .font(.caption)
-                DateTimeView(date: pomodoro.end)
+                Spacer()
+                DateTimeView(date: pomodoro.end, style: .short)
                     .font(.caption)
             }
         }
@@ -31,10 +32,17 @@ struct HistoryRowView: View {
 }
 
 struct HistoryRowView_Previews: PreviewProvider {
+    static var data = Pomodoro(
+        id: 0,
+        title: "Test Pomodoro",
+        start: Date(),
+        end: Date(),
+        category: "Test Category",
+        memo: "Some memo here"
+    )
+
     static var previews: some View {
-        HistoryRowView(
-            pomodoro: Pomodoro(
-                id: 0, title: "Test Pomodoro", start: Date(), end: Date(),
-                category: "Test Category", memo: ""))
+        HistoryRowView(pomodoro: data)
+            .previewLayout(.fixed(width: 256, height: 44))
     }
 }
