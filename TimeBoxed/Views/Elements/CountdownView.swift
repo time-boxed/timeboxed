@@ -21,13 +21,31 @@ struct CountdownView: View {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }
+
     @State var label = "Loading..."
+
+    var elappsed: TimeInterval {
+        return Date().timeIntervalSince(date)
+    }
+
+    var color: Color {
+        switch elappsed {
+        case _ where elappsed < 0:
+            return .green
+        case _ where elappsed > 600:
+            return .red
+        default:
+            return .blue
+        }
+    }
 
     var body: some View {
         Text(label)
+            .foregroundColor(color)
             .onReceive(timer) { input in
-                self.label = self.formatter.string(from: Date().timeIntervalSince(self.date))!
+                self.label = self.formatter.string(from: self.elappsed)!
             }
+
     }
 }
 
