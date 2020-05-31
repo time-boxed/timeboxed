@@ -27,4 +27,5 @@ struct Settings {
     static let identifier = "net.kungfudiscomonkey.Timebox"
     static let defaults = UserDefaults(suiteName: Settings.identifier)!
     static let keychain = Keychain(service: Settings.identifier)
+    static let homepage = URL(string: "https://github.com/kfdm/timeboxed")!
 }

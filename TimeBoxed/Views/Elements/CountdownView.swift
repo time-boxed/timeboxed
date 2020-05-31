@@ -12,40 +12,28 @@ import SwiftUI
 struct CountdownView: View {
     @State var date = Date()
 
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
-    var formatter: DateComponentsFormatter {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }
-
-    @State var label = "Loading..."
-
-    var elappsed: TimeInterval {
-        return Date().timeIntervalSince(date)
-    }
-
-    var color: Color {
-        switch elappsed {
-        case _ where elappsed < 0:
-            return .green
-        case _ where elappsed > 600:
-            return .red
+    @State private var color = Color.white
+    @State private var elapsed = TimeInterval()
+    
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    private func tick(tick: Date) {
+        elapsed = Date().timeIntervalSince(date)
+        
+        switch elapsed {
+        case _ where elapsed < 0:
+            color = .green
+        case _ where elapsed > 600:
+            color = .red
         default:
-            return .blue
+            color = .blue
         }
     }
-
+    
     var body: some View {
-        Text(label)
+        IntervalView(elapsed: elapsed)
             .foregroundColor(color)
-            .onReceive(timer) { input in
-                self.label = self.formatter.string(from: self.elappsed)!
-            }
-
+            .onReceive(timer, perform: tick)
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8708842F24826F14003D662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708842E24826F14003D662F /* SettingsView.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
 		87C6AA9F248243FF002FAA74 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AA9E248243FF002FAA74 /* AsyncImage.swift */; };
 		87C6AAA124824629002FAA74 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAA024824629002FAA74 /* ImageLoader.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8708842E24826F14003D662F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
 		87C6AA9E248243FF002FAA74 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
@@ -123,6 +125,15 @@
 			path = AsyncImage;
 			sourceTree = "<group>";
 		};
+		87C6AAB024826D75002FAA74 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
+				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
+			);
+			path = Rows;
+			sourceTree = "<group>";
+		};
 		C19BA135243F2E33004795A7 = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +182,14 @@
 		C19BA15C243F317B004795A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				87C6AAB024826D75002FAA74 /* Rows */,
 				C19BA15D243F3189004795A7 /* Elements */,
 				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
 				C19BA160243F31D0004795A7 /* FavoriteView.swift */,
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 				C19BA173243F35E8004795A7 /* LoginView.swift */,
+				8708842E24826F14003D662F /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,8 +201,6 @@
 				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
 				87F95B332480978200255B29 /* DateTimeView.swift */,
 				87F95B312480944700255B29 /* DurationView.swift */,
-				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
-				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				87C6AAAA24826983002FAA74 /* DateView.swift */,
 				87C6AAAC248269B9002FAA74 /* TimeView.swift */,
 				87C6AAAE24826B02002FAA74 /* IntervalView.swift */,
@@ -305,6 +316,7 @@
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
+				8708842F24826F14003D662F /* SettingsView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				87C6AAA524825390002FAA74 /* ImageCache.swift in Sources */,

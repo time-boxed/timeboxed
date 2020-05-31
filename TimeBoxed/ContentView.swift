@@ -12,14 +12,15 @@ enum Tab {
     case countdown
     case favorites
     case history
+    case settings
 }
 
 struct ContentView: View {
     @State private var currentTab = Tab.countdown
-
+    
     @State private var showLogin = false
     @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
-
+    
     @ViewBuilder
     var body: some View {
         TabView(selection: $currentTab) {
@@ -29,27 +30,35 @@ struct ContentView: View {
                         Image("first")
                         Text("Active")
                     }
-                }
-                .tag(Tab.countdown)
-
+            }
+            .tag(Tab.countdown)
+            
             FavoriteView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("Favorite")
                     }
-                }
-                .tag(Tab.favorites)
-
+            }
+            .tag(Tab.favorites)
+            
             HistoryView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("History")
                     }
-                }
-                .tag(Tab.history)
-
+            }
+            .tag(Tab.history)
+            SettingsView()
+                .tabItem {
+                    VStack {
+                        Image("second")
+                        Text("Settings")
+                    }
+            }
+            .tag(Tab.settings)
+            
         }
         .sheet(isPresented: $showLogin) {
             LoginView()
