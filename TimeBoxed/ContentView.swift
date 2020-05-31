@@ -16,12 +16,10 @@ enum Tab {
 }
 
 struct ContentView: View {
+    @ObservedObject var userSettings = UserSettings()
     @State private var currentTab = Tab.countdown
-    
     @State private var showLogin = false
-    @State private var currentUser = Settings.defaults.string(forKey: .currentUser)
-    
-    @ViewBuilder
+
     var body: some View {
         TabView(selection: $currentTab) {
             CountdownPageView()
@@ -64,7 +62,7 @@ struct ContentView: View {
             LoginView()
         }
         .onAppear {
-            self.showLogin = self.currentUser == nil
+            self.showLogin = self.userSettings.$current_user == nil
         }
     }
 }

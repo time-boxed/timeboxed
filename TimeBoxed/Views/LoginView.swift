@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var userSettings = UserSettings()
     @Environment(\.presentationMode) var presentation
 
     @State var username: String = ""
@@ -47,12 +48,15 @@ struct LoginView: View {
         cancellable = URLSession.shared
             .dataTaskPublisher(path: "/api/pomodoro", login: username, password: password)
             .eraseToAnyPublisher()
+            .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { (error) in
                     print(error)
                 },
                 receiveValue: { _ in
-                    Settings.defaults.set(value: self.username, forKey: .currentUser)
+                    self.userSettings.users.append(self.username)
+                    self.userSettings.current_user = self.username
+
                     Settings.keychain.set(self.password, for: self.username)
                     self.presentation.wrappedValue.dismiss()
                 })

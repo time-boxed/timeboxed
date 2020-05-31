@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8708842F24826F14003D662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708842E24826F14003D662F /* SettingsView.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
+		879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C36342483AB8A00DF0B9F /* SelectUserView.swift */; };
 		87C6AA9F248243FF002FAA74 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AA9E248243FF002FAA74 /* AsyncImage.swift */; };
 		87C6AAA124824629002FAA74 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAA024824629002FAA74 /* ImageLoader.swift */; };
 		87C6AAA324825337002FAA74 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAA224825337002FAA74 /* EnvironmentValues+ImageCache.swift */; };
@@ -48,6 +49,7 @@
 		8708842E24826F14003D662F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
+		879C36342483AB8A00DF0B9F /* SelectUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserView.swift; sourceTree = "<group>"; };
 		87C6AA9E248243FF002FAA74 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		87C6AAA024824629002FAA74 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		87C6AAA224825337002FAA74 /* EnvironmentValues+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+ImageCache.swift"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 				C19BA173243F35E8004795A7 /* LoginView.swift */,
 				8708842E24826F14003D662F /* SettingsView.swift */,
+				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				8708842F24826F14003D662F /* SettingsView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
+				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
 				87C6AAA524825390002FAA74 /* ImageCache.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,

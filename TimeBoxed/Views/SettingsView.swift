@@ -9,14 +9,28 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject var userSettings = UserSettings()
+
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: EmptyView()) {
-                    Text(Settings.homepage.absoluteString)
-                }.onTapGesture(perform: openRepo)
-
-                Text("Another Test")
+                Section(header: Text("Information")) {
+                    NavigationLink(destination: EmptyView()) {
+                        Text(Settings.homepage.absoluteString)
+                    }.onTapGesture(perform: openRepo)
+                }
+                Section(header: Text("User")) {
+                    NavigationLink(destination: LoginView()) {
+                        Text("New User")
+                    }
+                    NavigationLink(destination: SelectUserView()) {
+                        HStack {
+                            Text("Current User")
+                            Spacer()
+                            Text(userSettings.current_user ?? "Not logged in")
+                        }
+                    }
+                }
             }
         }
     }
