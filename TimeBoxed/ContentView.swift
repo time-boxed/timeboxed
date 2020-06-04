@@ -16,7 +16,7 @@ enum Tab {
 }
 
 struct ContentView: View {
-    @ObservedObject var userSettings = UserSettings()
+    @ObservedObject var userSettings = UserSettings.instance
     @State private var currentTab = Tab.countdown
     @State private var showLogin = false
 
@@ -28,35 +28,35 @@ struct ContentView: View {
                         Image("first")
                         Text("Active")
                     }
-            }
-            .tag(Tab.countdown)
-            
+                }
+                .tag(Tab.countdown)
+
             FavoriteView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("Favorite")
                     }
-            }
-            .tag(Tab.favorites)
-            
+                }
+                .tag(Tab.favorites)
+
             HistoryView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("History")
                     }
-            }
-            .tag(Tab.history)
+                }
+                .tag(Tab.history)
             SettingsView()
                 .tabItem {
                     VStack {
                         Image("second")
                         Text("Settings")
                     }
-            }
-            .tag(Tab.settings)
-            
+                }
+                .tag(Tab.settings)
+
         }
         .sheet(isPresented: $showLogin) {
             LoginView()

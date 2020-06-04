@@ -14,12 +14,12 @@ struct CountdownView: View {
 
     @State private var color = Color.white
     @State private var elapsed = TimeInterval()
-    
+
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+
     private func tick(tick: Date) {
         elapsed = Date().timeIntervalSince(date)
-        
+
         switch elapsed {
         case _ where elapsed < 0:
             color = .green
@@ -29,7 +29,7 @@ struct CountdownView: View {
             color = .blue
         }
     }
-    
+
     var body: some View {
         IntervalView(elapsed: elapsed)
             .foregroundColor(color)

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SelectUserView: View {
-    @ObservedObject var userSettings = UserSettings()
+    @ObservedObject var userSettings = UserSettings.instance
 
     var body: some View {
         List {

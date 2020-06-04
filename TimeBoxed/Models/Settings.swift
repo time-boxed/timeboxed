@@ -6,6 +6,7 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import Combine
 import Foundation
 import KeychainAccess
 
@@ -30,24 +31,22 @@ struct Settings {
     static let homepage = URL(string: "https://github.com/kfdm/timeboxed")!
 }
 
-
-import Foundation
-import Combine
-
 class UserSettings: ObservableObject {
+    public static let instance = UserSettings()
+
     @Published var current_user: String? {
         didSet {
-            Settings.defaults.set(current_user, forKey: .currentUser)
+            Settings.defaults.set(value: current_user, forKey: .currentUser)
         }
     }
-    
+
     @Published var users: [String] {
         didSet {
             Settings.defaults.set(users, forKey: .users)
         }
     }
 
-    init() {
+    private init() {
         self.current_user = Settings.defaults.string(forKey: .currentUser)
         self.users = Settings.defaults.array(forKey: .users)
     }

@@ -40,7 +40,7 @@ extension URLSession {
         return dataTaskPublisher(for: request)
     }
     func dataTaskPublisher(path: String) -> URLSession.DataTaskPublisher {
-        let userSettings = UserSettings()
+        let userSettings = UserSettings.instance
         let login = userSettings.current_user ?? "@"
         let password = Settings.keychain.string(for: login) ?? ""
 

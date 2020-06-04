@@ -37,8 +37,8 @@
 		C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
-		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
-		C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* KeychainAccess */; };
+		C19BA168243F3331004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftPackageProductDependency */; };
+		C19BA16B243F3396004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */; };
 		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
 		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
 		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
@@ -90,8 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */,
-				C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */,
+				C19BA16B243F3396004795A7 /* BuildFile in Frameworks */,
+				C19BA168243F3331004795A7 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,15 +184,15 @@
 		C19BA15C243F317B004795A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				87C6AAB024826D75002FAA74 /* Rows */,
 				C19BA15D243F3189004795A7 /* Elements */,
+				87C6AAB024826D75002FAA74 /* Rows */,
 				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
 				C19BA160243F31D0004795A7 /* FavoriteView.swift */,
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 				C19BA173243F35E8004795A7 /* LoginView.swift */,
-				8708842E24826F14003D662F /* SettingsView.swift */,
 				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
+				8708842E24826F14003D662F /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,10 +203,10 @@
 				87F95B352480A2B400255B29 /* ButtonStyles.swift */,
 				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
 				87F95B332480978200255B29 /* DateTimeView.swift */,
-				87F95B312480944700255B29 /* DurationView.swift */,
 				87C6AAAA24826983002FAA74 /* DateView.swift */,
-				87C6AAAC248269B9002FAA74 /* TimeView.swift */,
+				87F95B312480944700255B29 /* DurationView.swift */,
 				87C6AAAE24826B02002FAA74 /* IntervalView.swift */,
+				87C6AAAC248269B9002FAA74 /* TimeView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -238,8 +238,8 @@
 			);
 			name = TimeBoxed;
 			packageProductDependencies = (
-				C19BA167243F3331004795A7 /* SwiftMQTT */,
-				C19BA16A243F3396004795A7 /* KeychainAccess */,
+				C19BA167243F3331004795A7 /* SwiftPackageProductDependency */,
+				C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */,
 			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
@@ -270,8 +270,8 @@
 			);
 			mainGroup = C19BA135243F2E33004795A7;
 			packageReferences = (
-				C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */,
-				C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */,
+				C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
@@ -529,7 +529,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */ = {
+		C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
 			requirement = {
@@ -537,7 +537,7 @@
 				minimumVersion = 3.0.1;
 			};
 		};
-		C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+		C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
@@ -548,14 +548,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C19BA167243F3331004795A7 /* SwiftMQTT */ = {
+		C19BA167243F3331004795A7 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */;
+			package = C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */;
 			productName = SwiftMQTT;
 		};
-		C19BA16A243F3396004795A7 /* KeychainAccess */ = {
+		C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			package = C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */;
 			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */

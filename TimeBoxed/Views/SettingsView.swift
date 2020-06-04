@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var userSettings = UserSettings()
+    @ObservedObject var userSettings = UserSettings.instance
 
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     func openRepo() {
         UIApplication.shared.open(Settings.homepage, options: [:], completionHandler: nil)
     }

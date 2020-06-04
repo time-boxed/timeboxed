@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TimeView:View {
+struct TimeView: View {
     var date: Date
     var style = DateFormatter.Style.medium
 

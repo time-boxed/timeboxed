@@ -10,7 +10,7 @@ import SwiftUI
 
 struct IntervalView: View {
     var elapsed: TimeInterval
-    
+
     var formatter: DateComponentsFormatter {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -18,7 +18,7 @@ struct IntervalView: View {
         formatter.zeroFormattingBehavior = .pad
         return formatter
     }
-    
+
     var body: some View {
         Text(formatter.string(from: elapsed)!)
     }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HistoryRowView: View {
     var pomodoro: Pomodoro
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
@@ -28,7 +28,7 @@ struct HistoryRowView: View {
             Text(pomodoro.category)
                 .font(.footnote)
         }
-        
+
     }
 }
 
@@ -41,7 +41,7 @@ struct HistoryRowView_Previews: PreviewProvider {
         category: "Test Category",
         memo: "Some memo here"
     )
-    
+
     static var previews: some View {
         HistoryRowView(pomodoro: data)
             .previewLayout(.fixed(width: 256, height: 44))
