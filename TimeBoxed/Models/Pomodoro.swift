@@ -25,6 +25,12 @@ struct Pomodoro: Codable, Identifiable {
     }
 }
 
+extension Pomodoro {
+    var isActive: Bool {
+        return end > Date()
+    }
+}
+
 final class PomodoroStore: ObservableObject {
     @Published private(set) var pomodoros = [Pomodoro]()
     private var cancellable: AnyCancellable?
