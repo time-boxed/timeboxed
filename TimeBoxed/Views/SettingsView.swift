@@ -24,11 +24,9 @@ struct SettingsView: View {
                         Text("New User")
                     }
                     NavigationLink(destination: SelectUserView()) {
-                        HStack {
-                            Text("Current User")
-                            Spacer()
-                            Text(userSettings.current_user ?? "Not logged in")
-                        }
+                        NameValueView(
+                            name: "Current User",
+                            value: userSettings.current_user ?? "Not logged in")
                     }
                 }
             }

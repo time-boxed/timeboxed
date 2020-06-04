@@ -33,7 +33,7 @@ struct LoginView: View {
                 .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
-            Button(action: Login) {
+            Button(action: submitLogin) {
                 Text("LOGIN")
                     .font(.headline)
                     .foregroundColor(.white)
@@ -45,7 +45,7 @@ struct LoginView: View {
         }
     }
 
-    func Login() {
+    func submitLogin() {
         cancellable = URLRequest.request(path: "/api/pomodoro", login: username, password: password)
             .dataTaskPublisher()
             .eraseToAnyPublisher()

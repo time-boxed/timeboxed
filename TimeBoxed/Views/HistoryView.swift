@@ -26,6 +26,7 @@ extension HistoryGroup {
 }
 
 struct HistoryView: View {
+    @ObservedObject var userSettings = UserSettings.instance
     @ObservedObject var store = PomodoroStore()
 
     var body: some View {
@@ -42,6 +43,7 @@ struct HistoryView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .navigationBarTitle(userSettings.current_user ?? "Not Logged in")
         }
         .onAppear(perform: store.fetch)
     }

@@ -10,7 +10,9 @@ import Combine
 import SwiftUI
 
 struct FavoriteView: View {
+    @ObservedObject var userSettings = UserSettings.instance
     @ObservedObject var store = FavoriteStore()
+
     @Binding var selection: ContentView.Tab
 
     var body: some View {
