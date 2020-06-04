@@ -28,6 +28,7 @@ struct LoginView: View {
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
                 .keyboardType( /*@START_MENU_TOKEN@*/.emailAddress /*@END_MENU_TOKEN@*/)
+                .autocapitalization(.none)
             SecureField("Password", text: $password)
                 .padding()
                 .cornerRadius(5.0)
@@ -45,8 +46,8 @@ struct LoginView: View {
     }
 
     func Login() {
-        cancellable = URLSession.shared
-            .dataTaskPublisher(path: "/api/pomodoro", login: username, password: password)
+        cancellable = URLRequest.request(path: "/api/pomodoro", login: username, password: password)
+            .dataTaskPublisher()
             .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
             .sink(

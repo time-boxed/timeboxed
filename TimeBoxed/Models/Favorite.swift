@@ -35,7 +35,8 @@ final class FavoriteStore: ObservableObject {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        cancellable = URLSession.shared.dataTaskPublisher(path: "/api/favorite")
+        cancellable = URLRequest.request(path: "/api/favorite")
+            .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Favorite.List.self, decoder: decoder)
             .map(\.results)
@@ -46,7 +47,21 @@ final class FavoriteStore: ObservableObject {
             .assign(to: \.favorites, on: self)
     }
 
-    func start(favorite: Favorite) {
-        print(favorite)
+    func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)/start")
+        request.httpMethod = "POST"
+
+        cancellable =
+            request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Pomodoro.self, decoder: decoder)
+            .print()
+            .eraseToAnyPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in }, receiveValue: receiveOutput)
     }
 }

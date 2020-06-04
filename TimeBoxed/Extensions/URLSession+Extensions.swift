@@ -19,12 +19,8 @@ extension URLRequest {
         let base64LoginString = loginData.base64EncodedString()
         setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
     }
-}
 
-extension URLSession {
-    func dataTaskPublisher(path: String, login: String, password: String)
-        -> URLSession.DataTaskPublisher
-    {
+    static func request(path: String, login: String, password: String) -> URLRequest {
         let parts = login.components(separatedBy: "@")
 
         var url = URLComponents()
@@ -34,16 +30,21 @@ extension URLSession {
 
         var request = URLRequest(url: url.url!)
         request.addBasicAuth(username: parts[0], password: password)
-
         os_log(.debug, "Querying %{public}s for %{public}s", url.string!, parts[0])
-
-        return dataTaskPublisher(for: request)
+        return request
     }
-    func dataTaskPublisher(path: String) -> URLSession.DataTaskPublisher {
+
+    func dataTaskPublisher(for session: URLSession = URLSession.shared)
+        -> URLSession.DataTaskPublisher
+    {
+        return session.dataTaskPublisher(for: self)
+    }
+
+    static func request(path: String) -> URLRequest {
         let userSettings = UserSettings.instance
         let login = userSettings.current_user ?? "@"
         let password = Settings.keychain.string(for: login) ?? ""
 
-        return dataTaskPublisher(path: path, login: login, password: password)
+        return request(path: path, login: login, password: password)
     }
 }

@@ -8,16 +8,16 @@
 
 import SwiftUI
 
-enum Tab {
-    case countdown
-    case favorites
-    case history
-    case settings
-}
-
 struct ContentView: View {
+    enum Tab {
+        case countdown
+        case favorites
+        case history
+        case settings
+    }
+
     @ObservedObject var userSettings = UserSettings.instance
-    @State private var currentTab = Tab.countdown
+    @State private var currentTab = ContentView.Tab.countdown
     @State private var showLogin = false
 
     var body: some View {
@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.countdown)
 
-            FavoriteView()
+            FavoriteView(selection: $currentTab)
                 .tabItem {
                     VStack {
                         Image("second")
@@ -62,7 +62,7 @@ struct ContentView: View {
             LoginView()
         }
         .onAppear {
-            self.showLogin = self.userSettings.$current_user == nil
+            self.showLogin = self.userSettings.current_user == nil
         }
     }
 }

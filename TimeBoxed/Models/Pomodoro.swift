@@ -33,7 +33,8 @@ final class PomodoroStore: ObservableObject {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 
-        cancellable = URLSession.shared.dataTaskPublisher(path: "/api/pomodoro")
+        cancellable = URLRequest.request(path: "/api/pomodoro")
+            .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Pomodoro.List.self, decoder: decoder)
             .map(\.results)
