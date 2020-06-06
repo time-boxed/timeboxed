@@ -18,7 +18,7 @@ struct CountdownView: View {
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func tick(tick: Date) {
-        elapsed = Date().timeIntervalSince(date)
+        elapsed = Date().timeIntervalSince(date).rounded()
 
         switch elapsed {
         case _ where elapsed < 0:

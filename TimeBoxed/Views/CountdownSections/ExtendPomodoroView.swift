@@ -24,15 +24,34 @@ struct ExtendPomodoroView: View {
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
+
+            Button(action: actionStop) {
+                Text("Stop")
+            }
+            .buttonStyle(DangerButtonStyle())
+            .modifier(CenterModifier())
         }
     }
 
-    func actionAddPomodoro() {
+    func updatePomodoro(date: Date) {
+        var request = URLRequest.request(path: "/api/pomodoro/\(pomodoro.id)")
+        request.httpMethod = "PATCH"
 
+        let update = Pomodoro.DateRequest(end: Date())
+        print(request.debugDescription)
+        print(update)
+    }
+
+    func actionAddPomodoro() {
+        updatePomodoro(date: pomodoro.end + TimeInterval(25 * 60))
     }
 
     func actionAddHour() {
+        updatePomodoro(date: pomodoro.end + TimeInterval(60 * 60))
+    }
 
+    func actionStop() {
+        updatePomodoro(date: Date())
     }
 }
 

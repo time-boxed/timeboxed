@@ -17,3 +17,13 @@ struct ActionButtonStyle: ButtonStyle {
             .background(RoundedRectangle(cornerRadius: 8).stroke(Color.accentColor))
     }
 }
+
+struct DangerButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: 128, minHeight: 44)
+            .padding(.horizontal)
+            .foregroundColor(Color.red)
+            .background(RoundedRectangle(cornerRadius: 8).stroke(Color.red))
+    }
+}

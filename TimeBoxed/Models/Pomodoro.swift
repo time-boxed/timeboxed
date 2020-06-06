@@ -23,6 +23,10 @@ struct Pomodoro: Codable, Identifiable {
         let previous: String?
         let results: [Pomodoro]
     }
+
+    struct DateRequest: Codable {
+        let end: Date
+    }
 }
 
 extension Pomodoro {
