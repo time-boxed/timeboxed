@@ -36,6 +36,11 @@ extension Pomodoro {
 }
 
 final class PomodoroStore: ObservableObject {
+    static var shared = PomodoroStore()
+    private init() {
+
+    }
+
     @Published private(set) var pomodoros = [Pomodoro]()
     private var cancellable: AnyCancellable?
 
@@ -51,5 +56,29 @@ final class PomodoroStore: ObservableObject {
             .receive(on: DispatchQueue.main)
             .replaceError(with: [])
             .assign(to: \.pomodoros, on: self)
+    }
+
+    func update(id: Int, end: Date) {
+        let update = Pomodoro.DateRequest(end: end)
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        var request = URLRequest.request(path: "/api/pomodoro/\(id)")
+        request.httpMethod = "PATCH"
+        request.addBody(object: update)
+
+        cancellable =
+            request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Pomodoro.self, decoder: decoder)
+            .eraseToAnyPublisher()
+            .sink(receiveCompletion: { (error) in
+                print(error)
+            }) { (pomodoro) in
+                print(pomodoro)
+                self.fetch()
+            }
     }
 }

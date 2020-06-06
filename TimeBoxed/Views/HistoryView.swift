@@ -27,7 +27,7 @@ extension HistoryGroup {
 
 struct HistoryView: View {
     @ObservedObject var userSettings = UserSettings.instance
-    @ObservedObject var store = PomodoroStore()
+    @ObservedObject var store = PomodoroStore.shared
 
     var body: some View {
         NavigationView {

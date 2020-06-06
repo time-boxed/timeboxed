@@ -20,6 +20,19 @@ extension URLRequest {
         setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
     }
 
+    mutating func addBody<T: Encodable>(object: T) {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+
+        do {
+            httpBody = try encoder.encode(object)
+            addValue("application/json", forHTTPHeaderField: "Content-Type")
+            //            addValue("application/json", forHTTPHeaderField: "Accept")
+        } catch let error {
+            print(error)
+        }
+    }
+
     static func request(path: String, login: String, password: String) -> URLRequest {
         let parts = login.components(separatedBy: "@")
 

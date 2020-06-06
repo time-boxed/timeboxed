@@ -10,7 +10,8 @@ import Combine
 import SwiftUI
 
 struct CountdownPageView: View {
-    @ObservedObject var store = PomodoroStore()
+    @ObservedObject var store = PomodoroStore.shared
+
     private var current: Pomodoro? {
         return store.pomodoros.first
     }
