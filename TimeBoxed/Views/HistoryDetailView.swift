@@ -25,16 +25,12 @@ struct HistoryDetailView: View {
     }
 }
 
-struct HistoryDetailView_Previews: PreviewProvider {
-    static var data = Pomodoro(
-        id: 0,
-        title: "Test Title",
-        start: Date(),
-        end: Date(),
-        category: "Test Category",
-        memo: ""
-    )
-    static var previews: some View {
-        HistoryDetailView(pomodoro: data)
+#if DEBUG
+
+    struct HistoryDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            HistoryDetailView(pomodoro: PreviewData.pomodoro)
+        }
     }
-}
+
+#endif

@@ -36,6 +36,6 @@ struct CountdownPageView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CountdownPageView()
-        }.previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+        }.previewDevice(PreviewData.device)
     }
 }

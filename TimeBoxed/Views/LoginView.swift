@@ -64,8 +64,12 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView().previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+#if DEBUG
+
+    struct LoginView_Previews: PreviewProvider {
+        static var previews: some View {
+            LoginView().previewDevice(PreviewData.device)
+        }
     }
-}
+
+#endif

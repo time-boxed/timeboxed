@@ -45,19 +45,13 @@ struct FavoriteRowView: View {
     }
 }
 
-struct FavoriteRowView_Previews: PreviewProvider {
-    static var data = Favorite(
-        id: 0,
-        title: "Test",
-        duration: 30,
-        memo: "",
-        icon: nil,
-        html_link: URL(string: "https://example.com")!,
-        url: URL(string: "https://example.com"),
-        count: 1
-    )
-    static var previews: some View {
-        FavoriteRowView(favorite: data)
-            .previewLayout(.fixed(width: 256, height: 44))
+#if DEBUG
+
+    struct FavoriteRowView_Previews: PreviewProvider {
+        static var previews: some View {
+            FavoriteRowView(favorite: PreviewData.favorite)
+                .previewLayout(.fixed(width: 256, height: 44))
+        }
     }
-}
+
+#endif

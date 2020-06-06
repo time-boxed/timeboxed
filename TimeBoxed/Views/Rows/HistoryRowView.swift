@@ -32,18 +32,13 @@ struct HistoryRowView: View {
     }
 }
 
-struct HistoryRowView_Previews: PreviewProvider {
-    static var data = Pomodoro(
-        id: 0,
-        title: "Test Pomodoro",
-        start: Date(),
-        end: Date(),
-        category: "Test Category",
-        memo: "Some memo here"
-    )
+#if DEBUG
 
-    static var previews: some View {
-        HistoryRowView(pomodoro: data)
-            .previewLayout(.fixed(width: 256, height: 44))
+    struct HistoryRowView_Previews: PreviewProvider {
+        static var previews: some View {
+            HistoryRowView(pomodoro: PreviewData.pomodoro)
+                .previewLayout(.fixed(width: 256, height: 44))
+        }
     }
-}
+
+#endif

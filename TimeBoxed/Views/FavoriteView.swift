@@ -31,9 +31,12 @@ struct FavoriteView: View {
     }
 }
 
-struct FavoriteView_Previews: PreviewProvider {
-    static var device = PreviewDevice(rawValue: "iPhone SE")
-    static var previews: some View {
-        FavoriteView(selection: .constant(.favorites)).previewDevice(device)
+#if DEBUG
+
+    struct FavoriteView_Previews: PreviewProvider {
+        static var previews: some View {
+            FavoriteView(selection: .constant(.favorites)).previewDevice(PreviewData.device)
+        }
     }
-}
+
+#endif

@@ -36,16 +36,13 @@ struct ExtendPomodoroView: View {
     }
 }
 
-struct ExtendPomodoroView_Previews: PreviewProvider {
-    static var data = Pomodoro(
-        id: 0,
-        title: "Test Title",
-        start: Date(),
-        end: Date(),
-        category: "Test Category",
-        memo: ""
-    )
-    static var previews: some View {
-        ExtendPomodoroView(pomodoro: data)
+#if DEBUG
+
+    struct ExtendPomodoroView_Previews: PreviewProvider {
+
+        static var previews: some View {
+            ExtendPomodoroView(pomodoro: PreviewData.pomodoro)
+        }
     }
-}
+
+#endif

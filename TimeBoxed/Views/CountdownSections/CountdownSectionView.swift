@@ -27,16 +27,12 @@ struct CountdownSectionView: View {
     }
 }
 
-struct CountdownSectionView_Previews: PreviewProvider {
-    static var data = Pomodoro(
-        id: 0,
-        title: "Test Title",
-        start: Date(),
-        end: Date(),
-        category: "Test Category",
-        memo: ""
-    )
-    static var previews: some View {
-        CountdownSectionView(pomodoro: data)
+#if DEBUG
+
+    struct CountdownSectionView_Previews: PreviewProvider {
+        static var previews: some View {
+            CountdownSectionView(pomodoro: PreviewData.pomodoro)
+        }
     }
-}
+
+#endif

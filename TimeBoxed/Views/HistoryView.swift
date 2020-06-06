@@ -51,6 +51,6 @@ struct HistoryView: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryView().previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+        HistoryView().previewDevice(PreviewData.device)
     }
 }
