@@ -24,12 +24,15 @@ struct LoginView: View {
                 .fontWeight(.semibold)
                 .padding(.bottom, 20)
             TextField("Login", text: $username)
+                .textContentType(.emailAddress)
+                .keyboardType( /*@START_MENU_TOKEN@*/.emailAddress /*@END_MENU_TOKEN@*/)
                 .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
-                .keyboardType( /*@START_MENU_TOKEN@*/.emailAddress /*@END_MENU_TOKEN@*/)
                 .autocapitalization(.none)
             SecureField("Password", text: $password)
+                .textContentType(.password)
+                .keyboardType(.asciiCapable)
                 .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
@@ -42,6 +45,7 @@ struct LoginView: View {
                     .background(Color.green)
                     .cornerRadius(15.0)
             }
+            .disabled(username.isEmpty || password.isEmpty)
         }
     }
 
