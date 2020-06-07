@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CountdownSectionView: View {
-    var pomodoro: Pomodoro
+    @Binding var pomodoro: Pomodoro
 
     var body: some View {
         Section {
@@ -19,7 +19,7 @@ struct CountdownSectionView: View {
 
                 Text(pomodoro.category)
 
-                CountdownView(date: pomodoro.end)
+                CountdownView(date: .constant(pomodoro.end))
                     .font(.largeTitle)
 
             }.modifier(CenterModifier())
@@ -31,7 +31,7 @@ struct CountdownSectionView: View {
 
     struct CountdownSectionView_Previews: PreviewProvider {
         static var previews: some View {
-            CountdownSectionView(pomodoro: PreviewData.pomodoro)
+            CountdownSectionView(pomodoro: .constant(PreviewData.pomodoro))
         }
     }
 

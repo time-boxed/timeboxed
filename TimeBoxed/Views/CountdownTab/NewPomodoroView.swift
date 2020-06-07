@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct NewPomodoroView: View {
+    @ObservedObject var store = PomodoroStore.shared
+
     @State var title: String = ""
     @State var category: String = ""
 
@@ -21,12 +23,14 @@ struct NewPomodoroView: View {
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
+            .disabled(title.isEmpty || category.isEmpty)
 
             Button(action: actionSubmit60) {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
+            .disabled(title.isEmpty || category.isEmpty)
         }
     }
 
@@ -34,7 +38,10 @@ struct NewPomodoroView: View {
         let pomodoro = Pomodoro(
             id: 0, title: title, start: Date(), end: Date() + duration, category: category, memo: ""
         )
-        print(pomodoro)
+        store.create(pomodoro) { _ in
+            self.title = ""
+            self.category = ""
+        }
     }
 
     func actionSubmit25() {

@@ -12,22 +12,17 @@ import SwiftUI
 struct CountdownPageView: View {
     @ObservedObject var store = PomodoroStore.shared
 
-    private var current: Pomodoro? {
-        return store.pomodoros.first
-    }
-
     var body: some View {
         List {
-            if current != nil {
-                CountdownSectionView(pomodoro: current!)
+            if store.currentPomodoro != nil {
+                CountdownSectionView(pomodoro: .constant(store.currentPomodoro!))
             }
 
-            if current?.isActive ?? false {
-                ExtendPomodoroView(pomodoro: current!)
+            if store.currentPomodoro?.isActive ?? false {
+                ExtendPomodoroView(pomodoro: store.currentPomodoro!)
             } else {
                 NewPomodoroView()
             }
-
         }.onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
     }

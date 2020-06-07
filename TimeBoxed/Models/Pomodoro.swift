@@ -35,13 +35,16 @@ extension Pomodoro {
     }
 }
 
+typealias PomodoroCompletion = ((Pomodoro) -> Void)
+
 final class PomodoroStore: ObservableObject {
     static var shared = PomodoroStore()
-    private init() {
 
-    }
+    private init() {}
 
     @Published private(set) var pomodoros = [Pomodoro]()
+    @Published private(set) var currentPomodoro: Pomodoro?
+
     private var cancellable: AnyCancellable?
 
     func fetch() {
@@ -55,10 +58,41 @@ final class PomodoroStore: ObservableObject {
             .map(\.results)
             .receive(on: DispatchQueue.main)
             .replaceError(with: [])
-            .assign(to: \.pomodoros, on: self)
+            .sink(
+                receiveCompletion: { (error) in
+                    print(error)
+                },
+                receiveValue: { (newPomodoros) in
+                    self.pomodoros = newPomodoros
+                    self.currentPomodoro = newPomodoros.first
+                })
     }
 
-    func update(id: Int, end: Date) {
+    func create(_ pomodoro: Pomodoro, completion: @escaping PomodoroCompletion = { _ in }) {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        var request = URLRequest.request(path: "/api/pomodoro")
+        request.httpMethod = "POST"
+        request.addBody(object: pomodoro)
+
+        cancellable =
+            request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Pomodoro.self, decoder: decoder)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { (error) in
+                    print(error)
+                },
+                receiveValue: { (pomodoro) in
+                    self.currentPomodoro = pomodoro
+                    completion(pomodoro)
+                })
+    }
+
+    func update(id: Int, end: Date, completion: @escaping PomodoroCompletion = { _ in }) {
         let update = Pomodoro.DateRequest(end: end)
 
         let decoder = JSONDecoder()
@@ -73,12 +107,14 @@ final class PomodoroStore: ObservableObject {
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
-            .eraseToAnyPublisher()
-            .sink(receiveCompletion: { (error) in
-                print(error)
-            }) { (pomodoro) in
-                print(pomodoro)
-                self.fetch()
-            }
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { (error) in
+                    print(error)
+                },
+                receiveValue: { (pomodoro) in
+                    self.currentPomodoro = pomodoro
+                    completion(pomodoro)
+                })
     }
 }
