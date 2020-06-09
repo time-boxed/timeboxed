@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var userSettings = UserSettings.instance
+    @EnvironmentObject var userSettings: UserSettings
 
     var body: some View {
         NavigationView {

@@ -54,7 +54,8 @@ extension URLRequest {
     }
 
     static func request(path: String) -> URLRequest {
-        let userSettings = UserSettings.instance
+        // TODO: Use proper environment object
+        let userSettings = UserSettings()
         let login = userSettings.current_user ?? "@"
         let password = Settings.keychain.string(for: login) ?? ""
 

@@ -16,7 +16,7 @@ struct ContentView: View {
         case settings
     }
 
-    @ObservedObject var userSettings = UserSettings.instance
+    @EnvironmentObject var userSettings: UserSettings
     @State private var currentTab = ContentView.Tab.countdown
     @State private var showLogin = false
 

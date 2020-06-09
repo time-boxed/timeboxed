@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var userSettings = UserSettings.instance
+    @EnvironmentObject var userSettings: UserSettings
     @Environment(\.presentationMode) var presentation
 
     @State var username: String = ""

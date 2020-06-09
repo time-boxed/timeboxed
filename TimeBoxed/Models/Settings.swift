@@ -32,8 +32,6 @@ struct Settings {
 }
 
 class UserSettings: ObservableObject {
-    public static let instance = UserSettings()
-
     @Published var current_user: String? {
         didSet {
             Settings.defaults.set(value: current_user, forKey: .currentUser)
@@ -46,7 +44,7 @@ class UserSettings: ObservableObject {
         }
     }
 
-    private init() {
+    init() {
         self.current_user = Settings.defaults.string(forKey: .currentUser)
         self.users = Settings.defaults.array(forKey: .users)
     }
