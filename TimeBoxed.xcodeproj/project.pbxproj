@@ -10,6 +10,8 @@
 		8708842F24826F14003D662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708842E24826F14003D662F /* SettingsView.swift */; };
 		874E6C812489179B00E7153C /* NameValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C802489179B00E7153C /* NameValueView.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
+		8766894D248FAB1F0056DCB9 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectList.swift */; };
+		8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894E248FAEDB0056DCB9 /* Color+Extension.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
 		8792C374248BA1CB0098F928 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8792C373248BA1CB0098F928 /* Project.swift */; };
 		879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C36342483AB8A00DF0B9F /* SelectUserView.swift */; };
@@ -56,6 +58,8 @@
 		8708842E24826F14003D662F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		874E6C802489179B00E7153C /* NameValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValueView.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
+		8766894C248FAB1F0056DCB9 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
+		8766894E248FAEDB0056DCB9 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		8792C373248BA1CB0098F928 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 				C19BA173243F35E8004795A7 /* LoginView.swift */,
+				8766894C248FAB1F0056DCB9 /* ProjectList.swift */,
 				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
 				8708842E24826F14003D662F /* SettingsView.swift */,
 			);
@@ -251,6 +256,7 @@
 		C19BA16C243F33AA004795A7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8766894E248FAEDB0056DCB9 /* Color+Extension.swift */,
 				C19BA171243F346D004795A7 /* Keychain+Extensions.swift */,
 				87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */,
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
@@ -345,6 +351,7 @@
 				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
+				8766894D248FAB1F0056DCB9 /* ProjectList.swift in Sources */,
 				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,
@@ -362,6 +369,7 @@
 				874E6C812489179B00E7153C /* NameValueView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				87E8763E248A74150030044C /* CountdownSectionView.swift in Sources */,
+				8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */,
 				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
 				87C6AAA524825390002FAA74 /* ImageCache.swift in Sources */,

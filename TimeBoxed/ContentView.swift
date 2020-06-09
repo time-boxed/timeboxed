@@ -12,6 +12,7 @@ struct ContentView: View {
     enum Tab {
         case countdown
         case favorites
+        case project
         case history
         case settings
     }
@@ -39,7 +40,11 @@ struct ContentView: View {
                     }
                 }
                 .tag(Tab.favorites)
-
+            ProjectList()
+                .tabItem {
+                    Text("Projects")
+                }
+                .tag(Tab.project)
             HistoryView()
                 .tabItem {
                     VStack {

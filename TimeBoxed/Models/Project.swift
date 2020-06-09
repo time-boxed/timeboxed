@@ -8,10 +8,15 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 struct Project: Codable, Identifiable {
-    let id: Int
-    let title: String
+    let id: String
+    let name: String
+    let html_link: URL
+    let url: URL?
+    let color: Color
+    let active: Bool
 
     struct List: Codable {
         let count: Int
@@ -22,7 +27,7 @@ struct Project: Codable, Identifiable {
 }
 
 final class ProjectStore: ObservableObject {
-    var shared = ProjectStore()
+    static var shared = ProjectStore()
 
     @Published private(set) var projects = [Project]()
     private var cancellable: AnyCancellable?
@@ -36,7 +41,7 @@ final class ProjectStore: ObservableObject {
             .map { $0.data }
             .decode(type: Project.List.self, decoder: decoder)
             .map(\.results)
-            .eraseToAnyPublisher()
+            .print()
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: \.projects, on: self)
