@@ -57,7 +57,12 @@ extension UserDefaults {
     }
 
     func set<T: Encodable>(_ value: T, forKey: UserDefaults.Keys) {
-        set(try? PropertyListEncoder().encode(value), forKey: forKey.rawValue)
+        // TODO: See if there's a better way to handle this
+        if let stringArray = value as? [String] {
+            set(stringArray, forKey: forKey.rawValue)
+        } else {
+            set(try? PropertyListEncoder().encode(value), forKey: forKey.rawValue)
+        }
     }
 
     func append(_ value: String, forKey: UserDefaults.Keys) {
