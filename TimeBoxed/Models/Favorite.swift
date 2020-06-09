@@ -40,7 +40,6 @@ final class FavoriteStore: ObservableObject {
             .map { $0.data }
             .decode(type: Favorite.List.self, decoder: decoder)
             .map(\.results)
-            .eraseToAnyPublisher()
             .replaceError(with: [])
             .map { $0.sorted { $0.count > $1.count } }
             .receive(on: DispatchQueue.main)
@@ -60,7 +59,6 @@ final class FavoriteStore: ObservableObject {
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
             .print()
-            .eraseToAnyPublisher()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in }, receiveValue: receiveOutput)
     }

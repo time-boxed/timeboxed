@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct DateTimeView: View {
+    var label: String?
     var date: Date
     var style = DateFormatter.Style.medium
 
@@ -20,7 +21,13 @@ struct DateTimeView: View {
     }
 
     var body: some View {
-        Text(formatter.string(from: date))
+        HStack {
+            if label != nil {
+                Text(label!)
+                Spacer()
+            }
+            Text(formatter.string(from: date))
+        }
     }
 }
 
