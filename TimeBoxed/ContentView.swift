@@ -65,6 +65,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showLogin) {
             LoginView()
+                .environmentObject(self.userSettings)
         }
         .onAppear {
             self.showLogin = self.userSettings.current_user == nil
