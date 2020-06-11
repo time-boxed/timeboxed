@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ProjectRowView: View {
     @EnvironmentObject var store: ProjectStore
-    
+
     var id: String
     var project: Project? {
         return store.projects.first(where: { $0.id == id })
     }
-    
+
     @ViewBuilder
     var body: some View {
         if project == nil {

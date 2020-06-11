@@ -16,18 +16,22 @@ struct FavoriteView: View {
     @Binding var selection: ContentView.Tab
 
     var body: some View {
-        List {
-            ForEach(store.favorites) { item in
-                FavoriteRowView(favorite: item)
+        NavigationView {
+            List {
+                ForEach(store.favorites) { item in
+                    NavigationLink(destination: FavoriteDetailView(favorite: item)) {
+                        FavoriteRowView(favorite: item)
+                    }
                     .onLongPressGesture {
                         self.store.start(favorite: item) { pomodoro in
                             self.selection = .countdown
                         }
                     }
+                }
             }
+            .listStyle(GroupedListStyle())
         }
         .onAppear(perform: store.fetch)
-        .listStyle(GroupedListStyle())
     }
 }
 
