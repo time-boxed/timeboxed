@@ -73,8 +73,11 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().previewDevice(PreviewData.device)
+#if DEBUG
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView().previewDevice(PreviewData.device)
+        }
     }
-}
+
+#endif

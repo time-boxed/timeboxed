@@ -6,9 +6,8 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import SwiftUI
 import KingfisherSwiftUI
-
+import SwiftUI
 
 struct FavoriteRowView: View {
     var favorite: Favorite

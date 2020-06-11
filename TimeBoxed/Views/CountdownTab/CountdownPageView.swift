@@ -26,12 +26,17 @@ struct CountdownPageView: View {
         }.onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
     }
+
 }
 
-struct CountdownPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            CountdownPageView()
-        }.previewDevice(PreviewData.device)
+#if DEBUG
+
+    struct CountdownPageView_Previews: PreviewProvider {
+        static var previews: some View {
+            Group {
+                CountdownPageView()
+            }.previewDevice(PreviewData.device)
+        }
     }
-}
+
+#endif
