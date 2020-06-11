@@ -7,23 +7,19 @@
 //
 
 import SwiftUI
+import KingfisherSwiftUI
+
 
 struct FavoriteRowView: View {
-    @Environment(\.imageCache) var cache: ImageCache
-
     var favorite: Favorite
 
     var body: some View {
         HStack {
             Group {
                 if favorite.icon != nil {
-                    AsyncImage(
-                        url: favorite.icon!,
-                        cache: self.cache,
-                        placeholder: Text("Loading ..."),
-                        configuration: { $0.resizable() }
-                    )
-                    .frame(width: 32.0, height: 32.0)
+                    KFImage(favorite.icon!)
+                        .resizable()
+                        .frame(width: 32.0, height: 32.0)
                 }
             }
 
