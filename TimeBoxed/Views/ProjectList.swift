@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProjectList: View {
     @EnvironmentObject var store: ProjectStore
-
+    
     var body: some View {
         NavigationView {
             List(store.projects, id: \.id) { project in
@@ -19,6 +19,7 @@ struct ProjectList: View {
                         .foregroundColor(project.color)
                 }
             }
+            .navigationBarTitle("Projects")
         }
         .onAppear(perform: store.fetch)
     }

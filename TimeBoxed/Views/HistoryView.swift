@@ -21,14 +21,14 @@ extension HistoryGroup {
             .map { HistoryGroup(date: $0, items: $1.sorted { $0.end > $1.end }) }
             .sorted {
                 $0.date > $1.date
-            }
+        }
     }
 }
 
 struct HistoryView: View {
     @EnvironmentObject var userSettings: UserSettings
     @ObservedObject var store = PomodoroStore.shared
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -43,7 +43,7 @@ struct HistoryView: View {
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationBarTitle(userSettings.current_user ?? "Not Logged in")
+            .navigationBarTitle("History")
         }
         .onAppear(perform: store.fetch)
     }
@@ -51,10 +51,10 @@ struct HistoryView: View {
 
 #if DEBUG
 
-    struct HistoryView_Previews: PreviewProvider {
-        static var previews: some View {
-            HistoryView().previewDevice(PreviewData.device)
-        }
+struct HistoryView_Previews: PreviewProvider {
+    static var previews: some View {
+        HistoryView().previewDevice(PreviewData.device)
     }
+}
 
 #endif

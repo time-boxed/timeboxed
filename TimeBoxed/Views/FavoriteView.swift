@@ -30,6 +30,7 @@ struct FavoriteView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .navigationBarTitle("Favorites")
         }
         .onAppear(perform: store.fetch)
     }

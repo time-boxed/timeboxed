@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var userSettings: UserSettings
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -31,9 +31,10 @@ struct SettingsView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .navigationBarTitle("Settings")
         }
     }
-
+    
     func openRepo() {
         UIApplication.shared.open(Settings.homepage, options: [:], completionHandler: nil)
     }
