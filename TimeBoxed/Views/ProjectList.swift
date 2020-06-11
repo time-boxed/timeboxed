@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProjectList: View {
     @EnvironmentObject var store: ProjectStore
-    
+
     var body: some View {
         NavigationView {
             List(store.projects, id: \.id) { project in

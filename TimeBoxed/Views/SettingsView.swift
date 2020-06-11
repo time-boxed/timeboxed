@@ -10,14 +10,12 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var userSettings: UserSettings
-    
+
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Information")) {
-                    NavigationLink(destination: EmptyView()) {
-                        Text(Settings.homepage.absoluteString)
-                    }.onTapGesture(perform: openRepo)
+                    OpenLinkView(url: Settings.homepage)
                 }
                 Section(header: Text("User")) {
                     NavigationLink(destination: LoginView()) {
@@ -33,10 +31,6 @@ struct SettingsView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Settings")
         }
-    }
-    
-    func openRepo() {
-        UIApplication.shared.open(Settings.homepage, options: [:], completionHandler: nil)
     }
 }
 
