@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8708842F24826F14003D662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708842E24826F14003D662F /* SettingsView.swift */; };
+		870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE477249248AF00ED17C2 /* ProjectRowView.swift */; };
+		870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47924924BF000ED17C2 /* ProjectDetailView.swift */; };
 		874E6C812489179B00E7153C /* NameValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C802489179B00E7153C /* NameValueView.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
 		8766894D248FAB1F0056DCB9 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectList.swift */; };
@@ -54,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		8708842E24826F14003D662F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		870FE477249248AF00ED17C2 /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
+		870FE47924924BF000ED17C2 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		874E6C802489179B00E7153C /* NameValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameValueView.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
 		8766894C248FAB1F0056DCB9 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
@@ -112,6 +116,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		870FE476249242CA00ED17C2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
+				C19BA145243F2E33004795A7 /* ContentView.swift */,
+				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		874E6C822489213D00E7153C /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +152,7 @@
 				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
 				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				874E6C802489179B00E7153C /* NameValueView.swift */,
+				870FE477249248AF00ED17C2 /* ProjectRowView.swift */,
 			);
 			path = Rows;
 			sourceTree = "<group>";
@@ -174,16 +189,14 @@
 		C19BA140243F2E33004795A7 /* TimeBoxed */ = {
 			isa = PBXGroup;
 			children = (
+				870FE476249242CA00ED17C2 /* App */,
 				C19BA16C243F33AA004795A7 /* Extensions */,
 				876EF076245E90650021687C /* Models */,
 				C19BA149243F2E36004795A7 /* Preview Content */,
 				C19BA15C243F317B004795A7 /* Views */,
-				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
 				C19BA147243F2E36004795A7 /* Assets.xcassets */,
-				C19BA145243F2E33004795A7 /* ContentView.swift */,
 				C19BA14F243F2E36004795A7 /* Info.plist */,
 				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
-				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
 				87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */,
 			);
 			path = TimeBoxed;
@@ -209,6 +222,7 @@
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 				C19BA173243F35E8004795A7 /* LoginView.swift */,
+				870FE47924924BF000ED17C2 /* ProjectDetailView.swift */,
 				8766894C248FAB1F0056DCB9 /* ProjectList.swift */,
 				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
 				8708842E24826F14003D662F /* SettingsView.swift */,
@@ -330,12 +344,14 @@
 				C19BA161243F31D0004795A7 /* FavoriteView.swift in Sources */,
 				8766894D248FAB1F0056DCB9 /* ProjectList.swift in Sources */,
 				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
+				870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
 				87F95B342480978200255B29 /* DateTimeView.swift in Sources */,
 				8792C374248BA1CB0098F928 /* Project.swift in Sources */,
 				87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */,
+				870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */,
 				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
 				87C6AAAB24826983002FAA74 /* DateView.swift in Sources */,
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,

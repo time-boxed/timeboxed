@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 rootView:
                     contentView
                     .environmentObject(UserSettings())
+                    .environmentObject(ProjectStore())
             )
             self.window = window
             window.makeKeyAndVisible()

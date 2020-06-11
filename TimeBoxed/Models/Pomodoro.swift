@@ -16,6 +16,7 @@ struct Pomodoro: Codable, Identifiable {
     var end: Date
     var category: String
     var memo: String?
+    var project: String?
 
     struct List: Codable {
         let count: Int

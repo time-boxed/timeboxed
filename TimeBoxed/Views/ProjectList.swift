@@ -9,12 +9,16 @@
 import SwiftUI
 
 struct ProjectList: View {
-    @ObservedObject var store = ProjectStore.shared
+    @EnvironmentObject var store : ProjectStore
 
     var body: some View {
-        List(store.projects, id: \.id) { project in
-            Text(project.name)
-                .foregroundColor(project.color)
+        NavigationView {
+            List(store.projects, id: \.id) { project in
+                NavigationLink(destination: ProjectDetailView(project: project)) {
+                    Text(project.name)
+                        .foregroundColor(project.color)
+                }
+            }
         }
         .onAppear(perform: store.fetch)
     }

@@ -17,6 +17,7 @@ struct Project: Codable, Identifiable {
     let url: URL?
     let color: Color
     let active: Bool
+    let memo: String
 
     struct List: Codable {
         let count: Int
