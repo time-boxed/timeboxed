@@ -32,7 +32,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.countdown)
 
-            FavoriteView(selection: $currentTab)
+            FavoriteListView(selection: $currentTab)
                 .tabItem {
                     VStack {
                         Image("star")

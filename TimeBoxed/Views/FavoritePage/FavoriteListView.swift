@@ -1,5 +1,5 @@
 //
-//  FavoriteView.swift
+//  FavoriteListView.swift
 //  TimeBoxed
 //
 //  Created by ST20638 on 2020/04/09.
@@ -9,11 +9,12 @@
 import Combine
 import SwiftUI
 
-struct FavoriteView: View {
+struct FavoriteListView: View {
     @EnvironmentObject var userSettings: UserSettings
     @ObservedObject var store = FavoriteStore()
 
     @Binding var selection: ContentView.Tab
+    @State var isPresenting = false
 
     var body: some View {
         NavigationView {
@@ -29,10 +30,18 @@ struct FavoriteView: View {
                     }
                 }
             }
+            .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Favorites")
+            .navigationBarItems(
+                trailing: Button(action: { self.isPresenting.toggle() }) {
+                    Text("Add")
+                })
         }
-        .onAppear(perform: store.fetch)
+        .sheet(isPresented: $isPresenting) {
+            SheetNewFavoriteView(isPresented: self.$isPresenting)
+                .sheetWithDone(isPresented: self.$isPresenting)
+        }
     }
 }
 
@@ -40,7 +49,7 @@ struct FavoriteView: View {
 
     struct FavoriteView_Previews: PreviewProvider {
         static var previews: some View {
-            FavoriteView(selection: .constant(.favorites)).previewDevice(PreviewData.device)
+            FavoriteListView(selection: .constant(.favorites)).previewDevice(PreviewData.device)
         }
     }
 

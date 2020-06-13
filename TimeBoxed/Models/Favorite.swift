@@ -10,14 +10,14 @@ import Combine
 import Foundation
 
 struct Favorite: Codable, Identifiable {
-    let id: Int
-    let title: String
-    let duration: TimeInterval
-    let memo: String?
-    let icon: URL?
-    let html_link: URL
-    let url: URL?
-    let count: Int
+    var id: Int
+    var title: String
+    var duration: TimeInterval
+    var memo: String?
+    var icon: URL?
+    var html_link: URL
+    var url: URL?
+    var count: Int
 
     struct List: Codable {
         let count: Int
