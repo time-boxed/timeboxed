@@ -31,20 +31,34 @@ final class ProjectStore: ObservableObject {
     static var shared = ProjectStore()
 
     @Published private(set) var projects = [Project]()
-    private var cancellable: AnyCancellable?
+    private var subscriptions = Set<AnyCancellable>()
 
-    func fetch() {
+    private var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
 
-        cancellable = URLRequest.request(path: "/api/project")
+    private func onReceive(_ completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+
+    private func onReceive(_ batch: Project.List) {
+        projects = batch.results
+    }
+
+    func fetch() {
+        URLRequest.request(path: "/api/project", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Project.List.self, decoder: decoder)
-            .map(\.results)
-            .print()
-            .replaceError(with: [])
             .receive(on: DispatchQueue.main)
-            .assign(to: \.projects, on: self)
+            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
+            .store(in: &subscriptions)
     }
 }

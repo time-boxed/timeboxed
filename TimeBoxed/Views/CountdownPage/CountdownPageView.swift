@@ -23,8 +23,9 @@ struct CountdownPageView: View {
             } else {
                 NewPomodoroView()
             }
-        }.onAppear(perform: store.fetch)
-            .listStyle(GroupedListStyle())
+        }
+        .onAppear(perform: store.reload)
+        .listStyle(GroupedListStyle())
     }
 
 }

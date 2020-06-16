@@ -35,15 +35,21 @@ struct ExtendPomodoroView: View {
     }
 
     func actionAddPomodoro() {
-        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(25 * 60))
+        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(25 * 60)) { pomodoro in
+            print(pomodoro)
+        }
     }
 
     func actionAddHour() {
-        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(60 * 60))
+        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(60 * 60)) { pomodoro in
+            print(pomodoro)
+        }
     }
 
     func actionStop() {
-        store.update(id: pomodoro.id, end: Date())
+        store.update(id: pomodoro.id, end: Date()) { pomodoro in
+            print(pomodoro)
+        }
     }
 }
 

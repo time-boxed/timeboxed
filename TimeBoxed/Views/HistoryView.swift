@@ -42,7 +42,7 @@ struct HistoryView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
         }
-        .onAppear(perform: store.fetch)
+        .onAppear(perform: store.reload)
     }
 }
 

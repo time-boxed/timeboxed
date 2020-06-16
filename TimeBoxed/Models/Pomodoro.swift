@@ -69,6 +69,8 @@ final class PomodoroStore: ObservableObject {
 
     private func onReceive(_ batch: Pomodoro.List) {
         pomodoros += batch.results
+        currentPomodoro = pomodoros.first
+
         if let next = URLComponents(string: batch.next ?? "") {
             next.queryItems?.forEach({ (queryItem) in
                 if queryItem.name == "offset" {
@@ -78,6 +80,11 @@ final class PomodoroStore: ObservableObject {
         } else {
             canLoadNextPage = false
         }
+    }
+
+    func reload() {
+        pomodoros = []
+        fetch()
     }
 
     func fetch() {
@@ -90,7 +97,7 @@ final class PomodoroStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func create(_ pomodoro: Pomodoro, completion: @escaping PomodoroCompletion = { _ in }) {
+    func create(_ pomodoro: Pomodoro, completion: @escaping PomodoroCompletion) {
         var request = URLRequest.request(path: "/api/pomodoro")
         request.httpMethod = "POST"
         request.addBody(object: pomodoro)
@@ -100,19 +107,11 @@ final class PomodoroStore: ObservableObject {
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { (error) in
-                    print(error)
-                },
-                receiveValue: { (pomodoro) in
-                    self.currentPomodoro = pomodoro
-                    completion(pomodoro)
-                }
-            )
+            .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
     }
 
-    func update(id: Int, end: Date, completion: @escaping PomodoroCompletion = { _ in }) {
+    func update(id: Int, end: Date, completion: @escaping PomodoroCompletion) {
         let update = Pomodoro.DateRequest(end: end)
         var request = URLRequest.request(path: "/api/pomodoro/\(id)")
         request.httpMethod = "PATCH"
@@ -123,15 +122,7 @@ final class PomodoroStore: ObservableObject {
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { (error) in
-                    print(error)
-                },
-                receiveValue: { (pomodoro) in
-                    self.currentPomodoro = pomodoro
-                    completion(pomodoro)
-                }
-            )
+            .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
     }
 }
