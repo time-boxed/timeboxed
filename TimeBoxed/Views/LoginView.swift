@@ -50,21 +50,23 @@ struct LoginView: View {
     }
 
     func submitLogin() {
-        cancellable = URLRequest.request(path: "/api/pomodoro", login: username, password: password)
-            .dataTaskPublisher()
-            .eraseToAnyPublisher()
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { (error) in
-                    print(error)
-                },
-                receiveValue: { _ in
-                    self.userSettings.users.append(self.username)
-                    self.userSettings.current_user = self.username
+        cancellable = URLRequest.request(
+            path: "/api/pomodoro", login: username, password: password, qs: [:]
+        )
+        .dataTaskPublisher()
+        .eraseToAnyPublisher()
+        .receive(on: DispatchQueue.main)
+        .sink(
+            receiveCompletion: { (error) in
+                print(error)
+            },
+            receiveValue: { _ in
+                self.userSettings.users.append(self.username)
+                self.userSettings.current_user = self.username
 
-                    Settings.keychain.set(self.password, for: self.username)
-                    self.presentation.wrappedValue.dismiss()
-                })
+                Settings.keychain.set(self.password, for: self.username)
+                self.presentation.wrappedValue.dismiss()
+            })
     }
 }
 

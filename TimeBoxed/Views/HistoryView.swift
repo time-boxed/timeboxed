@@ -29,6 +29,11 @@ struct HistoryView: View {
                         ForEach(self.groups[date]!.sorted { $0.end > $1.end }, id: \.id) { p in
                             NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
                                 HistoryRowView(pomodoro: p)
+                                    .onAppear {
+                                        if self.store.pomodoros.last == p {
+                                            self.store.fetch()
+                                        }
+                                    }
                             }
                         }
                     }

@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-struct Pomodoro: Codable, Identifiable {
+struct Pomodoro: Codable, Identifiable, Equatable {
     let id: Int
     var title: String
     var start: Date
@@ -40,45 +40,62 @@ typealias PomodoroCompletion = ((Pomodoro) -> Void)
 
 final class PomodoroStore: ObservableObject {
     static var shared = PomodoroStore()
+    private var subscriptions = Set<AnyCancellable>()
+
+    private var decoder: JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }
 
     private init() {}
 
     @Published private(set) var pomodoros = [Pomodoro]()
     @Published private(set) var currentPomodoro: Pomodoro?
 
-    private var cancellable: AnyCancellable?
+    // Scroll
+    private var offset = "0"
+    var canLoadNextPage = true
+
+    private func onReceive(_ completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            print(error.localizedDescription)
+            canLoadNextPage = false
+        }
+    }
+
+    private func onReceive(_ batch: Pomodoro.List) {
+        pomodoros += batch.results
+        if let next = URLComponents(string: batch.next ?? "") {
+            next.queryItems?.forEach({ (queryItem) in
+                if queryItem.name == "offset" {
+                    self.offset = queryItem.value!
+                }
+            })
+        } else {
+            canLoadNextPage = false
+        }
+    }
 
     func fetch() {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-
-        cancellable = URLRequest.request(path: "/api/pomodoro")
+        URLRequest.request(path: "/api/pomodoro", qs: ["offset": offset])
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Pomodoro.List.self, decoder: decoder)
-            .map(\.results)
             .receive(on: DispatchQueue.main)
-            .replaceError(with: [])
-            .sink(
-                receiveCompletion: { (error) in
-                    print(error)
-                },
-                receiveValue: { (newPomodoros) in
-                    self.pomodoros = newPomodoros
-                    self.currentPomodoro = newPomodoros.first
-                })
+            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
+            .store(in: &subscriptions)
     }
 
     func create(_ pomodoro: Pomodoro, completion: @escaping PomodoroCompletion = { _ in }) {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-
         var request = URLRequest.request(path: "/api/pomodoro")
         request.httpMethod = "POST"
         request.addBody(object: pomodoro)
 
-        cancellable =
-            request
+        request
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
@@ -90,21 +107,18 @@ final class PomodoroStore: ObservableObject {
                 receiveValue: { (pomodoro) in
                     self.currentPomodoro = pomodoro
                     completion(pomodoro)
-                })
+                }
+            )
+            .store(in: &subscriptions)
     }
 
     func update(id: Int, end: Date, completion: @escaping PomodoroCompletion = { _ in }) {
         let update = Pomodoro.DateRequest(end: end)
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-
         var request = URLRequest.request(path: "/api/pomodoro/\(id)")
         request.httpMethod = "PATCH"
         request.addBody(object: update)
 
-        cancellable =
-            request
+        request
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Pomodoro.self, decoder: decoder)
@@ -116,6 +130,8 @@ final class PomodoroStore: ObservableObject {
                 receiveValue: { (pomodoro) in
                     self.currentPomodoro = pomodoro
                     completion(pomodoro)
-                })
+                }
+            )
+            .store(in: &subscriptions)
     }
 }

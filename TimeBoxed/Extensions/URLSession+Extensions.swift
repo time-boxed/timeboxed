@@ -10,6 +10,14 @@ import Combine
 import Foundation
 import os.log
 
+extension URLComponents {
+    mutating func addQuery(qs: [String: Any] = [:]) {
+        queryItems = qs.map { (key, value) in
+            URLQueryItem(name: key, value: "\(value)")
+        }
+    }
+}
+
 extension URLRequest {
     mutating func addBasicAuth(username: String, password: String) {
         let loginString = "\(username):\(password)"
@@ -33,17 +41,20 @@ extension URLRequest {
         }
     }
 
-    static func request(path: String, login: String, password: String) -> URLRequest {
+    static func request(path: String, login: String, password: String, qs: [String: Any])
+        -> URLRequest
+    {
         let parts = login.components(separatedBy: "@")
 
         var url = URLComponents()
         url.scheme = "https"
         url.host = parts[1]
         url.path = path
+        url.addQuery(qs: qs)
 
         var request = URLRequest(url: url.url!)
         request.addBasicAuth(username: parts[0], password: password)
-        os_log(.debug, "Querying %{public}s for %{public}s", url.string!, parts[0])
+        os_log(.debug, "Querying %{public}s for %{public}s", request.url!.absoluteString, parts[0])
         return request
     }
 
@@ -53,12 +64,12 @@ extension URLRequest {
         return session.dataTaskPublisher(for: self)
     }
 
-    static func request(path: String) -> URLRequest {
+    static func request(path: String, qs: [String: Any] = [:]) -> URLRequest {
         // TODO: Use proper environment object
         let userSettings = UserSettings()
         let login = userSettings.current_user ?? "@"
         let password = Settings.keychain.string(for: login) ?? ""
 
-        return request(path: path, login: login, password: password)
+        return request(path: path, login: login, password: password, qs: qs)
     }
 }
