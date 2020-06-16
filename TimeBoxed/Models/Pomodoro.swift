@@ -68,7 +68,7 @@ final class PomodoroStore: ObservableObject {
     }
 
     private func onReceive(_ batch: Pomodoro.List) {
-        pomodoros += batch.results
+        pomodoros += batch.results.sorted { $0.start > $1.start }
         currentPomodoro = pomodoros.first
 
         if let next = URLComponents(string: batch.next ?? "") {
@@ -84,6 +84,7 @@ final class PomodoroStore: ObservableObject {
 
     func reload() {
         pomodoros = []
+        offset = "0"
         fetch()
     }
 
