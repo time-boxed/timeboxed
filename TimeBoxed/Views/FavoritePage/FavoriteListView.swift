@@ -28,12 +28,13 @@ struct FavoriteListView: View {
                             self.selection = .countdown
                         }
                     }
-                }
+                }.onDelete(perform: deleteFavorite)
             }
             .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Favorites")
             .navigationBarItems(
+                leading: EditButton(),
                 trailing: Button(action: { self.isPresenting.toggle() }) {
                     Text("Add")
                 })
@@ -42,6 +43,10 @@ struct FavoriteListView: View {
             SheetNewFavoriteView(isPresented: self.$isPresenting)
                 .sheetWithDone(isPresented: self.$isPresenting)
         }
+    }
+    
+    func deleteFavorite(at offset: IndexSet) {
+        print(offset.rangeView)
     }
 }
 

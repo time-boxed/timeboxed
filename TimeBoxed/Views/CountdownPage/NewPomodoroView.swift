@@ -16,7 +16,6 @@ struct NewPomodoroView: View {
     class Model: ObservableObject {
         @Published var title: String = ""
         @Published var category: String = ""
-        @State var isSaveDisabled = true
 
         lazy var titleValidation: ValidationPublisher = {
             $title.nonEmptyValidator("Required Title")
@@ -49,14 +48,14 @@ struct NewPomodoroView: View {
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled(model.isSaveDisabled)
+            .disabled(isSaveDisabled)
 
             Button(action: actionSubmit60) {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled(model.isSaveDisabled)
+            .disabled(isSaveDisabled)
         }
         .onReceive(model.canSubmit) { validation in
             self.isSaveDisabled = !validation.isSuccess
