@@ -19,13 +19,26 @@ struct SelectUserView: View {
                 }) {
                     Text(user)
                 }
-            }
+            }.onDelete(perform: deleteItems)
         }
+        .navigationBarItems(trailing: EditButton())
+    }
+
+    func deleteItems(at offsets: IndexSet) {
+        userSettings.users.remove(at: offsets)
     }
 }
 
 struct SelectUserView_Previews: PreviewProvider {
     static var previews: some View {
         SelectUserView()
+    }
+}
+
+extension Array {
+    mutating func remove(at set: IndexSet) {
+        var arr = Swift.Array(self.enumerated())
+        arr.removeAll { set.contains($0.offset) }
+        self = arr.map { $0.element }
     }
 }
