@@ -6,41 +6,71 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 struct NewPomodoroView: View {
     @ObservedObject var store = PomodoroStore.shared
+    @State var isSaveDisabled = true
 
-    @State var title: String = ""
-    @State var category: String = ""
+    class Model: ObservableObject {
+        @Published var title: String = ""
+        @Published var category: String = ""
+        @State var isSaveDisabled = true
+
+        lazy var titleValidation: ValidationPublisher = {
+            $title.nonEmptyValidator("Required Title")
+        }()
+        lazy var categoryValidation: ValidationPublisher = {
+            $category.nonEmptyValidator("Required Category")
+        }()
+
+        lazy var canSubmit: ValidationPublisher = {
+            Publishers.CombineLatest(titleValidation, categoryValidation).map { v1, v2 in
+                //                print("firstNameValidation: \(v1)")
+                //                print("lastNamesValidation: \(v2)")
+                return [v1, v2].allSatisfy { $0.isSuccess } ? .success : .failure(message: "")
+            }.eraseToAnyPublisher()
+        }()
+
+    }
+    @ObservedObject var model = Model()
 
     var body: some View {
         Section(header: Text("New")) {
-            TextField("Title", text: $title)
-            TextField("Category", text: $category)
+            TextField("Title", text: $model.title)
+                .validation(model.titleValidation)
+
+            TextField("Category", text: $model.category)
+                .validation(model.categoryValidation)
+
             Button(action: actionSubmit25) {
                 Text("25 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled(title.isEmpty || category.isEmpty)
+            .disabled(model.isSaveDisabled)
 
             Button(action: actionSubmit60) {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled(title.isEmpty || category.isEmpty)
+            .disabled(model.isSaveDisabled)
+        }
+        .onReceive(model.canSubmit) { validation in
+            self.isSaveDisabled = !validation.isSuccess
         }
     }
 
     func submitPomodoro(duration: TimeInterval) {
         let pomodoro = Pomodoro(
-            id: 0, title: title, start: Date(), end: Date() + duration, category: category, memo: ""
+            id: 0, title: model.title, start: Date(), end: Date() + duration,
+            category: model.category, memo: ""
         )
         store.create(pomodoro) { _ in
-            self.title = ""
-            self.category = ""
+            self.model.title = ""
+            self.model.category = ""
         }
     }
 
