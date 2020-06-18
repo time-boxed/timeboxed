@@ -27,3 +27,13 @@ struct DangerButtonStyle: ButtonStyle {
             .background(RoundedRectangle(cornerRadius: 8).stroke(Color.red))
     }
 }
+
+struct LoginButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: 128, minHeight: 44)
+            .font(.headline)
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 8).stroke(Color.green))
+    }
+}

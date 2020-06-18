@@ -34,22 +34,22 @@ struct ExtendPomodoroView: View {
         }
     }
 
+    private func onReceive(_ batch: Pomodoro) {
+        print(pomodoro)
+    }
+
     func actionAddPomodoro() {
-        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(25 * 60)) { pomodoro in
-            print(pomodoro)
-        }
+        store.update(
+            id: pomodoro.id, end: pomodoro.end.addingTimeInterval(25 * 60), completion: onReceive)
     }
 
     func actionAddHour() {
-        store.update(id: pomodoro.id, end: pomodoro.end.addingTimeInterval(60 * 60)) { pomodoro in
-            print(pomodoro)
-        }
+        store.update(
+            id: pomodoro.id, end: pomodoro.end.addingTimeInterval(60 * 60), completion: onReceive)
     }
 
     func actionStop() {
-        store.update(id: pomodoro.id, end: Date()) { pomodoro in
-            print(pomodoro)
-        }
+        store.update(id: pomodoro.id, end: Date(), completion: onReceive)
     }
 }
 

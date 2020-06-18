@@ -13,60 +13,87 @@ struct LoginView: View {
     @EnvironmentObject var userSettings: UserSettings
     @Environment(\.presentationMode) var presentation
 
-    @State var username: String = ""
-    @State var password: String = ""
+    @State var isSaveDisabled = true
     @State private var cancellable: AnyCancellable?
 
+    class Model: ObservableObject {
+        @Published var username: String = ""
+        @Published var password: String = ""
+
+        lazy var usernameValidator: ValidationPublisher = {
+            $username.matcherValidation(".+@.+\\..+", "Requires Username")
+        }()
+        lazy var passwordValidation: ValidationPublisher = {
+            $password.nonEmptyValidator("Required Password")
+        }()
+
+        lazy var canSubmit: ValidationPublisher = {
+            Publishers.CombineLatest(usernameValidator, passwordValidation).map { v1, v2 in
+                //                print("firstNameValidation: \(v1)")
+                //                print("lastNamesValidation: \(v2)")
+                return [v1, v2].allSatisfy { $0.isSuccess } ? .success : .failure(message: "")
+            }.eraseToAnyPublisher()
+        }()
+    }
+    @ObservedObject var model = Model()
+
     var body: some View {
+        //        Form {
         VStack {
+
             Text("Welcome!")
                 .font(.largeTitle)
                 .fontWeight(.semibold)
-                .padding(.bottom, 20)
-            TextField("Login", text: $username)
+            TextField("Login", text: $model.username)
+                .validation(model.usernameValidator)
                 .textContentType(.emailAddress)
                 .keyboardType( /*@START_MENU_TOKEN@*/.emailAddress /*@END_MENU_TOKEN@*/)
-                .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
                 .autocapitalization(.none)
-            SecureField("Password", text: $password)
+            SecureField("Password", text: $model.password)
+                .validation(model.passwordValidation)
                 .textContentType(.password)
                 .keyboardType(.asciiCapable)
-                .padding()
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
             Button(action: submitLogin) {
                 Text("LOGIN")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(width: 220, height: 60)
-                    .background(Color.green)
-                    .cornerRadius(15.0)
             }
-            .disabled(username.isEmpty || password.isEmpty)
+            .buttonStyle(LoginButtonStyle())
+            .disabled(self.isSaveDisabled)
+
+            //            }
+        }.padding()
+            .onReceive(model.canSubmit) { (validation) in
+                self.isSaveDisabled = !validation.isSuccess
+            }
+    }
+
+    private func onReceive(completion: Subscribers.Completion<URLError>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            print(error.localizedDescription)
         }
+    }
+
+    private func onRecieve(data: Data, response: URLResponse) {
+        userSettings.users.append(model.username)
+        userSettings.current_user = model.username
+
+        Settings.keychain.set(model.password, for: model.username)
+        presentation.wrappedValue.dismiss()
     }
 
     func submitLogin() {
         cancellable = URLRequest.request(
-            path: "/api/pomodoro", login: username, password: password, qs: [:]
+            path: "/api/pomodoro", login: model.username, password: model.password, qs: [:]
         )
         .dataTaskPublisher()
-        .eraseToAnyPublisher()
         .receive(on: DispatchQueue.main)
-        .sink(
-            receiveCompletion: { (error) in
-                print(error)
-            },
-            receiveValue: { _ in
-                self.userSettings.users.append(self.username)
-                self.userSettings.current_user = self.username
-
-                Settings.keychain.set(self.password, for: self.username)
-                self.presentation.wrappedValue.dismiss()
-            })
+        .sink(receiveCompletion: onReceive, receiveValue: onRecieve)
     }
 }
 
