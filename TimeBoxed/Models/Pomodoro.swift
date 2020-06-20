@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-struct Pomodoro: Codable, Identifiable, Equatable {
+struct Pomodoro: Codable, Hashable {
     let id: Int
     var title: String
     var start: Date
@@ -72,6 +72,9 @@ final class PomodoroStore: ObservableObject {
         pomodoros += batch.results.sorted { $0.start > $1.start }
         currentPomodoro = pomodoros.first
 
+        canLoadNextPage = batch.next != nil
+        guard canLoadNextPage else { return }
+
         if let next = URLComponents(string: batch.next ?? "") {
             next.queryItems?.forEach({ (queryItem) in
                 if queryItem.name == "offset" {
@@ -84,12 +87,13 @@ final class PomodoroStore: ObservableObject {
     }
 
     func reload() {
-        pomodoros = []
-        offset = "0"
+        PomodoroStore.shared = PomodoroStore()
         fetch()
     }
 
     func fetch() {
+        guard canLoadNextPage else { return }
+
         URLRequest.request(path: "/api/pomodoro", qs: ["offset": offset])
             .dataTaskPublisher()
             .map { $0.data }
@@ -126,5 +130,30 @@ final class PomodoroStore: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
+    }
+
+    func delete(pomodoro: Pomodoro) {
+        var request = URLRequest.request(path: "/api/pomodoro/\(pomodoro.id)")
+        request.httpMethod = "DELETE"
+        request.dataTaskPublisher()
+            .map { $0.response }
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { (failure) in
+                    print(failure)
+                },
+                receiveValue: { (response) in
+                    print(response)
+                }
+            )
+            .store(in: &subscriptions)
+    }
+
+    func delete(at offset: IndexSet) {
+        offset.forEach { (index) in
+            delete(pomodoro: pomodoros[index])
+        }
+        pomodoros.remove(atOffsets: offset)
+//        reload()
     }
 }

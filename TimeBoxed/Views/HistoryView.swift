@@ -26,7 +26,7 @@ struct HistoryView: View {
             List {
                 ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
                     Section(header: DateView(date: date)) {
-                        ForEach(self.groups[date]!.sorted { $0.end > $1.end }, id: \.id) { p in
+                        ForEach(self.groups[date]!.sorted { $0.end > $1.end }, id: \.self) { p in
                             NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
                                 HistoryRowView(pomodoro: p)
                                     .onAppear {
@@ -35,12 +35,13 @@ struct HistoryView: View {
                                         }
                                     }
                             }
-                        }
+                        }.onDelete(perform: self.store.delete)
                     }
                 }
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
+            .navigationBarItems(leading: EditButton())
         }
         .onAppear(perform: store.reload)
     }

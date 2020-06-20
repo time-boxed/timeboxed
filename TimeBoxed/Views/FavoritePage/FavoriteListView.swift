@@ -44,7 +44,7 @@ struct FavoriteListView: View {
                 .sheetWithDone(isPresented: self.$isPresenting)
         }
     }
-    
+
     func deleteFavorite(at offset: IndexSet) {
         print(offset.rangeView)
     }
