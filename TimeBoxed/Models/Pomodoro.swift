@@ -39,15 +39,11 @@ extension Pomodoro {
 
 typealias PomodoroCompletion = ((Pomodoro) -> Void)
 
-final class PomodoroStore: ObservableObject {
+final class PomodoroStore: API {
+    typealias Model = Pomodoro
+
     static var shared = PomodoroStore()
     private var subscriptions = Set<AnyCancellable>()
-
-    private var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return decoder
-    }
 
     private init() {}
 
@@ -57,16 +53,6 @@ final class PomodoroStore: ObservableObject {
     // Scroll
     private var offset = "0"
     var canLoadNextPage = true
-
-    private func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            print(error.localizedDescription)
-            canLoadNextPage = false
-        }
-    }
 
     private func onReceive(_ batch: Pomodoro.List) {
         pomodoros += batch.results.sorted { $0.start > $1.start }
@@ -103,10 +89,10 @@ final class PomodoroStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func create(_ pomodoro: Pomodoro, completion: @escaping PomodoroCompletion) {
+    func create(_ object: Pomodoro, completion: @escaping ((Pomodoro) -> Void)) {
         var request = URLRequest.request(path: "/api/pomodoro")
         request.httpMethod = "POST"
-        request.addBody(object: pomodoro)
+        request.addBody(object: object)
 
         request
             .dataTaskPublisher()
@@ -117,7 +103,7 @@ final class PomodoroStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func update(id: Int, end: Date, completion: @escaping PomodoroCompletion) {
+    func update(id: Int, end: Date, completion: @escaping ((Pomodoro) -> Void)) {
         let update = Pomodoro.DateRequest(end: end)
         var request = URLRequest.request(path: "/api/pomodoro/\(id)")
         request.httpMethod = "PATCH"
@@ -132,7 +118,7 @@ final class PomodoroStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func delete(pomodoro: Pomodoro) {
+    func delete(_ pomodoro: Pomodoro) {
         var request = URLRequest.request(path: "/api/pomodoro/\(pomodoro.id)")
         request.httpMethod = "DELETE"
         request.dataTaskPublisher()
@@ -151,9 +137,8 @@ final class PomodoroStore: ObservableObject {
 
     func delete(at offset: IndexSet) {
         offset.forEach { (index) in
-            delete(pomodoro: pomodoros[index])
+            delete(pomodoros[index])
         }
         pomodoros.remove(atOffsets: offset)
-        //        reload()
     }
 }

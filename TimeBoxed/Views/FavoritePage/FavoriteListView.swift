@@ -21,7 +21,7 @@ struct FavoriteListView: View {
             List {
                 Button("Reload", action: store.fetch)
 
-                ForEach(store.favorites) { item in
+                ForEach(store.favorites, id: \.id) { item in
                     NavigationLink(destination: FavoriteDetailView(favorite: item)) {
                         FavoriteRowView(favorite: item)
                     }

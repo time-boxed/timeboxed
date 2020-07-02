@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-struct Favorite: Codable, Identifiable {
+struct Favorite: Codable, Hashable {
     var id: Int
     var title: String
     var duration: TimeInterval
@@ -29,33 +29,22 @@ struct Favorite: Codable, Identifiable {
 
 typealias FavoriteCompletion = ((Favorite) -> Void)
 
-final class FavoriteStore: ObservableObject {
+final class FavoriteStore: API {
+    var canLoadNextPage = true
+
+    typealias Model = Favorite
+
     @Published private(set) var favorites = [Favorite]()
     private var subscriptions = Set<AnyCancellable>()
-
-    private var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return decoder
-    }
-
-    private func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
-    }
 
     private func onReceive(_ batch: Favorite.List) {
         favorites = batch.results.sorted { $0.count > $1.count }
     }
 
-    func create(_ favorite: Favorite, completion: @escaping FavoriteCompletion) {
+    func create(_ object: Favorite, completion: @escaping ((Favorite) -> Void)) {
         var request = URLRequest.request(path: "/api/favorite")
         request.httpMethod = "POST"
-        request.addBody(object: favorite)
+        request.addBody(object: object)
 
         request
             .dataTaskPublisher()
@@ -93,8 +82,8 @@ final class FavoriteStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
-    func delete(favorite: Favorite) {
-        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)")
+    func delete(_ object: Favorite) {
+        var request = URLRequest.request(path: "/api/favorite/\(object.id)")
         request.httpMethod = "DELETE"
         request.dataTaskPublisher()
             .map { $0.response }
@@ -112,7 +101,7 @@ final class FavoriteStore: ObservableObject {
 
     func delete(at offset: IndexSet) {
         offset.forEach { (index) in
-            delete(favorite: favorites[index])
+            delete(favorites[index])
         }
         favorites.remove(atOffsets: offset)
         //        reload()
