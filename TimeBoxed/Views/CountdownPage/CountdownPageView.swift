@@ -14,6 +14,8 @@ struct CountdownPageView: View {
 
     var body: some View {
         List {
+            Button("Reload", action: store.reload)
+
             if store.currentPomodoro != nil {
                 CountdownSectionView(pomodoro: .constant(store.currentPomodoro!))
             }

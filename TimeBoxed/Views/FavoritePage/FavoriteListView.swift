@@ -19,6 +19,8 @@ struct FavoriteListView: View {
     var body: some View {
         NavigationView {
             List {
+                Button("Reload", action: store.fetch)
+
                 ForEach(store.favorites) { item in
                     NavigationLink(destination: FavoriteDetailView(favorite: item)) {
                         FavoriteRowView(favorite: item)
@@ -39,6 +41,7 @@ struct FavoriteListView: View {
                     Text("Add")
                 })
         }
+
         .sheet(isPresented: $isPresenting) {
             SheetNewFavoriteView(isPresented: self.$isPresenting)
                 .sheetWithDone(isPresented: self.$isPresenting)

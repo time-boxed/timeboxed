@@ -24,6 +24,8 @@ struct HistoryView: View {
     var body: some View {
         NavigationView {
             List {
+                Button("Reload", action: store.reload)
+
                 ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
                     Section(header: DateView(date: date)) {
                         ForEach(self.groups[date]!.sorted { $0.end > $1.end }, id: \.self) { p in

@@ -154,6 +154,6 @@ final class PomodoroStore: ObservableObject {
             delete(pomodoro: pomodoros[index])
         }
         pomodoros.remove(atOffsets: offset)
-//        reload()
+        //        reload()
     }
 }

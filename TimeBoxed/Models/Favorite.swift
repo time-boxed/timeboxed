@@ -60,6 +60,10 @@ final class FavoriteStore: ObservableObject {
             .store(in: &subscriptions)
     }
 
+    func reload() {
+        fetch()
+    }
+
     func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
         var request = URLRequest.request(path: "/api/favorite/\(favorite.id)/start")
         request.httpMethod = "POST"

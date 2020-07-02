@@ -13,10 +13,14 @@ struct ProjectList: View {
 
     var body: some View {
         NavigationView {
-            List(store.projects, id: \.id) { project in
-                NavigationLink(destination: ProjectDetailView(project: project)) {
-                    Text(project.name)
-                        .foregroundColor(project.color)
+            List() {
+                Button("Reload", action: self.store.fetch)
+
+                ForEach(store.projects, id: \.id) { project in
+                    NavigationLink(destination: ProjectDetailView(project: project)) {
+                        Text(project.name)
+                            .foregroundColor(project.color)
+                    }
                 }
             }
             .navigationBarTitle("Projects")
