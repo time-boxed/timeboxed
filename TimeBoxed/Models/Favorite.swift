@@ -27,6 +27,8 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
+typealias FavoriteCompletion = ((Favorite) -> Void)
+
 final class FavoriteStore: ObservableObject {
     @Published private(set) var favorites = [Favorite]()
     private var subscriptions = Set<AnyCancellable>()
@@ -48,6 +50,20 @@ final class FavoriteStore: ObservableObject {
 
     private func onReceive(_ batch: Favorite.List) {
         favorites = batch.results.sorted { $0.count > $1.count }
+    }
+
+    func create(_ favorite: Favorite, completion: @escaping FavoriteCompletion) {
+        var request = URLRequest.request(path: "/api/favorite")
+        request.httpMethod = "POST"
+        request.addBody(object: favorite)
+
+        request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Favorite.self, decoder: decoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onReceive, receiveValue: completion)
+            .store(in: &subscriptions)
     }
 
     func fetch() {
@@ -75,5 +91,30 @@ final class FavoriteStore: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
             .store(in: &subscriptions)
+    }
+
+    func delete(favorite: Favorite) {
+        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)")
+        request.httpMethod = "DELETE"
+        request.dataTaskPublisher()
+            .map { $0.response }
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { (failure) in
+                    print(failure)
+                },
+                receiveValue: { (response) in
+                    print(response)
+                }
+            )
+            .store(in: &subscriptions)
+    }
+
+    func delete(at offset: IndexSet) {
+        offset.forEach { (index) in
+            delete(favorite: favorites[index])
+        }
+        favorites.remove(atOffsets: offset)
+        //        reload()
     }
 }

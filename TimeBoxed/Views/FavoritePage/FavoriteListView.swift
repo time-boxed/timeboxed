@@ -30,7 +30,7 @@ struct FavoriteListView: View {
                             self.selection = .countdown
                         }
                     }
-                }.onDelete(perform: deleteFavorite)
+                }.onDelete(perform: store.delete)
             }
             .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
@@ -41,24 +41,17 @@ struct FavoriteListView: View {
                     Text("Add")
                 })
         }
-
-        .sheet(isPresented: $isPresenting) {
+        .sheet(isPresented: $isPresenting, onDismiss: store.reload) {
             SheetNewFavoriteView(isPresented: self.$isPresenting)
                 .sheetWithDone(isPresented: self.$isPresenting)
         }
     }
-
-    func deleteFavorite(at offset: IndexSet) {
-        print(offset.rangeView)
-    }
 }
 
 #if DEBUG
-
     struct FavoriteView_Previews: PreviewProvider {
         static var previews: some View {
             FavoriteListView(selection: .constant(.favorites)).previewDevice(PreviewData.device)
         }
     }
-
 #endif

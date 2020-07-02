@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct SheetNewFavoriteView: View {
+    @ObservedObject var store = FavoriteStore()
+
     @Binding var isPresented: Bool
 
     @State var newFavorite = Favorite(
@@ -35,7 +37,9 @@ struct SheetNewFavoriteView: View {
     }
 
     func submit() {
-        isPresented = false
+        store.create(newFavorite) { (favorite) in
+            self.isPresented = false
+        }
     }
 }
 
