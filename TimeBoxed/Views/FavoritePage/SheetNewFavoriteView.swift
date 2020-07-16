@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SheetNewFavoriteView: View {
-    @ObservedObject var store = FavoriteStore()
+    @EnvironmentObject var store: FavoriteStore
 
     @Binding var isPresented: Bool
 

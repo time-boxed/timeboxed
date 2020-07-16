@@ -11,7 +11,7 @@ import SwiftUI
 
 struct FavoriteListView: View {
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var store = FavoriteStore()
+    @EnvironmentObject var store: FavoriteStore
 
     @Binding var selection: ContentView.Tab
     @State var isPresenting = false
