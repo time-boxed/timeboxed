@@ -22,3 +22,10 @@ extension View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
+
+
+extension Text {
+    init (optional: String?) {
+        self.init(verbatim: optional ?? "")
+    }
+}

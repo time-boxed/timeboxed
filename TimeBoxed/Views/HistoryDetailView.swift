@@ -12,7 +12,7 @@ struct HistoryDetailView: View {
     var pomodoro: Pomodoro
 
     var body: some View {
-        VStack {
+        List {
             Text(pomodoro.title)
                 .font(.largeTitle)
             Text(pomodoro.category)
@@ -23,8 +23,25 @@ struct HistoryDetailView: View {
             if pomodoro.url != nil {
                 OpenLinkView(url: pomodoro.url!)
             }
-            Text(pomodoro.memo ?? "")
-        }
+            Text(optional: pomodoro.memo)
+            Section {
+                Button(action: actionDelete) {
+                    Text("Repeat")
+                }
+                .buttonStyle(ActionButtonStyle())
+                .modifier(CenterModifier())
+
+                Button(action: actionDelete) {
+                    Text("Delete")
+                }
+                .buttonStyle(DangerButtonStyle())
+                .modifier(CenterModifier())
+            }
+        }.navigationBarTitle(pomodoro.title)
+    }
+
+    func actionDelete() {
+
     }
 }
 
