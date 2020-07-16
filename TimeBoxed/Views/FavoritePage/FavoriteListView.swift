@@ -51,7 +51,6 @@ struct FavoriteListView: View {
                     switchView
                 }
             }
-            .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Favorites")
             .navigationBarItems(
@@ -60,6 +59,7 @@ struct FavoriteListView: View {
                     Text("Add")
                 })
         }
+        .onAppear(perform: store.fetch)
         .sheet(isPresented: $isPresenting, onDismiss: store.reload) {
             SheetNewFavoriteView(isPresented: self.$isPresenting)
                 .sheetWithDone(isPresented: self.$isPresenting)

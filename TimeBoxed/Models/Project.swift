@@ -30,7 +30,9 @@ struct Project: Codable, Identifiable {
 final class ProjectStore: ObservableObject {
     static var shared = ProjectStore()
 
-    @Published private(set) var projects = [Project]()
+    @Published private(set) var projects: [Project] = []
+    @Published private(set) var state = FetchState<[Project]>.empty
+
     private var subscriptions = Set<AnyCancellable>()
 
     private var decoder: JSONDecoder {
@@ -44,15 +46,17 @@ final class ProjectStore: ObservableObject {
         case .finished:
             break
         case .failure(let error):
-            print(error.localizedDescription)
+            state = .error(error)
         }
     }
 
     private func onReceive(_ batch: Project.List) {
+        state = .fetched
         projects = batch.results
     }
 
     func fetch() {
+        state = .fetching
         URLRequest.request(path: "/api/project", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }

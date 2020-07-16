@@ -11,18 +11,39 @@ import SwiftUI
 struct ProjectList: View {
     @EnvironmentObject var store: ProjectStore
 
+    var fetchedView: some View {
+        ForEach(store.projects, id: \.id) { project in
+            NavigationLink(destination: ProjectDetailView(project: project)) {
+                Text(project.name)
+                    .foregroundColor(project.color)
+            }
+        }
+    }
+
+    var switchView: AnyView {
+        switch store.state {
+        case .empty:
+            return Text("No Favorites").eraseToAnyView()
+        case .error(let error):
+            return Text(error.localizedDescription).eraseToAnyView()
+        case .fetching:
+            return Text("Loading").eraseToAnyView()
+        case .fetched:
+            return
+                fetchedView
+                .eraseToAnyView()
+        }
+    }
+
     var body: some View {
         NavigationView {
             List() {
                 Button("Reload", action: self.store.fetch)
-
-                ForEach(store.projects, id: \.id) { project in
-                    NavigationLink(destination: ProjectDetailView(project: project)) {
-                        Text(project.name)
-                            .foregroundColor(project.color)
-                    }
+                Section() {
+                    switchView
                 }
             }
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
         }
         .onAppear(perform: store.fetch)
