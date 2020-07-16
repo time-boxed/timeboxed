@@ -16,21 +16,39 @@ struct FavoriteListView: View {
     @Binding var selection: ContentView.Tab
     @State var isPresenting = false
 
+    var fetchedView: some View {
+        ForEach(store.favorites, id: \.id) { item in
+            NavigationLink(destination: FavoriteDetailView(favorite: item)) {
+                FavoriteRowView(favorite: item)
+            }
+            .onLongPressGesture {
+                self.store.start(favorite: item) { pomodoro in
+                    self.selection = .countdown
+                }
+            }
+        }.onDelete(perform: store.delete)
+    }
+
+    var switchView: AnyView {
+        switch store.state {
+        case .empty:
+            return Text("No Favorites").eraseToAnyView()
+        case .error(let error):
+            return Text(error.localizedDescription).eraseToAnyView()
+        case .fetching:
+            return Text("Loading").eraseToAnyView()
+        case .fetched:
+            return
+                fetchedView
+                .eraseToAnyView()
+        }
+    }
+
     var body: some View {
         NavigationView {
             List {
                 Button("Reload", action: store.fetch)
-
-                ForEach(store.favorites, id: \.id) { item in
-                    NavigationLink(destination: FavoriteDetailView(favorite: item)) {
-                        FavoriteRowView(favorite: item)
-                    }
-                    .onLongPressGesture {
-                        self.store.start(favorite: item) { pomodoro in
-                            self.selection = .countdown
-                        }
-                    }
-                }.onDelete(perform: store.delete)
+                switchView
             }
             .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())

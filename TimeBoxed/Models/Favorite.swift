@@ -34,10 +34,13 @@ final class FavoriteStore: API {
 
     typealias Model = Favorite
 
-    @Published private(set) var favorites = [Favorite]()
+    @Published private(set) var favorites: [Favorite] = []
+    @Published private(set) var state = FetchState<[Favorite]>.empty
+
     private var subscriptions = Set<AnyCancellable>()
 
     private func onReceive(_ batch: Favorite.List) {
+        state = .fetched
         favorites = batch.results.sorted { $0.count > $1.count }
     }
 
@@ -56,6 +59,7 @@ final class FavoriteStore: API {
     }
 
     func fetch() {
+        state = .fetching
         URLRequest.request(path: "/api/favorite", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }

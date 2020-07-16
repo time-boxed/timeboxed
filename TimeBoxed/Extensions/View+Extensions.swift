@@ -23,9 +23,14 @@ extension View {
     }
 }
 
-
 extension Text {
-    init (optional: String?) {
+    init(optional: String?) {
         self.init(verbatim: optional ?? "")
+    }
+}
+
+extension View {
+    public func eraseToAnyView() -> AnyView {
+        return AnyView(self)
     }
 }
