@@ -42,10 +42,7 @@ typealias PomodoroCompletion = ((Pomodoro) -> Void)
 final class PomodoroStore: API {
     typealias Model = Pomodoro
 
-    static var shared = PomodoroStore()
     private var subscriptions = Set<AnyCancellable>()
-
-    private init() {}
 
     @Published private(set) var pomodoros = [Pomodoro]()
     @Published private(set) var currentPomodoro: Pomodoro?
@@ -73,7 +70,10 @@ final class PomodoroStore: API {
     }
 
     func reload() {
-        PomodoroStore.shared = PomodoroStore()
+        pomodoros = []
+        offset = "0"
+        canLoadNextPage = true
+
         fetch()
     }
 

@@ -12,7 +12,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var userSettings: UserSettings
-    @ObservedObject var store = PomodoroStore.shared
+    @EnvironmentObject var store: PomodoroStore
 
     var groups: [Date: [Pomodoro]] {
         Dictionary(

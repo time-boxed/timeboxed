@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ExtendPomodoroView: View {
-    @ObservedObject var store = PomodoroStore.shared
+    @EnvironmentObject var store: PomodoroStore
     var pomodoro: Pomodoro
 
     var body: some View {

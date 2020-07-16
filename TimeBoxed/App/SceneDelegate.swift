@@ -32,6 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     contentView
                     .environmentObject(UserSettings())
                     .environmentObject(ProjectStore())
+                    .environmentObject(PomodoroStore())
+                    .environmentObject(FavoriteStore())
             )
             self.window = window
             window.makeKeyAndVisible()

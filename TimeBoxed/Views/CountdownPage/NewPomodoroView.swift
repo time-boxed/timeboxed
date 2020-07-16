@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 struct NewPomodoroView: View {
-    @ObservedObject var store = PomodoroStore.shared
+    @EnvironmentObject var store: PomodoroStore
     @State var isSaveDisabled = true
 
     class Model: ObservableObject {
