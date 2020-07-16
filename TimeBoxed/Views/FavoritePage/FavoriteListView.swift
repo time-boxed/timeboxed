@@ -10,14 +10,13 @@ import Combine
 import SwiftUI
 
 struct FavoriteListView: View {
-    @EnvironmentObject var userSettings: UserSettings
     @EnvironmentObject var store: FavoriteStore
 
     @Binding var selection: ContentView.Tab
     @State var isPresenting = false
 
     var fetchedView: some View {
-        ForEach(store.favorites, id: \.id) { item in
+        ForEach(store.favorites) { item in
             NavigationLink(destination: FavoriteDetailView(favorite: item)) {
                 FavoriteRowView(favorite: item)
             }
@@ -48,7 +47,9 @@ struct FavoriteListView: View {
         NavigationView {
             List {
                 Button("Reload", action: store.fetch)
-                switchView
+                Section() {
+                    switchView
+                }
             }
             .onAppear(perform: store.fetch)
             .listStyle(GroupedListStyle())

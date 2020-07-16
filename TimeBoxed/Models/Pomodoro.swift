@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-struct Pomodoro: Codable, Hashable {
+struct Pomodoro: Codable, Identifiable, Equatable {
     let id: Int
     var title: String
     var start: Date

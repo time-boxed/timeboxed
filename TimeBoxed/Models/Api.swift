@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 protocol API: ObservableObject {
-    associatedtype Model: Codable, Hashable
+    associatedtype Model: Codable, Identifiable
 
     var canLoadNextPage: Bool { get set }
 
