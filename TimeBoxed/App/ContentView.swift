@@ -26,7 +26,7 @@ struct ContentView: View {
             CountdownPageView()
                 .tabItem {
                     VStack {
-                        Image("stopwatch")
+                        Image(systemName: "timer")
                         Text("Active")
                     }
                 }
@@ -35,20 +35,21 @@ struct ContentView: View {
             FavoriteListView(selection: $currentTab)
                 .tabItem {
                     VStack {
-                        Image("star")
+                        Image(systemName: "star")
                         Text("Favorite")
                     }
                 }
                 .tag(Tab.favorites)
             ProjectList()
                 .tabItem {
+                    Image(systemName: "paperclip")
                     Text("Projects")
                 }
                 .tag(Tab.project)
             HistoryView()
                 .tabItem {
                     VStack {
-                        Image("calendar")
+                        Image(systemName: "calendar")
                         Text("History")
                     }
                 }
@@ -56,7 +57,7 @@ struct ContentView: View {
             SettingsView()
                 .tabItem {
                     VStack {
-                        Image("maintenance")
+                        Image(systemName: "gear")
                         Text("Settings")
                     }
                 }

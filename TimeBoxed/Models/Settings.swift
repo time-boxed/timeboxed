@@ -31,6 +31,7 @@ struct Settings {
     static let homepage = URL(string: "https://github.com/kfdm/timeboxed")!
 }
 
+
 class UserSettings: ObservableObject {
     @Published var current_user: String? {
         didSet {
