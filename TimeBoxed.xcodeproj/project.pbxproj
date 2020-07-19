@@ -134,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
-				C19BA145243F2E33004795A7 /* ContentView.swift */,
 				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
 			);
 			path = App;
@@ -172,6 +171,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		878C37C824C43A0600BA9F5B /* ProjectPage */ = {
+			isa = PBXGroup;
+			children = (
+				870FE47924924BF000ED17C2 /* ProjectDetailView.swift */,
+				8766894C248FAB1F0056DCB9 /* ProjectList.swift */,
+			);
+			path = ProjectPage;
+			sourceTree = "<group>";
+		};
 		87C6AAB024826D75002FAA74 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +191,7 @@
 			path = Rows;
 			sourceTree = "<group>";
 		};
-		87E8763C248A74000030044C /* CountdownPage */ = {
+		87E8763C248A74000030044C /* ActiveView */ = {
 			isa = PBXGroup;
 			children = (
 				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
@@ -191,7 +199,26 @@
 				87E87641248A75160030044C /* ExtendPomodoroView.swift */,
 				87E8763F248A74B50030044C /* NewPomodoroView.swift */,
 			);
-			path = CountdownPage;
+			path = ActiveView;
+			sourceTree = "<group>";
+		};
+		87E998AF24C43BAD008A25AD /* HistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
+				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
+			);
+			path = HistoryView;
+			sourceTree = "<group>";
+		};
+		87E998B024C43C09008A25AD /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				C19BA173243F35E8004795A7 /* LoginView.swift */,
+				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
+				8708842E24826F14003D662F /* SettingsView.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		C19BA135243F2E33004795A7 = {
@@ -240,18 +267,13 @@
 		C19BA15C243F317B004795A7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				87E8763C248A74000030044C /* CountdownPage */,
+				87E8763C248A74000030044C /* ActiveView */,
 				C19BA15D243F3189004795A7 /* Elements */,
 				873257592494B76D00E07208 /* FavoritePage */,
-				874E6C822489213D00E7153C /* Modifier */,
-				87C6AAB024826D75002FAA74 /* Rows */,
-				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
-				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
-				C19BA173243F35E8004795A7 /* LoginView.swift */,
-				870FE47924924BF000ED17C2 /* ProjectDetailView.swift */,
-				8766894C248FAB1F0056DCB9 /* ProjectList.swift */,
-				879C36342483AB8A00DF0B9F /* SelectUserView.swift */,
-				8708842E24826F14003D662F /* SettingsView.swift */,
+				87E998AF24C43BAD008A25AD /* HistoryView */,
+				878C37C824C43A0600BA9F5B /* ProjectPage */,
+				87E998B024C43C09008A25AD /* SettingsView */,
+				C19BA145243F2E33004795A7 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +281,8 @@
 		C19BA15D243F3189004795A7 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				874E6C822489213D00E7153C /* Modifier */,
+				87C6AAB024826D75002FAA74 /* Rows */,
 				C19BA15A243F2F7C004795A7 /* CountdownView.swift */,
 				87F95B332480978200255B29 /* DateTimeView.swift */,
 				87C6AAAA24826983002FAA74 /* DateView.swift */,
