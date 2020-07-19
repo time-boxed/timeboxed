@@ -44,12 +44,23 @@ final class PomodoroStore: API {
 
     private var subscriptions = Set<AnyCancellable>()
 
-    @Published private(set) var pomodoros = [Pomodoro]()
+    @Published private(set) var pomodoros: [Pomodoro] = []
+    @Published private(set) var state = FetchState<[Pomodoro]>.empty
     @Published private(set) var currentPomodoro: Pomodoro?
 
     // Scroll
     private var offset = "0"
     var canLoadNextPage = true
+
+    func onReceive(_ completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            state = .error(error)
+            canLoadNextPage = false
+        }
+    }
 
     private func onReceive(_ batch: Pomodoro.List) {
         pomodoros += batch.results.sorted { $0.start > $1.start }
@@ -79,6 +90,7 @@ final class PomodoroStore: API {
 
     func fetch() {
         guard canLoadNextPage else { return }
+        state = .fetching
 
         URLRequest.request(path: "/api/pomodoro", qs: ["offset": offset])
             .dataTaskPublisher()

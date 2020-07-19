@@ -12,9 +12,23 @@ import SwiftUI
 struct CountdownPageView: View {
     @EnvironmentObject var store: PomodoroStore
 
+    var stateStatus: AnyView {
+        switch store.state {
+        case .empty:
+            return Text("No result").eraseToAnyView()
+        case .error(let error):
+            return Text(error.localizedDescription).eraseToAnyView()
+        case .fetching:
+            return Text("Loading").eraseToAnyView()
+        case .fetched:
+            return Text("Loaded").hidden().eraseToAnyView()
+        }
+    }
+
     var body: some View {
         List {
             Button("Reload", action: store.reload)
+            stateStatus
 
             if store.currentPomodoro != nil {
                 CountdownSectionView(pomodoro: .constant(store.currentPomodoro!))

@@ -39,6 +39,16 @@ final class FavoriteStore: API {
 
     private var subscriptions = Set<AnyCancellable>()
 
+    func onReceive(_ completion: Subscribers.Completion<Error>) {
+        switch completion {
+        case .finished:
+            break
+        case .failure(let error):
+            state = .error(error)
+            canLoadNextPage = false
+        }
+    }
+
     private func onReceive(_ batch: Favorite.List) {
         state = .fetched
         favorites = batch.results.sorted { $0.count > $1.count }

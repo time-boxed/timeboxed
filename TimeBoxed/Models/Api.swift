@@ -35,14 +35,4 @@ extension API {
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }
-
-    internal func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            print(error.localizedDescription)
-            canLoadNextPage = false
-        }
-    }
 }
