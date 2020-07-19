@@ -20,25 +20,45 @@ struct HistoryView: View {
         )
     }
 
+    var fetchedView: some View {
+        ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
+            Section(header: DateView(date: date)) {
+                ForEach(self.groups[date]!.sorted { $0.end > $1.end }) { p in
+                    NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
+                        HistoryRowView(pomodoro: p)
+                            .onAppear {
+                                if self.store.pomodoros.last == p {
+                                    self.store.fetch()
+                                }
+                            }
+                    }
+                }.onDelete(perform: self.store.delete)
+            }
+        }
+    }
+
+    var stateStatus: AnyView {
+        switch store.state {
+        case .empty:
+            return Text("No result").eraseToAnyView()
+        case .error(let error):
+            return Text(error.localizedDescription).eraseToAnyView()
+        case .fetching:
+            return Text("Loading").eraseToAnyView()
+        case .fetched:
+            return EmptyView().eraseToAnyView()
+        }
+    }
+
     var body: some View {
         NavigationView {
             List {
-                Button("Reload", action: store.reload)
-
-                ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
-                    Section(header: DateView(date: date)) {
-                        ForEach(self.groups[date]!.sorted { $0.end > $1.end }) { p in
-                            NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
-                                HistoryRowView(pomodoro: p)
-                                    .onAppear {
-                                        if self.store.pomodoros.last == p {
-                                            self.store.fetch()
-                                        }
-                                    }
-                            }
-                        }.onDelete(perform: self.store.delete)
-                    }
+                HStack {
+                    Button("Reload", action: store.fetch)
+                    Spacer()
+                    stateStatus
                 }
+                fetchedView
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")

@@ -16,40 +16,42 @@ struct FavoriteListView: View {
     @State var isPresenting = false
 
     var fetchedView: some View {
-        ForEach(store.favorites) { item in
-            NavigationLink(destination: FavoriteDetailView(favorite: item)) {
-                FavoriteRowView(favorite: item)
-            }
-            .onLongPressGesture {
-                self.store.start(favorite: item) { pomodoro in
-                    self.selection = .countdown
+        Section {
+            ForEach(store.favorites) { item in
+                NavigationLink(destination: FavoriteDetailView(favorite: item)) {
+                    FavoriteRowView(favorite: item)
                 }
-            }
-        }.onDelete(perform: store.delete)
+                .onLongPressGesture {
+                    self.store.start(favorite: item) { pomodoro in
+                        self.selection = .countdown
+                    }
+                }
+            }.onDelete(perform: store.delete)
+        }
     }
 
-    var switchView: AnyView {
+    var stateStatus: AnyView {
         switch store.state {
         case .empty:
-            return Text("No Favorites").eraseToAnyView()
+            return Text("No result").eraseToAnyView()
         case .error(let error):
             return Text(error.localizedDescription).eraseToAnyView()
         case .fetching:
             return Text("Loading").eraseToAnyView()
         case .fetched:
-            return
-                fetchedView
-                .eraseToAnyView()
+            return EmptyView().eraseToAnyView()
         }
     }
 
     var body: some View {
         NavigationView {
             List {
-                Button("Reload", action: store.fetch)
-                Section() {
-                    switchView
+                HStack {
+                    Button("Reload", action: store.fetch)
+                    Spacer()
+                    stateStatus
                 }
+                fetchedView
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Favorites")

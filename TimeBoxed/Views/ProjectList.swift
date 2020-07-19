@@ -12,36 +12,38 @@ struct ProjectList: View {
     @EnvironmentObject var store: ProjectStore
 
     var fetchedView: some View {
-        ForEach(store.projects, id: \.id) { project in
-            NavigationLink(destination: ProjectDetailView(project: project)) {
-                Text(project.name)
-                    .foregroundColor(project.color)
+        Section {
+            ForEach(store.projects, id: \.id) { project in
+                NavigationLink(destination: ProjectDetailView(project: project)) {
+                    Text(project.name)
+                        .foregroundColor(project.color)
+                }
             }
         }
     }
 
-    var switchView: AnyView {
+    var stateStatus: AnyView {
         switch store.state {
         case .empty:
-            return Text("No Favorites").eraseToAnyView()
+            return Text("No result").eraseToAnyView()
         case .error(let error):
             return Text(error.localizedDescription).eraseToAnyView()
         case .fetching:
             return Text("Loading").eraseToAnyView()
         case .fetched:
-            return
-                fetchedView
-                .eraseToAnyView()
+            return EmptyView().eraseToAnyView()
         }
     }
 
     var body: some View {
         NavigationView {
-            List() {
-                Button("Reload", action: self.store.fetch)
-                Section() {
-                    switchView
+            List {
+                HStack {
+                    Button("Reload", action: store.fetch)
+                    Spacer()
+                    stateStatus
                 }
+                fetchedView
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
