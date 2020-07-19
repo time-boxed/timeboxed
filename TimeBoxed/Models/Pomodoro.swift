@@ -65,6 +65,7 @@ final class PomodoroStore: API {
     private func onReceive(_ batch: Pomodoro.List) {
         pomodoros += batch.results.sorted { $0.start > $1.start }
         currentPomodoro = pomodoros.first
+        state = .fetched
 
         canLoadNextPage = batch.next != nil
         guard canLoadNextPage else { return }
