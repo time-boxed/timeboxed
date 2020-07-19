@@ -18,11 +18,10 @@ struct ContentView: View {
     }
 
     @EnvironmentObject var userSettings: UserSettings
-    @State private var currentTab = ContentView.Tab.countdown
     @State private var showLogin = false
 
     var body: some View {
-        TabView(selection: $currentTab) {
+        TabView(selection: $userSettings.currentTab) {
             CountdownPageView()
                 .tabItem {
                     VStack {
@@ -32,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.countdown)
 
-            FavoriteListView(selection: $currentTab)
+            FavoriteListView()
                 .tabItem {
                     VStack {
                         Image(systemName: "star")

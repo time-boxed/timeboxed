@@ -11,8 +11,8 @@ import SwiftUI
 
 struct FavoriteListView: View {
     @EnvironmentObject var store: FavoriteStore
+    @EnvironmentObject var user: UserSettings
 
-    @Binding var selection: ContentView.Tab
     @State var isPresenting = false
 
     var fetchedView: some View {
@@ -23,7 +23,7 @@ struct FavoriteListView: View {
                 }
                 .onLongPressGesture {
                     self.store.start(favorite: item) { pomodoro in
-                        self.selection = .countdown
+                        self.user.currentTab = .countdown
                     }
                 }
             }.onDelete(perform: store.delete)
@@ -72,7 +72,7 @@ struct FavoriteListView: View {
 #if DEBUG
     struct FavoriteView_Previews: PreviewProvider {
         static var previews: some View {
-            FavoriteListView(selection: .constant(.favorites)).previewDevice(PreviewData.device)
+            FavoriteListView().previewDevice(PreviewData.device)
         }
     }
 #endif

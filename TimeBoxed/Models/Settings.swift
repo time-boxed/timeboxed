@@ -44,6 +44,8 @@ class UserSettings: ObservableObject {
         }
     }
 
+    @Published var currentTab = ContentView.Tab.countdown
+
     init() {
         self.current_user = Settings.defaults.string(forKey: .currentUser)
         self.users = Settings.defaults.array(forKey: .users)

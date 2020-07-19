@@ -16,6 +16,7 @@ struct SelectUserView: View {
             ForEach(userSettings.users, id: \.self) { user in
                 Button(action: {
                     self.userSettings.current_user = user
+                    self.userSettings.currentTab = .countdown
                 }) {
                     Text(user)
                 }
