@@ -21,12 +21,13 @@ struct CountdownPageView: View {
         case .fetching:
             return Text("Loading").eraseToAnyView()
         case .fetched:
-            return Button("Reload", action: store.reload).eraseToAnyView()
+            return EmptyView().eraseToAnyView()
         }
     }
 
     var body: some View {
         List {
+            Button("Reload", action: store.reload)
             stateStatus
 
             if store.currentPomodoro != nil {
