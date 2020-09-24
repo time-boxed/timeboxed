@@ -25,9 +25,9 @@ struct ValidationModifier: ViewModifier {
     var validationMessage: some View {
         switch latestValidation {
         case .success:
-            return EmptyView()
+            EmptyView()
         case .failure(let message):
-            return Text(message)
+            Text(message)
                 .foregroundColor(Color.red)
                 .font(.caption)
         }

@@ -39,22 +39,20 @@
 		87F95B322480944700255B29 /* DurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B312480944700255B29 /* DurationView.swift */; };
 		87F95B342480978200255B29 /* DateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B332480978200255B29 /* DateTimeView.swift */; };
 		87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B352480A2B400255B29 /* ButtonStyles.swift */; };
-		C137C34B2491ED8400ED9FF8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34A2491ED8400ED9FF8 /* SwiftPackageProductDependency */; };
-		C137C34D2491ED8400ED9FF8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34C2491ED8400ED9FF8 /* SwiftPackageProductDependency */; };
+		C137C34B2491ED8400ED9FF8 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */; };
+		C137C34D2491ED8400ED9FF8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34C2491ED8400ED9FF8 /* Kingfisher */; };
 		C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA141243F2E33004795A7 /* AppDelegate.swift */; };
-		C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA143243F2E33004795A7 /* SceneDelegate.swift */; };
 		C19BA146243F2E33004795A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA145243F2E33004795A7 /* ContentView.swift */; };
 		C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA147243F2E36004795A7 /* Assets.xcassets */; };
 		C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */; };
-		C19BA14E243F2E36004795A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */; };
 		C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA155243F2E8F004795A7 /* CountdownPageView.swift */; };
 		C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15A243F2F7C004795A7 /* CountdownView.swift */; };
 		C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryView.swift */; };
 		C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteListView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
-		C19BA168243F3331004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftPackageProductDependency */; };
-		C19BA16B243F3396004795A7 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */; };
+		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
+		C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* KeychainAccess */; };
 		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
 		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
 		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
@@ -97,11 +95,9 @@
 		87F95B352480A2B400255B29 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		C19BA13E243F2E33004795A7 /* TimeBoxed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeBoxed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19BA141243F2E33004795A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C19BA143243F2E33004795A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C19BA145243F2E33004795A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C19BA147243F2E36004795A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C19BA14D243F2E36004795A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C19BA14F243F2E36004795A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C19BA155243F2E8F004795A7 /* CountdownPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownPageView.swift; sourceTree = "<group>"; };
 		C19BA15A243F2F7C004795A7 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
@@ -120,10 +116,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C137C34D2491ED8400ED9FF8 /* BuildFile in Frameworks */,
-				C137C34B2491ED8400ED9FF8 /* BuildFile in Frameworks */,
-				C19BA16B243F3396004795A7 /* BuildFile in Frameworks */,
-				C19BA168243F3331004795A7 /* BuildFile in Frameworks */,
+				C137C34D2491ED8400ED9FF8 /* Kingfisher in Frameworks */,
+				C137C34B2491ED8400ED9FF8 /* KingfisherSwiftUI in Frameworks */,
+				C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */,
+				C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				C19BA141243F2E33004795A7 /* AppDelegate.swift */,
-				C19BA143243F2E33004795A7 /* SceneDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -249,7 +244,6 @@
 				C19BA15C243F317B004795A7 /* Views */,
 				C19BA147243F2E36004795A7 /* Assets.xcassets */,
 				C19BA14F243F2E36004795A7 /* Info.plist */,
-				C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */,
 				87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */,
 			);
 			path = TimeBoxed;
@@ -324,10 +318,10 @@
 			);
 			name = TimeBoxed;
 			packageProductDependencies = (
-				C19BA167243F3331004795A7 /* SwiftPackageProductDependency */,
-				C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */,
-				C137C34A2491ED8400ED9FF8 /* SwiftPackageProductDependency */,
-				C137C34C2491ED8400ED9FF8 /* SwiftPackageProductDependency */,
+				C19BA167243F3331004795A7 /* SwiftMQTT */,
+				C19BA16A243F3396004795A7 /* KeychainAccess */,
+				C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */,
+				C137C34C2491ED8400ED9FF8 /* Kingfisher */,
 			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
@@ -358,9 +352,9 @@
 			);
 			mainGroup = C19BA135243F2E33004795A7;
 			packageReferences = (
-				C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */,
-				C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */,
-				C137C3492491ED8400ED9FF8 /* RemoteSwiftPackageReference */,
+				C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */,
+				C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
@@ -376,7 +370,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19BA14E243F2E36004795A7 /* LaunchScreen.storyboard in Resources */,
 				C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */,
 				C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */,
 				C19BA165243F3243004795A7 /* swiftgen.yml in Resources */,
@@ -420,7 +413,6 @@
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				87E8763E248A74150030044C /* CountdownSectionView.swift in Sources */,
 				8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */,
-				C19BA144243F2E33004795A7 /* SceneDelegate.swift in Sources */,
 				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
@@ -438,18 +430,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C19BA14C243F2E36004795A7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C19BA14D243F2E36004795A7 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			path = .;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C19BA150243F2E36004795A7 /* Debug */ = {
@@ -503,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -559,7 +539,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -638,7 +618,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C137C3492491ED8400ED9FF8 /* RemoteSwiftPackageReference */ = {
+		C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
@@ -646,7 +626,7 @@
 				minimumVersion = 5.14.0;
 			};
 		};
-		C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */ = {
+		C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
 			requirement = {
@@ -654,7 +634,7 @@
 				minimumVersion = 3.0.1;
 			};
 		};
-		C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */ = {
+		C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
 			requirement = {
@@ -665,24 +645,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C137C34A2491ED8400ED9FF8 /* SwiftPackageProductDependency */ = {
+		C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C137C3492491ED8400ED9FF8 /* RemoteSwiftPackageReference */;
+			package = C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
 		};
-		C137C34C2491ED8400ED9FF8 /* SwiftPackageProductDependency */ = {
+		C137C34C2491ED8400ED9FF8 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C137C3492491ED8400ED9FF8 /* RemoteSwiftPackageReference */;
+			package = C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		C19BA167243F3331004795A7 /* SwiftPackageProductDependency */ = {
+		C19BA167243F3331004795A7 /* SwiftMQTT */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA166243F3331004795A7 /* RemoteSwiftPackageReference */;
+			package = C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */;
 			productName = SwiftMQTT;
 		};
-		C19BA16A243F3396004795A7 /* SwiftPackageProductDependency */ = {
+		C19BA16A243F3396004795A7 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C19BA169243F3396004795A7 /* RemoteSwiftPackageReference */;
+			package = C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
