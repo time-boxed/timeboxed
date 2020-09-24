@@ -15,7 +15,7 @@ struct FavoriteDetailView: View {
         List {
             Text(favorite.title)
             Text("\(favorite.count)")
-            OpenLinkView(url: favorite.html_link)
+            Link(favorite.html_link.absoluteString, destination: favorite.html_link)
         }
     }
 }

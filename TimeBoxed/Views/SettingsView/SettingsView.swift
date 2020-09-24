@@ -15,7 +15,7 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Information")) {
-                    OpenLinkView(url: Settings.homepage)
+                    Link("Homepage", destination: Settings.homepage)
                 }
                 Section(header: Text("User")) {
                     NavigationLink(destination: LoginView()) {

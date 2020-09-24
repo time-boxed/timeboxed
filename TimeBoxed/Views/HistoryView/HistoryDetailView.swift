@@ -20,8 +20,8 @@ struct HistoryDetailView: View {
                 DateTimeView(date: pomodoro.start)
                 DateTimeView(date: pomodoro.end)
             }
-            if pomodoro.url != nil {
-                OpenLinkView(url: pomodoro.url!)
+            if let url = pomodoro.url {
+                Link("Open", destination: url)
             }
             Text(optional: pomodoro.memo)
             Section {

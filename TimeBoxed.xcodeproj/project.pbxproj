@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8708842F24826F14003D662F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8708842E24826F14003D662F /* SettingsView.swift */; };
-		870F2F7024925406009CECD9 /* OpenLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870F2F6F24925406009CECD9 /* OpenLinkView.swift */; };
 		870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE477249248AF00ED17C2 /* ProjectRowView.swift */; };
 		870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47924924BF000ED17C2 /* ProjectDetailView.swift */; };
 		870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */; };
@@ -61,7 +60,6 @@
 
 /* Begin PBXFileReference section */
 		8708842E24826F14003D662F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		870F2F6F24925406009CECD9 /* OpenLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLinkView.swift; sourceTree = "<group>"; };
 		870FE477249248AF00ED17C2 /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		870FE47924924BF000ED17C2 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailView.swift; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 				87C6AAAA24826983002FAA74 /* DateView.swift */,
 				87F95B312480944700255B29 /* DurationView.swift */,
 				87C6AAAE24826B02002FAA74 /* IntervalView.swift */,
-				870F2F6F24925406009CECD9 /* OpenLinkView.swift */,
 				87C6AAAC248269B9002FAA74 /* TimeView.swift */,
 			);
 			path = Elements;
@@ -334,7 +331,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Paul Traylor";
 				TargetAttributes = {
 					C19BA13D243F2E33004795A7 = {
@@ -398,7 +395,6 @@
 				8732575F2494C4CD00E07208 /* View+Extensions.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
-				870F2F7024925406009CECD9 /* OpenLinkView.swift in Sources */,
 				87F95B342480978200255B29 /* DateTimeView.swift in Sources */,
 				8792C374248BA1CB0098F928 /* Project.swift in Sources */,
 				87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */,
@@ -458,6 +454,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -520,6 +517,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
