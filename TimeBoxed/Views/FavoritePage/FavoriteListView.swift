@@ -11,7 +11,6 @@ import SwiftUI
 
 struct FavoriteListView: View {
     @EnvironmentObject var store: FavoriteStore
-    @EnvironmentObject var user: UserSettings
 
     @State var isPresenting = false
 
@@ -20,11 +19,6 @@ struct FavoriteListView: View {
             ForEach(store.favorites) { item in
                 NavigationLink(destination: FavoriteDetailView(favorite: item)) {
                     FavoriteRowView(favorite: item)
-                }
-                .onLongPressGesture {
-                    self.store.start(favorite: item) { pomodoro in
-                        self.user.currentTab = .countdown
-                    }
                 }
             }.onDelete(perform: store.delete)
         }

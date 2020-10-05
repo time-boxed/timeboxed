@@ -50,7 +50,6 @@
 		C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryView.swift */; };
 		C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteListView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
-		C19BA165243F3243004795A7 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = C19BA164243F3243004795A7 /* swiftgen.yml */; };
 		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
 		C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* KeychainAccess */; };
 		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
@@ -104,7 +103,6 @@
 		C19BA15E243F31A4004795A7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		C19BA160243F31D0004795A7 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
 		C19BA162243F321F004795A7 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		C19BA164243F3243004795A7 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		C19BA16F243F3407004795A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C19BA171243F346D004795A7 /* Keychain+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Extensions.swift"; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 				C19BA13F243F2E33004795A7 /* Products */,
 				C19BA140243F2E33004795A7 /* TimeBoxed */,
 				C19BA162243F321F004795A7 /* Makefile */,
-				C19BA164243F3243004795A7 /* swiftgen.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -281,9 +278,9 @@
 				87F95B332480978200255B29 /* DateTimeView.swift */,
 				87C6AAAA24826983002FAA74 /* DateView.swift */,
 				87F95B312480944700255B29 /* DurationView.swift */,
+				873D2F66252B21F900CC3DCF /* ImageButton.swift */,
 				87C6AAAE24826B02002FAA74 /* IntervalView.swift */,
 				87C6AAAC248269B9002FAA74 /* TimeView.swift */,
-				873D2F66252B21F900CC3DCF /* ImageButton.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -372,7 +369,6 @@
 			files = (
 				C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */,
 				C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */,
-				C19BA165243F3243004795A7 /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
