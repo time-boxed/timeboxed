@@ -22,9 +22,8 @@ struct SettingsView: View {
                         Text("New User")
                     }
                     NavigationLink(destination: SelectUserView()) {
-                        NameValueView(
-                            name: "Current User",
-                            value: userSettings.current_user ?? "Not logged in")
+                        Text(userSettings.current_user ?? "Not logged in")
+                            .modifier(LabelModifier(label: "Current User"))
                     }
                 }
             }
