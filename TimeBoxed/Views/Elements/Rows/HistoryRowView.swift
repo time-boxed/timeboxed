@@ -14,8 +14,14 @@ struct HistoryRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
-                Text(pomodoro.title)
-                    .font(.title)
+                VStack(alignment: .leading) {
+                    Text(pomodoro.title)
+                        .font(.title)
+                    if let project = pomodoro.project {
+                        Text(project.name)
+                            .foregroundColor(project.color)
+                    }
+                }
                 Spacer()
                 VStack {
                     TimeView(date: pomodoro.start, style: .medium)

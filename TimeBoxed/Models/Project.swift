@@ -10,7 +10,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-struct Project: Codable, Identifiable {
+struct Project: Codable, Identifiable, Equatable {
     let id: String
     let name: String
     let html_link: URL

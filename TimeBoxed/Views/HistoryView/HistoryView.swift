@@ -10,6 +10,15 @@ import Combine
 import Foundation
 import SwiftUI
 
+extension Array where Element == Pomodoro {
+    func byEndDate() -> [Date: [Pomodoro]] {
+        return Dictionary(
+            grouping: self,
+            by: { Calendar.current.startOfDay(for: $0.end) }
+        )
+    }
+}
+
 struct HistoryView: View {
     @EnvironmentObject var store: PomodoroStore
 

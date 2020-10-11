@@ -9,27 +9,17 @@
 import SwiftUI
 
 struct ProjectRowView: View {
-    @EnvironmentObject var store: ProjectStore
-
-    var id: String
-    var project: Project? {
-        return store.projects.first(where: { $0.id == id })
-    }
+    var project: Project
 
     @ViewBuilder
     var body: some View {
-        if project == nil {
-            Text(id)
-                .onAppear(perform: store.fetch)
-        } else {
-            Text(project!.name)
-                .accentColor(project!.color)
-        }
+        Text(project.name)
+            .foregroundColor(project.color)
     }
 }
 
-struct ProjectRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectRowView(id: "")
-    }
-}
+//struct ProjectRowView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProjectRowView(id: "")
+//    }
+//}

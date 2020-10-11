@@ -25,6 +25,9 @@ struct FavoriteRowView: View {
             VStack(alignment: .leading) {
                 Text(favorite.title)
                     .font(.title)
+                if let project = favorite.project {
+                    ProjectRowView(project: project)
+                }
                 Text(favorite.memo ?? "")
                     .font(.footnote)
             }

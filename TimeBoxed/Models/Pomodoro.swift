@@ -16,7 +16,7 @@ struct Pomodoro: Codable, Identifiable, Equatable {
     var end: Date
     var category: String
     var memo: String?
-    var project: String?
+    var project: Project?
     var url: URL?
 
     struct List: Codable {

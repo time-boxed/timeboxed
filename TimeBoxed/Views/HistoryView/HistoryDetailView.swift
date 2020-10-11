@@ -13,11 +13,16 @@ struct HistoryDetailView: View {
 
     var body: some View {
         List {
-            Text(pomodoro.title)
-                .font(.largeTitle)
-            Text(pomodoro.category)
+            if let project = pomodoro.project {
+                NavigationLink(destination: ProjectDetailView(project: project)) {
+                    Text(project.name)
+                        .foregroundColor(project.color)
+                        .modifier(LabelModifier(label: "Project"))
+                }
+            }
             HStack {
                 DateTimeView(date: pomodoro.start)
+                Spacer()
                 DateTimeView(date: pomodoro.end)
             }
             if let url = pomodoro.url {
@@ -37,7 +42,9 @@ struct HistoryDetailView: View {
                 .buttonStyle(DangerButtonStyle())
                 .modifier(CenterModifier())
             }
-        }.navigationBarTitle(pomodoro.title)
+        }
+        .navigationBarTitle(pomodoro.title)
+        .listStyle(GroupedListStyle())
     }
 
     func actionDelete() {

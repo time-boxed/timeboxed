@@ -18,11 +18,15 @@ struct CountdownSectionView: View {
 
                 CountdownView(date: .constant(pomodoro.end))
                     .font(.system(size: 72))
-                NameValueView(name: "Category", value: pomodoro.category)
+
                 DateTimeView(label: "Start", date: pomodoro.start)
                 DateTimeView(label: "End", date: pomodoro.end)
-                if pomodoro.project != nil {
-                    ProjectRowView(id: pomodoro.project!)
+
+                if let project = pomodoro.project {
+                    NavigationLink(destination: ProjectDetailView(project: project)) {
+                        ProjectRowView(project: project)
+                            .modifier(LabelModifier(label: "Project"))
+                    }
                 }
 
             }.modifier(CenterModifier())
