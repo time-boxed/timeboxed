@@ -13,13 +13,7 @@ struct HistoryDetailView: View {
 
     var body: some View {
         List {
-            if let project = pomodoro.project {
-                NavigationLink(destination: ProjectDetailView(project: project)) {
-                    Text(project.name)
-                        .foregroundColor(project.color)
-                        .modifier(LabelModifier(label: "Project"))
-                }
-            }
+            ProjectSelector(project: pomodoro.project)
             HStack {
                 DateTimeView(date: pomodoro.start)
                 Spacer()

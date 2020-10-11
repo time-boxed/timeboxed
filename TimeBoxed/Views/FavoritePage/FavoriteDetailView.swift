@@ -17,7 +17,10 @@ struct FavoriteDetailView: View {
     var body: some View {
         List {
             Text(favorite.title)
+                .modifier(LabelModifier(label: "Title"))
             Text("\(favorite.count)")
+                .modifier(LabelModifier(label: "Count"))
+            ProjectSelector(project: favorite.project)
             Link(favorite.html_link.absoluteString, destination: favorite.html_link)
             Button("Start", action: actionStart)
         }
