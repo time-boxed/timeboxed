@@ -28,6 +28,7 @@ struct ButtonRepeatPomodoro: View {
 }
 
 struct ButtonUpdatePomodoro: View {
+    @EnvironmentObject var store: PomodoroStore
     @EnvironmentObject var user: UserSettings
 
     var pomodoro: Pomodoro
@@ -36,7 +37,9 @@ struct ButtonUpdatePomodoro: View {
     }
 
     func action() {
-        user.currentTab = .countdown
+        store.update(object: pomodoro) { newPomodoro in
+            user.currentTab = .countdown
+        }
     }
 }
 

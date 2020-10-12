@@ -115,6 +115,20 @@ final class PomodoroStore: API {
             .store(in: &subscriptions)
     }
 
+    func update(object: Pomodoro, completion: @escaping ((Pomodoro) -> Void)) {
+        var request = URLRequest.request(path: "/api/pomodoro/\(object.id)")
+        request.httpMethod = "PUT"
+        request.addBody(object: object)
+
+        request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Pomodoro.self, decoder: decoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onReceive, receiveValue: completion)
+            .store(in: &subscriptions)
+    }
+
     func update(id: Int, end: Date, completion: @escaping ((Pomodoro) -> Void)) {
         let update = Pomodoro.DateRequest(end: end)
         var request = URLRequest.request(path: "/api/pomodoro/\(id)")
