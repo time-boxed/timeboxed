@@ -20,13 +20,17 @@ struct ProjectListView: View {
                             NavigationLink(destination: ProjectDetailView(project: project)) {
                                 ProjectRowView(project: project)
                             }
-                        }
+                        }.onDelete(perform: store.delete)
                     }
                 }
                 ReloadButton(source: store)
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing: AddFavoriteButton()
+            )
         }
     }
 }

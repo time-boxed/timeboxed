@@ -67,4 +67,8 @@ final class ProjectStore: LoadableObject {
             .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
             .store(in: &subscriptions)
     }
+
+    func delete(at offset: IndexSet) {
+        // Stub
+    }
 }

@@ -24,6 +24,7 @@ struct ProjectDetailView: View {
                 VStack(alignment: .leading) {
                     Text("Memo")
                     TextEditor(text: $project.memo)
+                        .frame(height: 128)
                 }
             }
             Section {
