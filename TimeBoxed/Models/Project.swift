@@ -27,7 +27,7 @@ struct Project: Codable, Identifiable, Equatable {
     }
 }
 
-final class ProjectStore: ObservableObject {
+final class ProjectStore: LoadableObject {
     static var shared = ProjectStore()
 
     @Published private(set) var projects: [Project] = []
@@ -54,7 +54,7 @@ final class ProjectStore: ObservableObject {
         state = .loaded(batch.results)
     }
 
-    func fetch() {
+    func load() {
         state = .loading
         URLRequest.request(path: "/api/project", qs: ["limit": 50])
             .dataTaskPublisher()
