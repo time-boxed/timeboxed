@@ -21,7 +21,9 @@ struct FavoriteDetailView: View {
                     .modifier(LabelModifier(label: "Title"))
                 Text("\(favorite.count)")
                     .modifier(LabelModifier(label: "Count"))
-                ProjectSelectorView(project: favorite.project)
+                ProjectSelectorView(project: favorite.project) { project in
+                    favorite.project = project
+                }
                 Link(favorite.html_link.absoluteString, destination: favorite.html_link)
             }
 
@@ -47,7 +49,7 @@ struct FavoriteDetailView: View {
 
     func actionUpdate() {
         store.update(favorite: favorite) { (newFavorite) in
-            print(newFavorite)
+            store.load()
         }
     }
 }

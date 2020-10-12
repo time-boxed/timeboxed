@@ -86,7 +86,16 @@ final class FavoriteStore: LoadableObject {
     }
 
     func update(favorite: Favorite, receiveOutput: @escaping ((Favorite) -> Void)) {
-        print("not yet implemented")
+        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)")
+        request.httpMethod = "PUT"
+        request.addBody(object: favorite)
+        request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Favorite.self, decoder: JSONDecoder.djangoDecoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
+            .store(in: &subscriptions)
     }
 
     func delete(_ object: Favorite) {
