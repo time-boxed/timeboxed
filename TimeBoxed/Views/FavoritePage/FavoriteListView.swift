@@ -21,7 +21,7 @@ struct FavoriteListView: View {
                             NavigationLink(destination: FavoriteDetailView(favorite: item)) {
                                 FavoriteRowView(favorite: item)
                             }
-                        }
+                        }.onDelete(perform: store.delete)
                     }
                 }
                 ReloadButton(source: store)
