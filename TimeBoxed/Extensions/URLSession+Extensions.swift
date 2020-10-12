@@ -70,4 +70,13 @@ extension URLRequest {
 
         return request(path: path, login: login, password: password, qs: qs)
     }
+
+    init(login: Login, path: String, qs: [String: String] = [:]) {
+        var url = URLComponents()
+        url.scheme = "https"
+        url.host = login.domain
+        url.path = path
+        url.queryItems = qs.map { URLQueryItem(name: $0, value: $1) }
+        self.init(url: url.url!)
+    }
 }

@@ -13,21 +13,18 @@ struct HistoryRowView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Text(pomodoro.title)
+                .font(.title)
             HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                    Text(pomodoro.title)
-                        .font(.title)
-                    ProjectOptionalView(project: pomodoro.project)
-                }
+                TimeView(date: pomodoro.start, style: .medium)
                 Spacer()
-                VStack {
-                    TimeView(date: pomodoro.start, style: .medium)
-                    Spacer()
-                    TimeView(date: pomodoro.end, style: .medium)
-                    Spacer()
-                    IntervalView(elapsed: pomodoro.end.timeIntervalSince(pomodoro.start))
-                }.font(.caption)
+                TimeView(date: pomodoro.end, style: .medium)
             }
+            HStack(alignment: .top) {
+                ProjectOptionalView(project: pomodoro.project)
+                Spacer()
+                IntervalView(from: pomodoro.start, to: pomodoro.end)
+            }.font(.footnote)
         }
 
     }

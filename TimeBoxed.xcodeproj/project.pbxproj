@@ -17,8 +17,6 @@
 		8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */; };
 		873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D2F66252B21F900CC3DCF /* ImageButton.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
-		87604215249B75630096C938 /* ValidationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87604214249B75630096C938 /* ValidationModifier.swift */; };
-		87604217249B75A20096C938 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87604216249B75A20096C938 /* Validation.swift */; };
 		8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectListView.swift */; };
 		8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894E248FAEDB0056DCB9 /* Color+Extension.swift */; };
 		876CBB0725343C7700031AE1 /* ProjectCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */; };
@@ -72,8 +70,6 @@
 		8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCreateSheet.swift; sourceTree = "<group>"; };
 		873D2F66252B21F900CC3DCF /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
-		87604214249B75630096C938 /* ValidationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationModifier.swift; sourceTree = "<group>"; };
-		87604216249B75A20096C938 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		8766894C248FAB1F0056DCB9 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		8766894E248FAEDB0056DCB9 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreateSheet.swift; sourceTree = "<group>"; };
@@ -153,7 +149,6 @@
 			children = (
 				87F95B352480A2B400255B29 /* ButtonStyles.swift */,
 				874E6C832489215100E7153C /* CenterModifier.swift */,
-				87604214249B75630096C938 /* ValidationModifier.swift */,
 				87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */,
 			);
 			path = Modifier;
@@ -301,7 +296,6 @@
 				C19BA171243F346D004795A7 /* Keychain+Extensions.swift */,
 				87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */,
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
-				87604216249B75A20096C938 /* Validation.swift */,
 				871E49852533F5D800355776 /* JSON+Extensions.swift */,
 			);
 			path = Extensions;
@@ -394,11 +388,9 @@
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
 				8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */,
-				87604215249B75630096C938 /* ValidationModifier.swift in Sources */,
 				8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */,
 				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
 				870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */,
-				87604217249B75A20096C938 /* Validation.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,

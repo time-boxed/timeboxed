@@ -18,9 +18,12 @@ struct ProjectListView: View {
                     Section {
                         ForEach(projects.sorted { $0.duration > $1.duration }) { project in
                             NavigationLink(destination: ProjectDetailView(project: project)) {
-                                ProjectRowView(project: project)
-                                Spacer()
-                                DurationView(duration: project.duration)
+                                VStack(alignment: .leading) {
+                                    ProjectRowView(project: project)
+                                        .font(.title)
+                                    DurationView(duration: project.duration)
+                                        .font(.footnote)
+                                }
                             }
                         }.onDelete(perform: store.delete)
                     }

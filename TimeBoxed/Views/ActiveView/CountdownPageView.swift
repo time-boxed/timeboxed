@@ -13,20 +13,26 @@ struct CountdownPageView: View {
     @EnvironmentObject var store: PomodoroStore
 
     var body: some View {
-        List {
-            AsyncContentView(source: store) { _ in
-                if let current = store.currentPomodoro {
-                    CountdownSectionView(pomodoro: current)
+        NavigationView {
+            List {
+                AsyncContentView(source: store) { _ in
+                    if let current = store.currentPomodoro {
+                        CountdownSectionView(pomodoro: current)
 
-                    if current.isActive {
-                        ExtendPomodoroView(pomodoro: current)
-                    } else {
-                        NewPomodoroView()
+                        if current.isActive {
+                            ExtendPomodoroView(pomodoro: current)
+                        } else {
+                            NewPomodoroView()
+                        }
                     }
                 }
             }
+            .listStyle(GroupedListStyle())
+            .navigationBarItems(
+                trailing: ReloadButton(source: store)
+            )
         }
-        .listStyle(GroupedListStyle())
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

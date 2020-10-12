@@ -23,6 +23,14 @@ struct IntervalView: View {
         // Ensure that we always print the absolute value of our timer
         Text(formatter.string(from: elapsed > 0 ? elapsed : elapsed * -1)!)
     }
+
+    init(elapsed: TimeInterval) {
+        self.elapsed = elapsed
+    }
+
+    init(from start: Date, to end: Date) {
+        self.elapsed = end.timeIntervalSince(start)
+    }
 }
 
 struct IntervalView_Previews: PreviewProvider {

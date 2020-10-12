@@ -79,7 +79,7 @@ struct HistoryDetailView: View {
                 TextEditor(text: $pomodoro.memo)
                     .frame(height: 128)
             }
-            
+
             Section {
                 ButtonRepeatPomodoro(pomodoro: pomodoro)
                     .buttonStyle(ActionButtonStyle())
@@ -99,10 +99,10 @@ struct HistoryDetailView: View {
 
 #if DEBUG
 
-struct HistoryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryDetailView(pomodoro: PreviewData.pomodoro)
+    struct HistoryDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            HistoryDetailView(pomodoro: PreviewData.pomodoro)
+        }
     }
-}
 
 #endif
