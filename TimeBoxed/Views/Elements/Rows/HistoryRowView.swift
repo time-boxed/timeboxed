@@ -31,8 +31,6 @@ struct HistoryRowView: View {
                     IntervalView(elapsed: pomodoro.end.timeIntervalSince(pomodoro.start))
                 }.font(.caption)
             }
-            Text(pomodoro.category)
-                .font(.footnote)
         }
 
     }

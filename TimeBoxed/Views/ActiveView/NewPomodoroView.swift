@@ -65,7 +65,7 @@ struct NewPomodoroView: View {
     func submitPomodoro(duration: TimeInterval) {
         let pomodoro = Pomodoro(
             id: 0, title: model.title, start: Date(), end: Date() + duration,
-            category: model.category, memo: ""
+            memo: ""
         )
         store.create(pomodoro) { _ in
             self.model.title = ""

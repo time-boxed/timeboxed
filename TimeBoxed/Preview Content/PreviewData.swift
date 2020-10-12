@@ -17,7 +17,6 @@ import SwiftUI
             title: "Preview Title",
             start: Date(),
             end: Date(),
-            category: "Preview Category",
             memo: "Some memo"
         )
 

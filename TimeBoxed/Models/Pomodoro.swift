@@ -14,7 +14,6 @@ struct Pomodoro: Codable, Identifiable, Equatable {
     var title: String
     var start: Date
     var end: Date
-    var category: String
     var memo: String?
     var project: Project?
     var url: URL?
