@@ -15,8 +15,7 @@ struct ProjectSelector: View {
         NavigationLink(destination: EmptyView()) {
             Group {
                 if let project = project {
-                    Text(project.name)
-                        .foregroundColor(project.color)
+                    ProjectRowView(project: project)
                 } else {
                     Text("No Project")
                 }
