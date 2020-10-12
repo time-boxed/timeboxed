@@ -9,10 +9,24 @@
 import Foundation
 import SwiftUI
 
-extension Array where Element == Pomodoro {
-    func byEndDate() -> [Date: [Pomodoro]] {
-        return Dictionary(
-            grouping: self,
+struct GroupedHistory: View {
+    var pomodoros: [Date:[Pomodoro]]
+
+    var body: some View {
+        ForEach(pomodoros.keys.sorted { $0 > $1 }, id: \.self) { date in
+            Section(header: DateView(date: date)) {
+                ForEach(pomodoros[date]!.sorted { $0.end > $1.end }) { pomodoro in
+                    NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
+                        HistoryRowView(pomodoro: pomodoro)
+                    }
+                }
+            }
+        }
+    }
+
+    init (pomodoros: [Pomodoro]) {
+        self.pomodoros = Dictionary(
+            grouping: pomodoros,
             by: { Calendar.current.startOfDay(for: $0.end) }
         )
     }
@@ -25,16 +39,7 @@ struct HistoryView: View {
         NavigationView {
             List {
                 AsyncContentView(source: store) { pomodoros in
-                    let groups = pomodoros.byEndDate()
-                    ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
-                        Section(header: DateView(date: date)) {
-                            ForEach(groups[date]!.sorted { $0.end > $1.end }) { pomodoro in
-                                NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
-                                    HistoryRowView(pomodoro: pomodoro)
-                                }
-                            }
-                        }
-                    }
+                    GroupedHistory(pomodoros: pomodoros)
                 }
                 ReloadButton(source: store)
             }
