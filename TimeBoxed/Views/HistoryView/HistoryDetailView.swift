@@ -38,7 +38,7 @@ struct ButtonUpdatePomodoro: View {
 
     func action() {
         store.update(object: pomodoro) { newPomodoro in
-            store.reload()
+            store.load()
         }
     }
 }

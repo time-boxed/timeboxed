@@ -38,18 +38,12 @@ extension Pomodoro {
 
 typealias PomodoroCompletion = ((Pomodoro) -> Void)
 
-final class PomodoroStore: API {
-    typealias Model = Pomodoro
-
+final class PomodoroStore: LoadableObject {
+    @Published private(set) var state = LoadingState<[Pomodoro]>.idle
     private var subscriptions = Set<AnyCancellable>()
 
     @Published private(set) var pomodoros: [Pomodoro] = []
-    @Published private(set) var state = LoadingState<[Pomodoro]>.idle
     @Published private(set) var currentPomodoro: Pomodoro?
-
-    // Scroll
-    private var offset = "0"
-    var canLoadNextPage = true
 
     func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
@@ -57,45 +51,22 @@ final class PomodoroStore: API {
             break
         case .failure(let error):
             state = .failed(error)
-            canLoadNextPage = false
         }
     }
 
     private func onReceive(_ batch: Pomodoro.List) {
-        pomodoros += batch.results.sorted { $0.start > $1.start }
+        pomodoros = batch.results.sorted { $0.start > $1.start }
         currentPomodoro = pomodoros.first
         state = .loaded(pomodoros)
-
-        canLoadNextPage = batch.next != nil
-        guard canLoadNextPage else { return }
-
-        if let next = URLComponents(string: batch.next ?? "") {
-            next.queryItems?.forEach({ (queryItem) in
-                if queryItem.name == "offset" {
-                    self.offset = queryItem.value!
-                }
-            })
-        } else {
-            canLoadNextPage = false
-        }
     }
 
-    func reload() {
-        pomodoros = []
-        offset = "0"
-        canLoadNextPage = true
-
-        fetch()
-    }
-
-    func fetch() {
-        guard canLoadNextPage else { return }
+    func load() {
         state = .loading
 
-        URLRequest.request(path: "/api/pomodoro", qs: ["offset": offset])
+        URLRequest.request(path: "/api/pomodoro", qs: ["limit": 100])
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Pomodoro.List.self, decoder: decoder)
+            .decode(type: Pomodoro.List.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
@@ -109,7 +80,7 @@ final class PomodoroStore: API {
         request
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: decoder)
+            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
@@ -123,7 +94,7 @@ final class PomodoroStore: API {
         request
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: decoder)
+            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
@@ -138,7 +109,7 @@ final class PomodoroStore: API {
         request
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: decoder)
+            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)

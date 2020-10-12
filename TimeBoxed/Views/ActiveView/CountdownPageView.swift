@@ -12,41 +12,22 @@ import SwiftUI
 struct CountdownPageView: View {
     @EnvironmentObject var store: PomodoroStore
 
-    var stateStatus: AnyView {
-        switch store.state {
-        case .idle:
-            return Text("No result").eraseToAnyView()
-        case .failed(let error):
-            return Text(error.localizedDescription).eraseToAnyView()
-        case .loading:
-            return Text("Loading").eraseToAnyView()
-        case .loaded:
-            return EmptyView().eraseToAnyView()
-        }
-    }
-
     var body: some View {
         List {
-            HStack {
-                Button("Reload", action: store.fetch)
-                Spacer()
-                stateStatus
-            }
+            AsyncContentView(source: store) { _ in
+                if let current = store.currentPomodoro {
+                    CountdownSectionView(pomodoro: current)
 
-            if store.currentPomodoro != nil {
-                CountdownSectionView(pomodoro: .constant(store.currentPomodoro!))
-            }
-
-            if store.currentPomodoro?.isActive ?? false {
-                ExtendPomodoroView(pomodoro: store.currentPomodoro!)
-            } else {
-                NewPomodoroView()
+                    if current.isActive {
+                        ExtendPomodoroView(pomodoro: current)
+                    } else {
+                        NewPomodoroView()
+                    }
+                }
             }
         }
-        .onAppear(perform: store.reload)
         .listStyle(GroupedListStyle())
     }
-
 }
 
 #if DEBUG

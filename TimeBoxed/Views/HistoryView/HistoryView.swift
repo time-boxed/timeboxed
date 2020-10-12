@@ -6,7 +6,6 @@
 //  Copyright © 2020 Paul Traylor. All rights reserved.
 //
 
-import Combine
 import Foundation
 import SwiftUI
 
@@ -22,58 +21,27 @@ extension Array where Element == Pomodoro {
 struct HistoryView: View {
     @EnvironmentObject var store: PomodoroStore
 
-    var groups: [Date: [Pomodoro]] {
-        Dictionary(
-            grouping: store.pomodoros,
-            by: { Calendar.current.startOfDay(for: $0.end) }
-        )
-    }
-
-    var fetchedView: some View {
-        ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
-            Section(header: DateView(date: date)) {
-                ForEach(self.groups[date]!.sorted { $0.end > $1.end }) { p in
-                    NavigationLink(destination: HistoryDetailView(pomodoro: p)) {
-                        HistoryRowView(pomodoro: p)
-                            .onAppear {
-                                if self.store.pomodoros.last == p {
-                                    self.store.fetch()
-                                }
-                            }
-                    }
-                }.onDelete(perform: self.store.delete)
-            }
-        }
-    }
-
-    var stateStatus: AnyView {
-        switch store.state {
-        case .idle:
-            return Text("No result").eraseToAnyView()
-        case .failed(let error):
-            return Text(error.localizedDescription).eraseToAnyView()
-        case .loading:
-            return Text("Loading").eraseToAnyView()
-        case .loaded:
-            return EmptyView().eraseToAnyView()
-        }
-    }
-
     var body: some View {
         NavigationView {
             List {
-                HStack {
-                    Button("Reload", action: store.fetch)
-                    Spacer()
-                    stateStatus
+                AsyncContentView(source: store) { pomodoros in
+                    let groups = pomodoros.byEndDate()
+                    ForEach(groups.keys.sorted { $0 > $1 }, id: \.self) { date in
+                        Section(header: DateView(date: date)) {
+                            ForEach(groups[date]!.sorted { $0.end > $1.end }) { pomodoro in
+                                NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
+                                    HistoryRowView(pomodoro: pomodoro)
+                                }
+                            }
+                        }
+                    }
                 }
-                fetchedView
+                ReloadButton(source: store)
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
             .navigationBarItems(leading: EditButton())
         }
-        .onAppear(perform: store.reload)
     }
 }
 
