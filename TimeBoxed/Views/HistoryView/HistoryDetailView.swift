@@ -13,7 +13,7 @@ struct HistoryDetailView: View {
 
     var body: some View {
         List {
-            ProjectSelector(project: pomodoro.project)
+            ProjectSelectorView(project: pomodoro.project)
             HStack {
                 DateTimeView(date: pomodoro.start)
                 Spacer()

@@ -39,7 +39,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(Tab.favorites)
-            ProjectList()
+            ProjectListView()
                 .tabItem {
                     Image(systemName: "paperclip")
                     Text("Projects")

@@ -1,5 +1,5 @@
 //
-//  ProjectList.swift
+//  ProjectListView.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/06/09.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ProjectList: View {
+struct ProjectListView: View {
     @EnvironmentObject var store: ProjectStore
 
     var body: some View {
@@ -32,6 +32,6 @@ struct ProjectList: View {
 
 struct ProjectList_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectList()
+        ProjectListView()
     }
 }

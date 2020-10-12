@@ -22,10 +22,10 @@ struct CountdownSectionView: View {
                 DateTimeView(label: "Start", date: pomodoro.start)
                 DateTimeView(label: "End", date: pomodoro.end)
 
-                ProjectSelector(project: pomodoro.project)
+                ProjectSelectorView(project: pomodoro.project)
 
                 if let project = pomodoro.project {
-                    ProjectSelector(project: project)
+                    ProjectSelectorView(project: project)
                     NavigationLink(destination: ProjectDetailView(project: project)) {
                         ProjectRowView(project: project)
                             .modifier(LabelModifier(label: "Project"))

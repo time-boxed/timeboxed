@@ -1,5 +1,5 @@
 //
-//  ProjectSelector.swift
+//  ProjectSelectorView.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/10/11.
