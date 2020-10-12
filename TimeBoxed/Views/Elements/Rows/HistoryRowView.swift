@@ -17,10 +17,7 @@ struct HistoryRowView: View {
                 VStack(alignment: .leading) {
                     Text(pomodoro.title)
                         .font(.title)
-                    if let project = pomodoro.project {
-                        Text(project.name)
-                            .foregroundColor(project.color)
-                    }
+                    ProjectOptionalView(project: pomodoro.project)
                 }
                 Spacer()
                 VStack {

@@ -14,32 +14,26 @@ struct FavoriteRowView: View {
 
     var body: some View {
         HStack {
-            Group {
-                if favorite.icon != nil {
-                    KFImage(favorite.icon!)
-                        .resizable()
-                        .frame(width: 32.0, height: 32.0)
-                }
-            }
+            //            Group {
+            //                if favorite.icon != nil {
+            //                    KFImage(favorite.icon!)
+            //                        .resizable()
+            //                        .frame(width: 32.0, height: 32.0)
+            //                }
+            //            }
 
             VStack(alignment: .leading) {
                 Text(favorite.title)
                     .font(.title)
-                if let project = favorite.project {
-                    ProjectRowView(project: project)
-                }
-                Text(favorite.memo ?? "")
+                ProjectOptionalView(project: favorite.project)
                     .font(.footnote)
             }
             Spacer()
             VStack {
                 DurationView(duration: favorite.duration)
                 Text("Count: \(favorite.count)")
-                Text(favorite.memo ?? "")
-
             }.font(.caption)
         }
-
     }
 }
 

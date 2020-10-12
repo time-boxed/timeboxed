@@ -8,6 +8,19 @@
 
 import SwiftUI
 
+struct AddFavoriteButton: View {
+    @State var isPresenting = false
+
+    var body: some View {
+        Button("Add") {
+            isPresenting.toggle()
+        }.sheet(isPresented: $isPresenting) {
+            SheetNewFavoriteView(isPresented: self.$isPresenting)
+                .sheetWithDone(isPresented: self.$isPresenting)
+        }
+    }
+}
+
 struct SheetNewFavoriteView: View {
     @EnvironmentObject var store: FavoriteStore
 

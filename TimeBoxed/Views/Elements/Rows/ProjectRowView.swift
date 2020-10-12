@@ -8,6 +8,18 @@
 
 import SwiftUI
 
+struct ProjectOptionalView: View {
+    var project: Project?
+
+    var body: some View {
+        if let project = project {
+            ProjectRowView(project: project)
+        } else {
+            Text("No Project")
+        }
+    }
+}
+
 struct ProjectRowView: View {
     var project: Project
 

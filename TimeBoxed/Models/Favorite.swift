@@ -30,14 +30,8 @@ struct Favorite: Codable, Identifiable {
 
 typealias FavoriteCompletion = ((Favorite) -> Void)
 
-final class FavoriteStore: API {
-    var canLoadNextPage = true
-
-    typealias Model = Favorite
-
-    @Published private(set) var favorites: [Favorite] = []
+final class FavoriteStore: LoadableObject {
     @Published private(set) var state = LoadingState<[Favorite]>.idle
-
     private var subscriptions = Set<AnyCancellable>()
 
     func onReceive(_ completion: Subscribers.Completion<Error>) {
@@ -46,13 +40,11 @@ final class FavoriteStore: API {
             break
         case .failure(let error):
             state = .failed(error)
-            canLoadNextPage = false
         }
     }
 
     private func onReceive(_ batch: Favorite.List) {
-        favorites = batch.results.sorted { $0.count > $1.count }
-        state = .loaded(favorites)
+        state = .loaded(batch.results.sorted { $0.count > $1.count })
     }
 
     func create(_ object: Favorite, completion: @escaping ((Favorite) -> Void)) {
@@ -63,25 +55,21 @@ final class FavoriteStore: API {
         request
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Favorite.self, decoder: decoder)
+            .decode(type: Favorite.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: completion)
             .store(in: &subscriptions)
     }
 
-    func fetch() {
+    func load() {
         state = .loading
         URLRequest.request(path: "/api/favorite", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Favorite.List.self, decoder: decoder)
+            .decode(type: Favorite.List.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
-    }
-
-    func reload() {
-        fetch()
     }
 
     func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
@@ -91,7 +79,7 @@ final class FavoriteStore: API {
         request
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: decoder)
+            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
             .store(in: &subscriptions)
@@ -119,10 +107,10 @@ final class FavoriteStore: API {
     }
 
     func delete(at offset: IndexSet) {
-        offset.forEach { (index) in
-            delete(favorites[index])
-        }
-        favorites.remove(atOffsets: offset)
-        //        reload()
+        //        offset.forEach { (index) in
+        //            delete(favorites[index])
+        //        }
+        //        favorites.remove(atOffsets: offset)
+        //        //        reload()
     }
 }
