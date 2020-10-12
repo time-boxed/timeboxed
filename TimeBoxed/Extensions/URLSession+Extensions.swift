@@ -41,20 +41,18 @@ extension URLRequest {
         }
     }
 
-    static func request(path: String, login: String, password: String, qs: [String: Any])
+    static func request(path: String, login: Login, password: String, qs: [String: Any])
         -> URLRequest
     {
-        let parts = login.components(separatedBy: "@")
-
         var url = URLComponents()
         url.scheme = "https"
-        url.host = parts[1]
+        url.host = login.domain
         url.path = path
         url.addQuery(qs: qs)
 
         var request = URLRequest(url: url.url!)
-        request.addBasicAuth(username: parts[0], password: password)
-        os_log(.debug, "Querying %{public}s for %{public}s", request.url!.absoluteString, parts[0])
+        request.addBasicAuth(username: login.username, password: password)
+        os_log(.debug, "Querying %{public}s for %{public}s", request.url!.absoluteString, login.username)
         return request
     }
 
