@@ -12,12 +12,12 @@ import SwiftUI
 
 struct Project: Codable, Identifiable, Equatable {
     let id: String
-    let name: String
+    var name: String
     let html_link: URL
-    let url: URL?
-    let color: Color
+    var url: URL?
+    var color: Color
     let active: Bool
-    let memo: String
+    var memo: String
 
     struct List: Codable {
         let count: Int
@@ -28,24 +28,15 @@ struct Project: Codable, Identifiable, Equatable {
 }
 
 final class ProjectStore: LoadableObject {
-    static var shared = ProjectStore()
-
-    @Published private(set) var projects: [Project] = []
     @Published private(set) var state = LoadingState<[Project]>.idle
-
     private var subscriptions = Set<AnyCancellable>()
-
-    private var decoder: JSONDecoder {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return decoder
-    }
 
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:
             break
         case .failure(let error):
+            print(error.localizedDescription)
             state = .failed(error)
         }
     }
@@ -59,9 +50,21 @@ final class ProjectStore: LoadableObject {
         URLRequest.request(path: "/api/project", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }
-            .decode(type: Project.List.self, decoder: decoder)
+            .decode(type: Project.List.self, decoder: JSONDecoder.djangoDecoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
+            .store(in: &subscriptions)
+    }
+
+    func update(project: Project, receiveValue: @escaping ((Project) -> Void)) {
+        var request = URLRequest.request(path: "/api/project/\(project.id)")
+        request.httpMethod = "PUT"
+        request.addBody(object: project)
+        request.dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Project.self, decoder: JSONDecoder.djangoDecoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
             .store(in: &subscriptions)
     }
 }

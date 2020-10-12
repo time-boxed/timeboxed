@@ -10,18 +10,40 @@ import SwiftUI
 
 struct ProjectDetailView: View {
     @State var project: Project
+    @EnvironmentObject var store: ProjectStore
 
     var body: some View {
-        VStack {
-            Text(project.name)
-                .accentColor(project.color)
-            if project.url != nil {
-                Text(project.url!.absoluteString)
+        List {
+            Section {
+                TextField("Name", text: $project.name)
+                if let url = project.url {
+                    Link("URL", destination: url)
+                }
+                ColorPicker("Color", selection: $project.color)
+                VStack(alignment: .leading) {
+                    Text("Memo")
+                    TextEditor(text: $project.memo)
+                }
             }
-            Text(project.memo)
-            Spacer()
+            Section {
+                Button("Save", action: actionSave).disabled(
+                    [
+                        project.name.count > 1
+                    ].contains(false))
+            }
         }
+        .listStyle(GroupedListStyle())
         .navigationBarTitle(project.name)
+    }
+
+    func actionSave() {
+        store.update(project: project) { updatedProject in
+            print(updatedProject)
+        }
+    }
+
+    func receiveValue(_ project: Project) {
+
     }
 }
 
