@@ -20,6 +20,7 @@ struct ProjectDetailView: View {
                     Link("URL", destination: url)
                 }
                 ColorPicker("Color", selection: $project.color)
+                Toggle("Active", isOn: $project.active)
                 VStack(alignment: .leading) {
                     Text("Memo")
                     TextEditor(text: $project.memo)
@@ -39,11 +40,8 @@ struct ProjectDetailView: View {
     func actionSave() {
         store.update(project: project) { updatedProject in
             print(updatedProject)
+            store.load()
         }
-    }
-
-    func receiveValue(_ project: Project) {
-
     }
 }
 

@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ProjectListView: View {
     @EnvironmentObject var store: ProjectStore
-
+    
     var body: some View {
         NavigationView {
-            AsyncContentView(source: store) { projects in
-                List {
+            List {
+                AsyncContentView(source: store) { projects in
                     Section {
                         ForEach(projects) { project in
                             NavigationLink(destination: ProjectDetailView(project: project)) {

@@ -42,6 +42,7 @@ struct AsyncContentView<Source: LoadableObject, Content: View>: View {
             ErrorView(error: error, retryHandler: source.load)
         case .loaded(let output):
             content(output)
+            Button("Reload", action: source.load)
         }
     }
 

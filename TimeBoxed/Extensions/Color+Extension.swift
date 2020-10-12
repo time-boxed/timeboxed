@@ -17,7 +17,23 @@ extension Color: Codable {
     }
 
     public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(hexString)
+    }
 
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        UIColor(cgColor: cgColor!).getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        return (red, green, blue, alpha)
+    }
+
+    var hexString: String {
+        let c = rgba
+        return String(format:"%02X", Int(c.red * 255)) + String(format:"%02X", Int(c.green * 255)) + String(format:"%02X", Int(c.blue * 255))
     }
 
     init(hex: String) {

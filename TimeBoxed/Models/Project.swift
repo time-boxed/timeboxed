@@ -16,7 +16,7 @@ struct Project: Codable, Identifiable, Equatable {
     let html_link: URL
     var url: URL?
     var color: Color
-    let active: Bool
+    var active: Bool
     var memo: String
 
     struct List: Codable {
