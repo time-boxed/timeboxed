@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 struct GroupedHistory: View {
-    var pomodoros: [Date:[Pomodoro]]
+    var pomodoros: [Date: [Pomodoro]]
 
     var body: some View {
         ForEach(pomodoros.keys.sorted { $0 > $1 }, id: \.self) { date in
@@ -24,7 +24,7 @@ struct GroupedHistory: View {
         }
     }
 
-    init (pomodoros: [Pomodoro]) {
+    init(pomodoros: [Pomodoro]) {
         self.pomodoros = Dictionary(
             grouping: pomodoros,
             by: { Calendar.current.startOfDay(for: $0.end) }
@@ -41,11 +41,10 @@ struct HistoryView: View {
                 AsyncContentView(source: store) { pomodoros in
                     GroupedHistory(pomodoros: pomodoros)
                 }
-                ReloadButton(source: store)
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
-            .navigationBarItems(leading: EditButton())
+            .navigationBarItems(leading: EditButton(), trailing: ReloadButton(source: store))
         }
     }
 }
