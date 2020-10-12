@@ -8,19 +8,52 @@
 
 import SwiftUI
 
-struct ProjectSelectorView: View {
-    var project: Project?
+struct ProjectSelectorList: View {
+    @EnvironmentObject var store: ProjectStore
+    @Environment(\.presentationMode) var presentationMode
+    var selected: (Project?) -> Void = { _ in }
 
     var body: some View {
-        NavigationLink(destination: EmptyView()) {
-            Group {
-                if let project = project {
-                    ProjectRowView(project: project)
-                } else {
-                    Text("No Project")
+        NavigationView {
+            List {
+                AsyncContentView(source: store) { projects in
+                    Section {
+                        ForEach(projects) { project in
+                            Button(action: {
+                                selected(project)
+                                self.presentationMode.wrappedValue.dismiss()
+                            }) {
+                                ProjectRowView(project: project)
+                            }
+                        }
+                    }
                 }
             }
-            .modifier(LabelModifier(label: "Project"))
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle("Projects")
+        }
+    }
+}
+
+struct ProjectSelectorView: View {
+    @EnvironmentObject var store: ProjectStore
+    @State var isPresented = false
+
+    var project: Project?
+
+    var selected: (Project?) -> Void = { _ in }
+
+    var body: some View {
+        Button(action: { isPresented.toggle() }) {
+            if let project = project {
+                ProjectRowView(project: project)
+            } else {
+                Text("No Project")
+            }
+        }
+        .modifier(LabelModifier(label: "Project"))
+        .sheet(isPresented: $isPresented) {
+            ProjectSelectorList(selected: selected)
         }
     }
 }
