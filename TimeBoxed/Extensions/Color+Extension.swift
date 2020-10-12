@@ -33,7 +33,8 @@ extension Color: Codable {
 
     var hexString: String {
         let c = rgba
-        return String(format:"%02X", Int(c.red * 255)) + String(format:"%02X", Int(c.green * 255)) + String(format:"%02X", Int(c.blue * 255))
+        return String(format: "%02X", Int(c.red * 255)) + String(format: "%02X", Int(c.green * 255))
+            + String(format: "%02X", Int(c.blue * 255))
     }
 
     init(hex: String) {

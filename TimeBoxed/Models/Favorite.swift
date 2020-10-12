@@ -97,6 +97,10 @@ final class FavoriteStore: API {
             .store(in: &subscriptions)
     }
 
+    func update(favorite: Favorite, receiveOutput: @escaping ((Favorite) -> Void)) {
+        print("not yet implemented")
+    }
+
     func delete(_ object: Favorite) {
         var request = URLRequest.request(path: "/api/favorite/\(object.id)")
         request.httpMethod = "DELETE"

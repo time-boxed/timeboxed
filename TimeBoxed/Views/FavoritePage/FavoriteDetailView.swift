@@ -12,24 +12,42 @@ struct FavoriteDetailView: View {
     @EnvironmentObject var store: FavoriteStore
     @EnvironmentObject var user: UserSettings
 
-    var favorite: Favorite
+    @State var favorite: Favorite
 
     var body: some View {
         List {
-            Text(favorite.title)
-                .modifier(LabelModifier(label: "Title"))
-            Text("\(favorite.count)")
-                .modifier(LabelModifier(label: "Count"))
-            ProjectSelectorView(project: favorite.project)
-            Link(favorite.html_link.absoluteString, destination: favorite.html_link)
+            Section {
+                TextField("Title", text: $favorite.title)
+                    .modifier(LabelModifier(label: "Title"))
+                Text("\(favorite.count)")
+                    .modifier(LabelModifier(label: "Count"))
+                ProjectSelectorView(project: favorite.project)
+                Link(favorite.html_link.absoluteString, destination: favorite.html_link)
+            }
+
             Button("Start", action: actionStart)
+                .buttonStyle(ActionButtonStyle())
+            Button("Update", action: actionUpdate)
+                .buttonStyle(ActionButtonStyle())
+                .disabled(
+                    [
+                        favorite.title.count > 0
+                    ].contains(false))
+
         }
         .navigationBarTitle(favorite.title)
+        .listStyle(GroupedListStyle())
     }
 
     func actionStart() {
         store.start(favorite: favorite) { pomodoro in
             user.currentTab = .countdown
+        }
+    }
+
+    func actionUpdate() {
+        store.update(favorite: favorite) { (newFavorite) in
+            print(newFavorite)
         }
     }
 }
