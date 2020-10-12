@@ -71,4 +71,18 @@ final class ProjectStore: LoadableObject {
     func delete(at offset: IndexSet) {
         // Stub
     }
+
+    func create(_ object: Project, completion: @escaping ((Project) -> Void)) {
+        var request = URLRequest.request(path: "/api/project")
+        request.httpMethod = "POST"
+        request.addBody(object: object)
+
+        request
+            .dataTaskPublisher()
+            .map { $0.data }
+            .decode(type: Project.self, decoder: JSONDecoder.djangoDecoder)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: onReceive, receiveValue: completion)
+            .store(in: &subscriptions)
+    }
 }

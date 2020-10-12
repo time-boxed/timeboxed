@@ -15,13 +15,13 @@ struct AddFavoriteButton: View {
         Button("Add") {
             isPresenting.toggle()
         }.sheet(isPresented: $isPresenting) {
-            SheetNewFavoriteView(isPresented: self.$isPresenting)
+            FavoriteCreateSheet(isPresented: self.$isPresenting)
                 .sheetWithDone(isPresented: self.$isPresenting)
         }
     }
 }
 
-struct SheetNewFavoriteView: View {
+struct FavoriteCreateSheet: View {
     @EnvironmentObject var store: FavoriteStore
 
     @Binding var isPresented: Bool
@@ -58,6 +58,6 @@ struct SheetNewFavoriteView: View {
 
 struct NewFavoriteView_Previews: PreviewProvider {
     static var previews: some View {
-        SheetNewFavoriteView(isPresented: .constant(true))
+        FavoriteCreateSheet(isPresented: .constant(true))
     }
 }

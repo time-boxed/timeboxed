@@ -29,7 +29,7 @@ struct ProjectListView: View {
             .navigationBarTitle("Projects")
             .navigationBarItems(
                 leading: EditButton(),
-                trailing: AddFavoriteButton()
+                trailing: AddProjectButton()
             )
         }
     }
