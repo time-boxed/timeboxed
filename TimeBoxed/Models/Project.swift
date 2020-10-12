@@ -18,6 +18,7 @@ struct Project: Codable, Identifiable, Equatable {
     var color: Color
     var active: Bool
     var memo: String
+    var duration: TimeInterval
 
     struct List: Codable {
         let count: Int

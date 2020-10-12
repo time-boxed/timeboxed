@@ -16,9 +16,11 @@ struct ProjectListView: View {
             List {
                 AsyncContentView(source: store) { projects in
                     Section {
-                        ForEach(projects) { project in
+                        ForEach(projects.sorted { $0.duration > $1.duration }) { project in
                             NavigationLink(destination: ProjectDetailView(project: project)) {
                                 ProjectRowView(project: project)
+                                Spacer()
+                                DurationView(duration: project.duration)
                             }
                         }.onDelete(perform: store.delete)
                     }

@@ -31,7 +31,8 @@ struct ProjectCreateSheet: View {
         url: nil,
         color: .black,
         active: true,
-        memo: ""
+        memo: "",
+        duration: 0
     )
 
     var body: some View {

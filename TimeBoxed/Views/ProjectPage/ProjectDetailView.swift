@@ -21,11 +21,10 @@ struct ProjectDetailView: View {
                 }
                 ColorPicker("Color", selection: $project.color)
                 Toggle("Active", isOn: $project.active)
-                VStack(alignment: .leading) {
-                    Text("Memo")
-                    TextEditor(text: $project.memo)
-                        .frame(height: 128)
-                }
+            }
+            Section(header: Text("Memo")) {
+                TextEditor(text: $project.memo)
+                    .frame(height: 128)
             }
             Section {
                 Button("Save", action: actionSave).disabled(

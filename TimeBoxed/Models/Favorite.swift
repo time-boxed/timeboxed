@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 struct Favorite: Codable, Identifiable {
-    var id: Int
+    let id: Int
     var title: String
     var duration: TimeInterval
     var memo: String?
