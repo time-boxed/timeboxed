@@ -36,7 +36,7 @@ final class FavoriteStore: API {
     typealias Model = Favorite
 
     @Published private(set) var favorites: [Favorite] = []
-    @Published private(set) var state = FetchState<[Favorite]>.empty
+    @Published private(set) var state = LoadingState<[Favorite]>.idle
 
     private var subscriptions = Set<AnyCancellable>()
 
@@ -45,14 +45,14 @@ final class FavoriteStore: API {
         case .finished:
             break
         case .failure(let error):
-            state = .error(error)
+            state = .failed(error)
             canLoadNextPage = false
         }
     }
 
     private func onReceive(_ batch: Favorite.List) {
-        state = .fetched
         favorites = batch.results.sorted { $0.count > $1.count }
+        state = .loaded(favorites)
     }
 
     func create(_ object: Favorite, completion: @escaping ((Favorite) -> Void)) {
@@ -70,7 +70,7 @@ final class FavoriteStore: API {
     }
 
     func fetch() {
-        state = .fetching
+        state = .loading
         URLRequest.request(path: "/api/favorite", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }

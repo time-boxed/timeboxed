@@ -11,6 +11,8 @@
 		870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE477249248AF00ED17C2 /* ProjectRowView.swift */; };
 		870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47924924BF000ED17C2 /* ProjectDetailView.swift */; };
 		870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */; };
+		871E49832533F33D00355776 /* AsyncContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49822533F33D00355776 /* AsyncContentView.swift */; };
+		871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49852533F5D800355776 /* JSON+Extensions.swift */; };
 		8732575B2494B8C900E07208 /* SheetNewFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732575A2494B8C900E07208 /* SheetNewFavoriteView.swift */; };
 		8732575F2494C4CD00E07208 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732575E2494C4CD00E07208 /* View+Extensions.swift */; };
 		873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D2F66252B21F900CC3DCF /* ImageButton.swift */; };
@@ -64,6 +66,8 @@
 		870FE477249248AF00ED17C2 /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		870FE47924924BF000ED17C2 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailView.swift; sourceTree = "<group>"; };
+		871E49822533F33D00355776 /* AsyncContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContentView.swift; sourceTree = "<group>"; };
+		871E49852533F5D800355776 /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		8732575A2494B8C900E07208 /* SheetNewFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNewFavoriteView.swift; sourceTree = "<group>"; };
 		8732575E2494C4CD00E07208 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		873D2F66252B21F900CC3DCF /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				878C37C824C43A0600BA9F5B /* ProjectPage */,
 				87E998B024C43C09008A25AD /* SettingsView */,
 				C19BA145243F2E33004795A7 /* ContentView.swift */,
+				871E49822533F33D00355776 /* AsyncContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
 				87604216249B75A20096C938 /* Validation.swift */,
 				8732575E2494C4CD00E07208 /* View+Extensions.swift */,
+				871E49852533F5D800355776 /* JSON+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				87604217249B75A20096C938 /* Validation.swift in Sources */,
 				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				8732575F2494C4CD00E07208 /* View+Extensions.swift in Sources */,
+				871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
 				87F95B342480978200255B29 /* DateTimeView.swift in Sources */,
@@ -416,6 +423,7 @@
 				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */,
+				871E49832533F33D00355776 /* AsyncContentView.swift in Sources */,
 				87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */,
 				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
 				87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */,

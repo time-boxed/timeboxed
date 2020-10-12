@@ -22,13 +22,6 @@ protocol API: ObservableObject {
     func onReceive(_ completion: Subscribers.Completion<Error>)
 }
 
-public enum FetchState<T> {
-    case empty
-    case fetching
-    case fetched
-    case error(Error)
-}
-
 extension API {
     internal var decoder: JSONDecoder {
         let decoder = JSONDecoder()

@@ -14,13 +14,13 @@ struct CountdownPageView: View {
 
     var stateStatus: AnyView {
         switch store.state {
-        case .empty:
+        case .idle:
             return Text("No result").eraseToAnyView()
-        case .error(let error):
+        case .failed(let error):
             return Text(error.localizedDescription).eraseToAnyView()
-        case .fetching:
+        case .loading:
             return Text("Loading").eraseToAnyView()
-        case .fetched:
+        case .loaded:
             return EmptyView().eraseToAnyView()
         }
     }

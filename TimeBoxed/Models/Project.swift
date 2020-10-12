@@ -31,7 +31,7 @@ final class ProjectStore: ObservableObject {
     static var shared = ProjectStore()
 
     @Published private(set) var projects: [Project] = []
-    @Published private(set) var state = FetchState<[Project]>.empty
+    @Published private(set) var state = LoadingState<[Project]>.idle
 
     private var subscriptions = Set<AnyCancellable>()
 
@@ -46,17 +46,16 @@ final class ProjectStore: ObservableObject {
         case .finished:
             break
         case .failure(let error):
-            state = .error(error)
+            state = .failed(error)
         }
     }
 
     private func onReceive(_ batch: Project.List) {
-        state = .fetched
-        projects = batch.results
+        state = .loaded(batch.results)
     }
 
     func fetch() {
-        state = .fetching
+        state = .loading
         URLRequest.request(path: "/api/project", qs: ["limit": 50])
             .dataTaskPublisher()
             .map { $0.data }
