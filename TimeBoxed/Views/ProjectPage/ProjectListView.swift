@@ -23,6 +23,7 @@ struct ProjectListView: View {
                         }
                     }
                 }
+                ReloadButton(source: store)
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")

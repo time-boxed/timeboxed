@@ -30,6 +30,18 @@ struct ErrorView: View {
     }
 }
 
+struct ReloadButton<Source: LoadableObject>: View {
+    @ObservedObject var source: Source
+    var body: some View {
+        switch source.state {
+        case .loading:
+            EmptyView()
+        default:
+            Button("Reload", action: source.load)
+        }
+    }
+}
+
 struct AsyncContentView<Source: LoadableObject, Content: View>: View {
     @ObservedObject var source: Source
     var content: (Source.Output) -> Content
@@ -42,7 +54,6 @@ struct AsyncContentView<Source: LoadableObject, Content: View>: View {
             ErrorView(error: error, retryHandler: source.load)
         case .loaded(let output):
             content(output)
-            Button("Reload", action: source.load)
         }
     }
 
