@@ -16,14 +16,14 @@ struct HistoryRowView: View {
             Text(pomodoro.title)
                 .font(.title)
             HStack(alignment: .top) {
-                TimeView(date: pomodoro.start, style: .medium)
-                Spacer()
-                TimeView(date: pomodoro.end, style: .medium)
-            }
-            HStack(alignment: .top) {
                 ProjectOptionalView(project: pomodoro.project)
                 Spacer()
                 IntervalView(from: pomodoro.start, to: pomodoro.end)
+            }
+            HStack(alignment: .top) {
+                TimeView(date: pomodoro.start, style: .medium)
+                Spacer()
+                TimeView(date: pomodoro.end, style: .medium)
             }.font(.footnote)
         }
 

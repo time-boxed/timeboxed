@@ -177,7 +177,6 @@
 		87C6AAB024826D75002FAA74 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
-				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				870FE477249248AF00ED17C2 /* ProjectRowView.swift */,
 			);
 			path = Rows;
@@ -198,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
+				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
 			);
 			path = HistoryView;
