@@ -40,8 +40,6 @@
 		87F95B322480944700255B29 /* DurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B312480944700255B29 /* DurationView.swift */; };
 		87F95B342480978200255B29 /* DateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B332480978200255B29 /* DateTimeView.swift */; };
 		87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B352480A2B400255B29 /* ButtonStyles.swift */; };
-		C137C34B2491ED8400ED9FF8 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */; };
-		C137C34D2491ED8400ED9FF8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C137C34C2491ED8400ED9FF8 /* Kingfisher */; };
 		C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA141243F2E33004795A7 /* AppDelegate.swift */; };
 		C19BA146243F2E33004795A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA145243F2E33004795A7 /* ContentView.swift */; };
 		C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA147243F2E36004795A7 /* Assets.xcassets */; };
@@ -116,8 +114,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C137C34D2491ED8400ED9FF8 /* Kingfisher in Frameworks */,
-				C137C34B2491ED8400ED9FF8 /* KingfisherSwiftUI in Frameworks */,
 				C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */,
 				C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */,
 			);
@@ -320,8 +316,6 @@
 			packageProductDependencies = (
 				C19BA167243F3331004795A7 /* SwiftMQTT */,
 				C19BA16A243F3396004795A7 /* KeychainAccess */,
-				C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */,
-				C137C34C2491ED8400ED9FF8 /* Kingfisher */,
 			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
@@ -354,7 +348,6 @@
 			packageReferences = (
 				C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */,
 				C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
-				C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
@@ -620,14 +613,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.14.0;
-			};
-		};
 		C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
@@ -647,16 +632,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C137C34A2491ED8400ED9FF8 /* KingfisherSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherSwiftUI;
-		};
-		C137C34C2491ED8400ED9FF8 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C137C3492491ED8400ED9FF8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		C19BA167243F3331004795A7 /* SwiftMQTT */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */;
