@@ -71,7 +71,7 @@ struct HistoryDetailView: View {
                     DateTimeView(date: pomodoro.end)
                 }
                 if let url = pomodoro.url {
-                    Link("Open", destination: url)
+                    Link(url.absoluteString, destination: url)
                 }
             }
 
