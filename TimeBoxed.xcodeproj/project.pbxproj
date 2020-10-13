@@ -137,6 +137,7 @@
 		873257592494B76D00E07208 /* FavoritePage */ = {
 			isa = PBXGroup;
 			children = (
+				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
 				870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */,
 				C19BA160243F31D0004795A7 /* FavoriteListView.swift */,
 				8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */,
@@ -180,7 +181,6 @@
 		87C6AAB024826D75002FAA74 /* Rows */ = {
 			isa = PBXGroup;
 			children = (
-				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
 				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				870FE477249248AF00ED17C2 /* ProjectRowView.swift */,
 			);
