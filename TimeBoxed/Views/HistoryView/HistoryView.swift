@@ -9,13 +9,28 @@
 import Foundation
 import SwiftUI
 
-struct GroupedHistory: View {
-    var pomodoros: [Date: [Pomodoro]]
+struct HistoryHeader: View {
+    var date: Date
+    var pomodoros: [Pomodoro]
 
     var body: some View {
-        ForEach(pomodoros.keys.sorted { $0 > $1 }, id: \.self) { date in
-            Section(header: DateView(date: date)) {
-                ForEach(pomodoros[date]!.sorted { $0.end > $1.end }) { pomodoro in
+        NavigationLink(destination: HistoryReportView(date: date, pomodoros: pomodoros)) {
+            HStack {
+                DateView(date: date)
+                Spacer()
+                IntervalView(elapsed: pomodoros.map { $0.end.timeIntervalSince($0.start) })
+            }
+        }
+    }
+}
+
+struct GroupedHistory: View {
+    var groups: [(key: Date, value: [Pomodoro])]
+
+    var body: some View {
+        ForEach(groups, id: \.key) { date, pomodoros in
+            Section(header: HistoryHeader(date: date, pomodoros: pomodoros)) {
+                ForEach(pomodoros) { pomodoro in
                     NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
                         HistoryRowView(pomodoro: pomodoro)
                     }
@@ -25,10 +40,10 @@ struct GroupedHistory: View {
     }
 
     init(pomodoros: [Pomodoro]) {
-        self.pomodoros = Dictionary(
+        self.groups = Dictionary(
             grouping: pomodoros,
             by: { Calendar.current.startOfDay(for: $0.end) }
-        )
+        ).sorted { $0.key > $1.key }
     }
 }
 

@@ -28,6 +28,10 @@ struct IntervalView: View {
         self.elapsed = elapsed
     }
 
+    init(elapsed: [TimeInterval]) {
+        self.elapsed = elapsed.reduce(0, +)
+    }
+
     init(from start: Date, to end: Date) {
         self.elapsed = end.timeIntervalSince(start)
     }

@@ -26,6 +26,7 @@
 		87A1DAEE2532DB9400F48EB4 /* LabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */; };
 		87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */; };
 		87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B41D248B523D00F37761 /* PreviewData.swift */; };
+		87B56A012535E06200EA6178 /* HistoryReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B56A002535E06200EA6178 /* HistoryReportView.swift */; };
 		87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */; };
 		87C6AAAB24826983002FAA74 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAA24826983002FAA74 /* DateView.swift */; };
 		87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAC248269B9002FAA74 /* TimeView.swift */; };
@@ -78,6 +79,7 @@
 		87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModifier.swift; sourceTree = "<group>"; };
 		87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
 		87A4B41D248B523D00F37761 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		87B56A002535E06200EA6178 /* HistoryReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryReportView.swift; sourceTree = "<group>"; };
 		87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		87C6AAAA24826983002FAA74 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		87C6AAAC248269B9002FAA74 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
+				87B56A002535E06200EA6178 /* HistoryReportView.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
 				87E87642248A75160030044C /* ExtendPomodoroView.swift in Sources */,
 				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
+				87B56A012535E06200EA6178 /* HistoryReportView.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
 				8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */,
