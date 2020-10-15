@@ -15,8 +15,8 @@ struct CountdownPageView: View {
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { _ in
-                    if let current = store.currentPomodoro {
+                AsyncContentView(source: store) { pomodoros in
+                    if let current = pomodoros.first {
                         CountdownSectionView(pomodoro: current)
 
                         if current.isActive {

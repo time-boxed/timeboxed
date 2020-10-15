@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct CountdownSectionView: View {
-    @State var pomodoro: Pomodoro
+    @Binding var pomodoro: Pomodoro
     var body: some View {
         Section {
             VStack {
                 Text(pomodoro.title)
                     .font(.system(size: 32))
 
-                CountdownView(date: .constant(pomodoro.end))
+                CountdownView(date: pomodoro.end)
                     .font(.system(size: 72))
 
                 DateTimeView(label: "Start", date: pomodoro.start)
@@ -27,6 +27,9 @@ struct CountdownSectionView: View {
                 }
             }.modifier(CenterModifier())
         }
+    }
+    init(pomodoro: Pomodoro) {
+        self._pomodoro = .constant(pomodoro)
     }
 }
 

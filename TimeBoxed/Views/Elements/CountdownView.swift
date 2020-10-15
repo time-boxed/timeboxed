@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 struct CountdownView: View {
-    @Binding var date: Date
+    var date: Date
 
     @State private var color = Color.white
     @State private var elapsed = TimeInterval()
@@ -39,6 +39,6 @@ struct CountdownView: View {
 
 struct CountdownView_Previews: PreviewProvider {
     static var previews: some View {
-        CountdownView(date: .constant(Date())).previewLayout(.sizeThatFits)
+        CountdownView(date: Date()).previewLayout(.sizeThatFits)
     }
 }

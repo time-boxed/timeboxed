@@ -10,7 +10,11 @@ import SwiftUI
 
 struct ExtendPomodoroView: View {
     @EnvironmentObject var store: PomodoroStore
-    var pomodoro: Pomodoro
+    @Binding var pomodoro: Pomodoro
+
+    init(pomodoro: Pomodoro) {
+        self._pomodoro = .constant(pomodoro)
+    }
 
     var body: some View {
         Section(header: Text("Extend")) {
