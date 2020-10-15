@@ -14,7 +14,7 @@ struct HistoryHeader: View {
     var pomodoros: [Pomodoro]
 
     var body: some View {
-        NavigationLink(destination: HistoryReportView(date: date, pomodoros: pomodoros)) {
+        NavigationLink(destination: ReportView(date: date, pomodoros: pomodoros)) {
             HStack {
                 DateView(date: date)
                 Spacer()
