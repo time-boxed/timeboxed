@@ -15,6 +15,7 @@ struct ContentView: View {
         case project
         case history
         case settings
+        case report
     }
 
     @EnvironmentObject var userSettings: UserSettings
@@ -23,43 +24,22 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $userSettings.currentTab) {
             CountdownPageView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "timer")
-                        Text("Active")
-                    }
-                }
+                .tabItem{ Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)
-
             FavoriteListView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "star")
-                        Text("Favorite")
-                    }
-                }
+                .tabItem{ Label("Favorite", systemImage: "star") }
                 .tag(Tab.favorites)
             ProjectListView()
-                .tabItem {
-                    Image(systemName: "paperclip")
-                    Text("Projects")
-                }
+                .tabItem{ Label("Project", systemImage: "paperclip") }
                 .tag(Tab.project)
             HistoryView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "calendar")
-                        Text("History")
-                    }
-                }
+                .tabItem{ Label("History", systemImage: "calendar") }
                 .tag(Tab.history)
+//            ReportView()
+//                .tabItem{ Label("Report", systemImage: "list.star") }
+//                .tag(Tab.report)
             SettingsView()
-                .tabItem {
-                    VStack {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
-                }
+                .tabItem{ Label("Settings", systemImage: "gear") }
                 .tag(Tab.settings)
 
         }
