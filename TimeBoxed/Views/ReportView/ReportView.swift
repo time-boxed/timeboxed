@@ -9,14 +9,16 @@
 import SwiftUI
 
 struct ReportByProject: View {
-    static var defaultProject = Project(id: "", name: "No Project", html_link: URL(string: "https://example.com")!, url: nil, color: .black, active: true, memo: "", duration: 0)
+    static var defaultProject = Project(
+        id: "", name: "No Project", html_link: URL(string: "https://example.com")!, url: nil,
+        color: .black, active: true, memo: "", duration: 0)
 
     var groups: [(key: Project, value: [Pomodoro])]
     var body: some View {
         List {
             ForEach(groups, id: \.key) { project, pomodoros in
                 Section(header: Text(project.name)) {
-                    IntervalView(elapsed: pomodoros.map { $0.end.distance(to: $0.start) }  )
+                    IntervalView(elapsed: pomodoros.map { $0.end.distance(to: $0.start) })
                 }
             }
         }

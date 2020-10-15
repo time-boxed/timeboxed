@@ -12,51 +12,53 @@ import SwiftUI
 struct NewPomodoroView: View {
     @EnvironmentObject var store: PomodoroStore
     @State var model = Pomodoro(id: 0, title: "", start: Date(), end: Date())
-    
+
     var body: some View {
         Section(header: Text("New")) {
             TextField("Title", text: $model.title)
-            
+
             ProjectSelectorView(project: model.project) { project in
                 model.project = project
             }
-            
+
             Button(action: actionSubmit25) {
                 Text("25 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled([
-                model.title.count > 0
-            ].contains(false))
-            
+            .disabled(
+                [
+                    model.title.count > 0
+                ].contains(false))
+
             Button(action: actionSubmit60) {
                 Text("60 Min")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
-            .disabled([
-                model.title.count > 0
-            ].contains(false))
+            .disabled(
+                [
+                    model.title.count > 0
+                ].contains(false))
         }
     }
-    
+
     func submitPomodoro(duration: TimeInterval) {
         let pomodoro = Pomodoro(
             id: 0, title: model.title, start: Date(), end: Date() + duration,
             memo: "", project: model.project
         )
-        
+
         store.create(pomodoro) { _ in
             store.load()
             model.title = ""
         }
     }
-    
+
     func actionSubmit25() {
         submitPomodoro(duration: 25 * 60)
     }
-    
+
     func actionSubmit60() {
         submitPomodoro(duration: 60 * 60)
     }

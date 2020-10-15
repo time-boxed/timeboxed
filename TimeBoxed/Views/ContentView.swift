@@ -24,22 +24,22 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $userSettings.currentTab) {
             CountdownPageView()
-                .tabItem{ Label("Active", systemImage: "timer") }
+                .tabItem { Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)
             FavoriteListView()
-                .tabItem{ Label("Favorite", systemImage: "star") }
+                .tabItem { Label("Favorite", systemImage: "star") }
                 .tag(Tab.favorites)
             ProjectListView()
-                .tabItem{ Label("Project", systemImage: "paperclip") }
+                .tabItem { Label("Project", systemImage: "paperclip") }
                 .tag(Tab.project)
             HistoryView()
-                .tabItem{ Label("History", systemImage: "calendar") }
+                .tabItem { Label("History", systemImage: "calendar") }
                 .tag(Tab.history)
-//            ReportView()
-//                .tabItem{ Label("Report", systemImage: "list.star") }
-//                .tag(Tab.report)
+            //            ReportView()
+            //                .tabItem{ Label("Report", systemImage: "list.star") }
+            //                .tag(Tab.report)
             SettingsView()
-                .tabItem{ Label("Settings", systemImage: "gear") }
+                .tabItem { Label("Settings", systemImage: "gear") }
                 .tag(Tab.settings)
 
         }
