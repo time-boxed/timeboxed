@@ -9,14 +9,20 @@
 import SwiftUI
 
 struct SelectUserView: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var pomodoro: PomodoroStore
+    @EnvironmentObject var favorite: PomodoroStore
+    @EnvironmentObject var project: PomodoroStore
 
     var body: some View {
         List {
-            ForEach(userSettings.users, id: \.self) { user in
+            ForEach(settings.users, id: \.self) { user in
                 Button(action: {
-                    self.userSettings.current_user = user
-                    self.userSettings.currentTab = .countdown
+                    settings.current_user = user
+                    pomodoro.load()
+                    favorite.load()
+                    project.load()
+                    settings.currentTab = .countdown
                 }) {
                     Text(user)
                 }
@@ -26,7 +32,7 @@ struct SelectUserView: View {
     }
 
     func deleteItems(at offsets: IndexSet) {
-        userSettings.users.remove(atOffsets: offsets)
+        settings.users.remove(atOffsets: offsets)
     }
 }
 

@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import KeychainAccess
+import SwiftUI
 
 extension UserDefaults {
     enum Keys: String {
@@ -32,22 +33,7 @@ struct Settings {
 }
 
 class UserSettings: ObservableObject {
-    @Published var current_user: String? {
-        didSet {
-            Settings.defaults.set(value: current_user, forKey: .currentUser)
-        }
-    }
-
-    @Published var users: [String] {
-        didSet {
-            Settings.defaults.set(users, forKey: .users)
-        }
-    }
-
+    @AppStorage("current_user") var current_user: Login?
+    @AppStorage("users") var users: [Login] = []
     @Published var currentTab = ContentView.Tab.countdown
-
-    init() {
-        self.current_user = Settings.defaults.string(forKey: .currentUser)
-        self.users = Settings.defaults.array(forKey: .users)
-    }
 }
