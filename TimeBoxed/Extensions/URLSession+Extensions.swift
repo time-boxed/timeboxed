@@ -52,7 +52,7 @@ extension URLRequest {
 
         var request = URLRequest(url: url.url!)
         request.addBasicAuth(username: login.username, password: password)
-        os_log(.debug, "Querying %{public}s for %{public}s", request.url!.absoluteString, login.username)
+        os_log(.debug, "%{public}s %{public}s for %{public}s",request.httpMethod!, request.url!.absoluteString, login.username )
         return request
     }
 
