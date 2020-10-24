@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct CountdownTimerView: View {
+    @EnvironmentObject var store: PomodoroStore
     @Binding var pomodoro: Pomodoro
     var body: some View {
         Section {
@@ -22,14 +23,21 @@ struct CountdownTimerView: View {
                 DateTimeView(label: "Start", date: pomodoro.start)
                 DateTimeView(label: "End", date: pomodoro.end)
 
-                ProjectSelectorView(project: pomodoro.project) { newProject in
-                    pomodoro.project = newProject
-                }
+                ProjectSelectorView(project: pomodoro.project, selected: updateProject)
             }.modifier(CenterModifier())
         }
     }
     init(pomodoro: Pomodoro) {
         self._pomodoro = .constant(pomodoro)
+    }
+
+    func updateProject(project: Project?) {
+        let request = Pomodoro(
+            id: pomodoro.id, title: pomodoro.title, start: pomodoro.start, end: pomodoro.end,
+            memo: pomodoro.memo, project: project, url: pomodoro.url)
+        store.update(object: request) { updatedPomodoro in
+            print(updatedPomodoro)
+        }
     }
 }
 
