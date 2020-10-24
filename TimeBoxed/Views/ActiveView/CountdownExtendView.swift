@@ -1,5 +1,5 @@
 //
-//  ExtendPomodoroView.swift
+//  CountdownExtendView.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/06/05.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ExtendPomodoroView: View {
+struct CountdownExtendView: View {
     @EnvironmentObject var store: PomodoroStore
     @Binding var pomodoro: Pomodoro
 
@@ -62,7 +62,7 @@ struct ExtendPomodoroView: View {
     struct ExtendPomodoroView_Previews: PreviewProvider {
 
         static var previews: some View {
-            ExtendPomodoroView(pomodoro: PreviewData.pomodoro)
+            CountdownExtendView(pomodoro: PreviewData.pomodoro)
         }
     }
 

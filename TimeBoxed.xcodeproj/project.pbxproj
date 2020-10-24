@@ -31,9 +31,9 @@
 		87C6AAAB24826983002FAA74 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAA24826983002FAA74 /* DateView.swift */; };
 		87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAC248269B9002FAA74 /* TimeView.swift */; };
 		87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAE24826B02002FAA74 /* IntervalView.swift */; };
-		87E8763E248A74150030044C /* CountdownSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763D248A74150030044C /* CountdownSectionView.swift */; };
-		87E87640248A74B50030044C /* NewPomodoroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763F248A74B50030044C /* NewPomodoroView.swift */; };
-		87E87642248A75160030044C /* ExtendPomodoroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E87641248A75160030044C /* ExtendPomodoroView.swift */; };
+		87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763D248A74150030044C /* CountdownTimerView.swift */; };
+		87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763F248A74B50030044C /* CountdownCreateView.swift */; };
+		87E87642248A75160030044C /* CountdownExtendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E87641248A75160030044C /* CountdownExtendView.swift */; };
 		87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */; };
 		87F95B2C24808D0400255B29 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2B24808D0400255B29 /* Favorite.swift */; };
 		87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2D2480930200255B29 /* FavoriteRowView.swift */; };
@@ -45,7 +45,7 @@
 		C19BA146243F2E33004795A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA145243F2E33004795A7 /* ContentView.swift */; };
 		C19BA148243F2E36004795A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA147243F2E36004795A7 /* Assets.xcassets */; };
 		C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */; };
-		C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA155243F2E8F004795A7 /* CountdownPageView.swift */; };
+		C19BA156243F2E8F004795A7 /* CountdownParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA155243F2E8F004795A7 /* CountdownParentView.swift */; };
 		C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15A243F2F7C004795A7 /* CountdownView.swift */; };
 		C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryView.swift */; };
 		C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteListView.swift */; };
@@ -84,9 +84,9 @@
 		87C6AAAA24826983002FAA74 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		87C6AAAC248269B9002FAA74 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
 		87C6AAAE24826B02002FAA74 /* IntervalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
-		87E8763D248A74150030044C /* CountdownSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownSectionView.swift; sourceTree = "<group>"; };
-		87E8763F248A74B50030044C /* NewPomodoroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPomodoroView.swift; sourceTree = "<group>"; };
-		87E87641248A75160030044C /* ExtendPomodoroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendPomodoroView.swift; sourceTree = "<group>"; };
+		87E8763D248A74150030044C /* CountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerView.swift; sourceTree = "<group>"; };
+		87E8763F248A74B50030044C /* CountdownCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCreateView.swift; sourceTree = "<group>"; };
+		87E87641248A75160030044C /* CountdownExtendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownExtendView.swift; sourceTree = "<group>"; };
 		87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		87F95B2B24808D0400255B29 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		87F95B2D2480930200255B29 /* FavoriteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowView.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		C19BA147243F2E36004795A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C19BA14F243F2E36004795A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C19BA155243F2E8F004795A7 /* CountdownPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownPageView.swift; sourceTree = "<group>"; };
+		C19BA155243F2E8F004795A7 /* CountdownParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownParentView.swift; sourceTree = "<group>"; };
 		C19BA15A243F2F7C004795A7 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		C19BA15E243F31A4004795A7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		C19BA160243F31D0004795A7 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
@@ -195,10 +195,10 @@
 		87E8763C248A74000030044C /* ActiveView */ = {
 			isa = PBXGroup;
 			children = (
-				C19BA155243F2E8F004795A7 /* CountdownPageView.swift */,
-				87E8763D248A74150030044C /* CountdownSectionView.swift */,
-				87E87641248A75160030044C /* ExtendPomodoroView.swift */,
-				87E8763F248A74B50030044C /* NewPomodoroView.swift */,
+				C19BA155243F2E8F004795A7 /* CountdownParentView.swift */,
+				87E8763D248A74150030044C /* CountdownTimerView.swift */,
+				87E87641248A75160030044C /* CountdownExtendView.swift */,
+				87E8763F248A74B50030044C /* CountdownCreateView.swift */,
 			);
 			path = ActiveView;
 			sourceTree = "<group>";
@@ -387,7 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
-				87E87642248A75160030044C /* ExtendPomodoroView.swift in Sources */,
+				87E87642248A75160030044C /* CountdownExtendView.swift in Sources */,
 				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
@@ -413,10 +413,10 @@
 				87A1DAEE2532DB9400F48EB4 /* LabelModifier.swift in Sources */,
 				8708842F24826F14003D662F /* SettingsView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
-				87E8763E248A74150030044C /* CountdownSectionView.swift in Sources */,
+				87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */,
 				8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */,
 				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
-				C19BA156243F2E8F004795A7 /* CountdownPageView.swift in Sources */,
+				C19BA156243F2E8F004795A7 /* CountdownParentView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */,
 				871E49832533F33D00355776 /* AsyncContentView.swift in Sources */,
@@ -424,7 +424,7 @@
 				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
 				87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */,
 				876CBB0725343C7700031AE1 /* ProjectCreateSheet.swift in Sources */,
-				87E87640248A74B50030044C /* NewPomodoroView.swift in Sources */,
+				87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */,
 				87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */,
 				871E498B253402DD00355776 /* Login.swift in Sources */,
 				87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */,

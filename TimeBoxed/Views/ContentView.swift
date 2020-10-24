@@ -23,7 +23,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $userSettings.currentTab) {
-            CountdownPageView()
+            CountdownParentView()
                 .tabItem { Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)
             FavoriteListView()

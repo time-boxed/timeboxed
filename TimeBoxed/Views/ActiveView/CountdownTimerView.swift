@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CountdownSectionView: View {
+struct CountdownTimerView: View {
     @Binding var pomodoro: Pomodoro
     var body: some View {
         Section {
@@ -37,7 +37,7 @@ struct CountdownSectionView: View {
 
     struct CountdownSectionView_Previews: PreviewProvider {
         static var previews: some View {
-            CountdownSectionView(pomodoro: PreviewData.pomodoro)
+            CountdownTimerView(pomodoro: PreviewData.pomodoro)
         }
     }
 

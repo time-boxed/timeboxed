@@ -1,5 +1,5 @@
 //
-//  CountdownView.swift
+//  ActiveCountdownView.swift
 //  TimeBoxed
 //
 //  Created by ST20638 on 2020/04/09.
@@ -9,7 +9,7 @@
 import Combine
 import SwiftUI
 
-struct CountdownPageView: View {
+struct CountdownParentView: View {
     @EnvironmentObject var store: PomodoroStore
 
     var body: some View {
@@ -17,12 +17,12 @@ struct CountdownPageView: View {
             List {
                 AsyncContentView(source: store) { pomodoros in
                     if let current = pomodoros.first {
-                        CountdownSectionView(pomodoro: current)
+                        CountdownTimerView(pomodoro: current)
 
                         if current.isActive {
-                            ExtendPomodoroView(pomodoro: current)
+                            CountdownExtendView(pomodoro: current)
                         } else {
-                            NewPomodoroView()
+                            CountdownCreateView()
                         }
                     }
                 }
@@ -41,7 +41,7 @@ struct CountdownPageView: View {
     struct CountdownPageView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
-                CountdownPageView()
+                CountdownParentView()
             }.previewDevice(PreviewData.device)
         }
     }

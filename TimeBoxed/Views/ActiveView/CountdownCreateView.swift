@@ -1,5 +1,5 @@
 //
-//  NewPomodoroView.swift
+//  CountdownCreateView.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/06/05.
@@ -9,7 +9,7 @@
 import Combine
 import SwiftUI
 
-struct NewPomodoroView: View {
+struct CountdownCreateView: View {
     @EnvironmentObject var store: PomodoroStore
     @State var model = Pomodoro(id: 0, title: "", start: Date(), end: Date())
 
@@ -66,6 +66,6 @@ struct NewPomodoroView: View {
 
 struct NewPomodoroView_Previews: PreviewProvider {
     static var previews: some View {
-        NewPomodoroView()
+        CountdownCreateView()
     }
 }
