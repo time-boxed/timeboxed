@@ -34,6 +34,9 @@ extension Pomodoro {
     var isActive: Bool {
         return end > Date()
     }
+    var duration: TimeInterval {
+        return end.distance(to: start)
+    }
 }
 
 typealias PomodoroCompletion = ((Pomodoro) -> Void)

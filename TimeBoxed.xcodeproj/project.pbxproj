@@ -27,6 +27,8 @@
 		87A1DAEE2532DB9400F48EB4 /* LabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */; };
 		87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */; };
 		87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B41D248B523D00F37761 /* PreviewData.swift */; };
+		87B1D507254AC3F40064BD4D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 87B1D506254AC3F40064BD4D /* SwiftUICharts */; };
+		87B1D50A254ACF8B0064BD4D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */; };
 		87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */; };
 		87C6AAAB24826983002FAA74 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAA24826983002FAA74 /* DateView.swift */; };
 		87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAC248269B9002FAA74 /* TimeView.swift */; };
@@ -80,6 +82,7 @@
 		87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModifier.swift; sourceTree = "<group>"; };
 		87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
 		87A4B41D248B523D00F37761 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
 		87C6AAAA24826983002FAA74 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		87C6AAAC248269B9002FAA74 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87B1D507254AC3F40064BD4D /* SwiftUICharts in Frameworks */,
 				C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */,
 				C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */,
 			);
@@ -304,6 +308,7 @@
 				87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */,
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
 				871E49852533F5D800355776 /* JSON+Extensions.swift */,
+				87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 			packageProductDependencies = (
 				C19BA167243F3331004795A7 /* SwiftMQTT */,
 				C19BA16A243F3396004795A7 /* KeychainAccess */,
+				87B1D506254AC3F40064BD4D /* SwiftUICharts */,
 			);
 			productName = TimeBoxed;
 			productReference = C19BA13E243F2E33004795A7 /* TimeBoxed.app */;
@@ -359,6 +365,7 @@
 			packageReferences = (
 				C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */,
 				C19BA169243F3396004795A7 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				87B1D505254AC3F40064BD4D /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = C19BA13F243F2E33004795A7 /* Products */;
 			projectDirPath = "";
@@ -403,6 +410,7 @@
 				87F95B342480978200255B29 /* DateTimeView.swift in Sources */,
 				8792C374248BA1CB0098F928 /* Project.swift in Sources */,
 				87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */,
+				87B1D50A254ACF8B0064BD4D /* Array+Extensions.swift in Sources */,
 				870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */,
 				873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */,
 				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
@@ -625,6 +633,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		87B1D505254AC3F40064BD4D /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
 		C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mikegrb/SwiftMQTT";
@@ -644,6 +660,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		87B1D506254AC3F40064BD4D /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 87B1D505254AC3F40064BD4D /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
 		C19BA167243F3331004795A7 /* SwiftMQTT */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C19BA166243F3331004795A7 /* XCRemoteSwiftPackageReference "SwiftMQTT" */;

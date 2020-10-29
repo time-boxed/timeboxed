@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct ReportByProject: View {
     static var defaultProject = Project(
@@ -18,17 +19,31 @@ struct ReportByProject: View {
         List {
             ForEach(groups, id: \.key) { project, pomodoros in
                 Section(header: Text(project.name)) {
-                    IntervalView(elapsed: pomodoros.map { $0.end.distance(to: $0.start) })
+                    IntervalView(elapsed: pomodoros.map { $0.duration })
                 }
             }
         }
         Text("Project")
     }
     init(pomodoros: [Pomodoro]) {
-        self.groups = Dictionary(
-            grouping: pomodoros,
-            by: { $0.project ?? ReportByProject.defaultProject }
-        ).sorted { $0.key.name > $1.key.name }
+        self.groups =
+            pomodoros
+            .groupByProject()
+            .sorted { $0.key.name > $1.key.name }
+    }
+}
+
+struct ChartByProject: View {
+    var data: [Double]
+    var body: some View {
+        PieChartView(data: data, title: "Report")
+    }
+    init(pomodoros: [Pomodoro]) {
+        self.data =
+            pomodoros
+            .groupByProject()
+            .values
+            .map { $0.sum(for: \.duration) }
     }
 }
 
@@ -39,8 +54,10 @@ struct ReportView: View {
     var body: some View {
         VStack {
             DateView(date: date)
+            ChartByProject(pomodoros: pomodoros)
             ReportByProject(pomodoros: pomodoros)
         }
+        .navigationBarTitle(date.debugDescription)
     }
 }
 
