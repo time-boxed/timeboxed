@@ -10,14 +10,6 @@ import Combine
 import Foundation
 import os.log
 
-extension URLComponents {
-    mutating func addQuery(qs: [String: Any] = [:]) {
-        queryItems = qs.map { (key, value) in
-            URLQueryItem(name: key, value: "\(value)")
-        }
-    }
-}
-
 extension URLRequest {
     mutating func addBasicAuth(username: String, password: String) {
         let loginString = "\(username):\(password)"
@@ -35,24 +27,16 @@ extension URLRequest {
         do {
             httpBody = try encoder.encode(object)
             addValue("application/json", forHTTPHeaderField: "Content-Type")
-            //            addValue("application/json", forHTTPHeaderField: "Accept")
+            addValue("application/json", forHTTPHeaderField: "Accept")
         } catch let error {
-            print(error)
+            os_log(.error, log: .network, "%s", error.localizedDescription)
         }
     }
 
-    static func request(path: String, login: Login, password: String, qs: [String: Any])
+    static func request(path: String, login: Login, password: String, qs: [URLQueryItem] = [])
         -> URLRequest
     {
-        var url = URLComponents()
-        url.scheme = "https"
-        url.host = login.domain
-        url.path = path
-        url.addQuery(qs: qs)
-
-        var request = URLRequest(url: url.url!)
-        request.addBasicAuth(username: login.username, password: password)
-        os_log(.debug, "%{public}s %{public}s for %{public}s",request.httpMethod!, request.url!.absoluteString, login.username )
+        let request = login.request(authed: path, with: password, qs: qs)
         return request
     }
 
@@ -62,21 +46,14 @@ extension URLRequest {
         return session.dataTaskPublisher(for: self)
     }
 
-    static func request(path: String, qs: [String: Any] = [:]) -> URLRequest {
+    static func request(path: String, qs: [URLQueryItem] = []) -> URLRequest {
         // TODO: Use proper environment object
         let userSettings = UserSettings()
         let login = userSettings.current_user ?? "@"
-        let password = Settings.keychain.string(for: login) ?? ""
-
-        return request(path: path, login: login, password: password, qs: qs)
+        return login.request(authed: path, qs: qs)
     }
 
-    init(login: Login, path: String, qs: [String: String] = [:]) {
-        var url = URLComponents()
-        url.scheme = "https"
-        url.host = login.domain
-        url.path = path
-        url.queryItems = qs.map { URLQueryItem(name: $0, value: $1) }
-        self.init(url: url.url!)
+    static func request(path: String, qs: [String: Any]) -> URLRequest {
+        return request(path: path, qs: qs.map { URLQueryItem(name: $0, value: "\($1)") })
     }
 }

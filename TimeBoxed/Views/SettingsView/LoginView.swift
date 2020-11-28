@@ -33,7 +33,7 @@ struct LoginView: View {
     }
 
     func loginAction() {
-        var request = URLRequest(login: newLogin, path: "/api/pomodoro")
+        var request = newLogin.request(for: "/api/pomodoro", qs: [])
         request.addBasicAuth(username: newLogin.username, password: password)
 
         URLSession.shared.dataTaskPublisher(for: request)

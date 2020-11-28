@@ -18,14 +18,31 @@ extension Login {
         return components(separatedBy: "@").last!
     }
 
-    func request(for path: String, qs: [String: String] = [:]) -> URLRequest {
-        var url = URLComponents()
-        url.scheme = "https"
-        url.host = domain
-        url.path = path
-        url.queryItems = qs.map { URLQueryItem(name: $0, value: $1) }
+    func request(for path: String, qs: [URLQueryItem]) -> URLRequest {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = domain
+        components.path = path
+        components.queryItems = qs
 
-        return URLRequest(url: url.url!)
+        guard let url = components.url else {
+            preconditionFailure(
+                "Invalid URL components: \(components)"
+            )
+        }
+
+        return URLRequest(url: url)
+    }
+
+    func request(authed path: String, with password: String, qs: [URLQueryItem]) -> URLRequest {
+        var request = self.request(for: path, qs: qs)
+        request.addBasicAuth(username: username, password: password)
+        return request
+    }
+
+    func request(authed path: String, qs: [URLQueryItem]) -> URLRequest {
+        let password = Settings.keychain.string(for: self) ?? ""
+        return self.request(authed: path, with: password, qs: qs)
     }
 }
 
