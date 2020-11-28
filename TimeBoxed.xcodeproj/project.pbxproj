@@ -16,6 +16,7 @@
 		871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49852533F5D800355776 /* JSON+Extensions.swift */; };
 		871E498B253402DD00355776 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E498A253402DD00355776 /* Login.swift */; };
 		8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */; };
+		873A6B7625726A52004BAAD0 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */; };
 		873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D2F66252B21F900CC3DCF /* ImageButton.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
 		8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectListView.swift */; };
@@ -70,6 +71,7 @@
 		871E49852533F5D800355776 /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		871E498A253402DD00355776 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCreateSheet.swift; sourceTree = "<group>"; };
+		873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		873D2F66252B21F900CC3DCF /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
 		8766894C248FAB1F0056DCB9 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
 				871E49852533F5D800355776 /* JSON+Extensions.swift */,
 				87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */,
+				873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */,
 				8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */,
 				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
+				873A6B7625726A52004BAAD0 /* OSLog+Extensions.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownParentView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */,
