@@ -28,7 +28,12 @@ struct SelectUserView: View {
                 }
             }.onDelete(perform: deleteItems)
         }
-        .navigationBarItems(trailing: EditButton())
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                EditButton()
+            }
+        }
+
     }
 
     func deleteItems(at offsets: IndexSet) {

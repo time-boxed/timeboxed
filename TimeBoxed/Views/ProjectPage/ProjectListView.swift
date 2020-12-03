@@ -28,14 +28,21 @@ struct ProjectListView: View {
                         }.onDelete(perform: store.delete)
                     }
                 }
-                ReloadButton(source: store)
+
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing: AddProjectButton()
-            )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    AddProjectButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReloadButton(source: store)
+                }
+            }
         }
     }
 }

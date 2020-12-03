@@ -59,7 +59,14 @@ struct HistoryView: View {
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
-            .navigationBarItems(leading: EditButton(), trailing: ReloadButton(source: store))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReloadButton(source: store)
+                }
+            }
         }
     }
 }

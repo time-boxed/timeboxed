@@ -24,14 +24,21 @@ struct FavoriteListView: View {
                         }.onDelete(perform: store.delete)
                     }
                 }
-                ReloadButton(source: store)
+
             }
             .listStyle(GroupedListStyle())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    AddFavoriteButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReloadButton(source: store)
+                }
+            }
             .navigationBarTitle("Favorites")
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing: AddFavoriteButton()
-            )
         }
     }
 }
