@@ -21,5 +21,6 @@ platform :ios do
     increment_build_number(xcodeproj: "TimeBoxed.xcodeproj")
     build_app(scheme: "TimeBoxed")
     upload_to_testflight
+    commit_version_bump(xcodeproj: "TimeBoxed.xcodeproj")
   end
 end
