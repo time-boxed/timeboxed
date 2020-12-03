@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-fileprivate struct LeftLabelModifier: ViewModifier {
+struct LeftLabelModifier: ViewModifier {
     var label: String
     func body(content: Content) -> some View {
         HStack {

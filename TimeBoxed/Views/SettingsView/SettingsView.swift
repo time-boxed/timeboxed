@@ -15,18 +15,26 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Information")) {
-                    Link("Homepage", destination: URL(string: "https://github.com/kfdm/timeboxed")!)
-                    Link(
-                        "Issues",
-                        destination: URL(string: "https://github.com/kfdm/timeboxed/issues")!)
+                    Link(destination: URL(string: "https://github.com/kfdm/timeboxed")!) {
+                        Label("Homepage", systemImage: "house")
+                    }
+                    Link(destination: URL(string: "https://github.com/kfdm/timeboxed/issues")!) {
+                        Label("Issues", systemImage: "ant")
+                    }
+                    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
+                        as? String,
+                        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+                    {
+                        Label("Version \(version) Build: \(build)", systemImage: "note.text")
+                    }
+
                 }
                 Section(header: Text("User")) {
                     NavigationLink(destination: LoginView()) {
-                        Text("New User")
+                        Label("New User", systemImage: "person.badge.plus")
                     }
                     NavigationLink(destination: SelectUserView()) {
-                        Text(userSettings.current_user ?? "Not logged in")
-                            .label(left: "Current User")
+                        Label("Switch User", systemImage: "person.2")
                     }
                 }
             }
