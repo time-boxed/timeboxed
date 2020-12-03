@@ -40,6 +40,7 @@ struct CountdownExtendView: View {
 
     private func onReceive(_ batch: Pomodoro) {
         print(pomodoro)
+        store.load()
     }
 
     func actionAddPomodoro() {

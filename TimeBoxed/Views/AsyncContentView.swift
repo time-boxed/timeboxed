@@ -49,7 +49,7 @@ struct AsyncContentView<Source: LoadableObject, Content: View>: View {
     var body: some View {
         switch source.state {
         case .idle, .loading:
-            ProgressView().onAppear(perform: source.load)
+            ProgressView().modifier(CenterModifier()).onAppear(perform: source.load)
         case .failed(let error):
             ErrorView(error: error, retryHandler: source.load)
         case .loaded(let output):

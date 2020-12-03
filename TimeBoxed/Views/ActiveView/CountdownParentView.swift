@@ -15,16 +15,17 @@ struct CountdownParentView: View {
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { pomodoros in
-                    if let current = pomodoros.first {
-                        CountdownTimerView(pomodoro: current)
+                if let current = store.pomodoros.first {
+                    CountdownTimerView(pomodoro: current)
 
-                        if current.isActive {
-                            CountdownExtendView(pomodoro: current)
-                        } else {
-                            CountdownCreateView()
-                        }
+                    if current.isActive {
+                        CountdownExtendView(pomodoro: current)
+                    } else {
+                        CountdownCreateView()
                     }
+                }
+                AsyncContentView(source: store) { _ in
+                    EmptyView()
                 }
             }
             .listStyle(GroupedListStyle())

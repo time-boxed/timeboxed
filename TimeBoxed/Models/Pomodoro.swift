@@ -46,7 +46,6 @@ final class PomodoroStore: LoadableObject {
     private var subscriptions = Set<AnyCancellable>()
 
     @Published private(set) var pomodoros: [Pomodoro] = []
-    @Published private(set) var currentPomodoro: Pomodoro?
 
     func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
@@ -59,7 +58,6 @@ final class PomodoroStore: LoadableObject {
 
     private func onReceive(_ batch: Pomodoro.List) {
         pomodoros = batch.results.sorted { $0.start > $1.start }
-        currentPomodoro = pomodoros.first
         state = .loaded(pomodoros)
     }
 
