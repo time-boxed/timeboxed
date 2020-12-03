@@ -11,6 +11,7 @@ import SwiftUI
 struct FavoriteDetailView: View {
     @EnvironmentObject var store: FavoriteStore
     @EnvironmentObject var user: UserSettings
+    @EnvironmentObject var main: PomodoroStore
 
     @State var favorite: Favorite
 
@@ -24,7 +25,14 @@ struct FavoriteDetailView: View {
                 ProjectSelectorView(project: favorite.project) { project in
                     favorite.project = project
                 }
-                Link(favorite.html_link.absoluteString, destination: favorite.html_link)
+                if let url = favorite.url {
+                    Link(destination: url) {
+                        Label(url.absoluteString, systemImage: "safari")
+                    }
+                }
+                Link(destination: favorite.html_link) {
+                    Label(favorite.html_link.absoluteString, systemImage: "link")
+                }
             }
 
             Button("Start", action: actionStart)
@@ -46,6 +54,7 @@ struct FavoriteDetailView: View {
     func actionStart() {
         store.start(favorite: favorite) { pomodoro in
             user.currentTab = .countdown
+            main.load()
         }
     }
 
