@@ -15,7 +15,10 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Information")) {
-                    Link("Homepage", destination: Settings.homepage)
+                    Link("Homepage", destination: URL(string: "https://github.com/kfdm/timeboxed")!)
+                    Link(
+                        "Issues",
+                        destination: URL(string: "https://github.com/kfdm/timeboxed/issues")!)
                 }
                 Section(header: Text("User")) {
                     NavigationLink(destination: LoginView()) {
@@ -23,7 +26,7 @@ struct SettingsView: View {
                     }
                     NavigationLink(destination: SelectUserView()) {
                         Text(userSettings.current_user ?? "Not logged in")
-                            .modifier(LabelModifier(label: "Current User"))
+                            .label(left: "Current User")
                     }
                 }
             }

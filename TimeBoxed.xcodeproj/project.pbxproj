@@ -25,7 +25,7 @@
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
 		8792C374248BA1CB0098F928 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8792C373248BA1CB0098F928 /* Project.swift */; };
 		879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C36342483AB8A00DF0B9F /* SelectUserView.swift */; };
-		87A1DAEE2532DB9400F48EB4 /* LabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */; };
+		87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */; };
 		87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */; };
 		87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B41D248B523D00F37761 /* PreviewData.swift */; };
 		87B1D507254AC3F40064BD4D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 87B1D506254AC3F40064BD4D /* SwiftUICharts */; };
@@ -81,7 +81,7 @@
 		8792C373248BA1CB0098F928 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
 		879C36342483AB8A00DF0B9F /* SelectUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserView.swift; sourceTree = "<group>"; };
-		87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModifier.swift; sourceTree = "<group>"; };
+		87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelModifier.swift; sourceTree = "<group>"; };
 		87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
 		87A4B41D248B523D00F37761 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			children = (
 				87F95B352480A2B400255B29 /* ButtonStyles.swift */,
 				874E6C832489215100E7153C /* CenterModifier.swift */,
-				87A1DAED2532DB9400F48EB4 /* LabelModifier.swift */,
+				87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -421,7 +421,7 @@
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
-				87A1DAEE2532DB9400F48EB4 /* LabelModifier.swift in Sources */,
+				87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */,
 				8708842F24826F14003D662F /* SettingsView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
 				87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */,

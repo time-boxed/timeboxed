@@ -18,9 +18,9 @@ struct FavoriteDetailView: View {
         List {
             Section {
                 TextField("Title", text: $favorite.title)
-                    .modifier(LabelModifier(label: "Title"))
+                    .label(left: "Title")
                 Text("\(favorite.count)")
-                    .modifier(LabelModifier(label: "Count"))
+                    .label(left: "Count")
                 ProjectSelectorView(project: favorite.project) { project in
                     favorite.project = project
                 }

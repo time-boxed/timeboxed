@@ -29,7 +29,6 @@ struct Settings {
     static let identifier = "net.kungfudiscomonkey.Timebox"
     fileprivate static let defaults = UserDefaults(suiteName: Settings.identifier)!
     static let keychain = Keychain(service: Settings.identifier)
-    static let homepage = URL(string: "https://github.com/kfdm/timeboxed")!
 }
 
 class UserSettings: ObservableObject {

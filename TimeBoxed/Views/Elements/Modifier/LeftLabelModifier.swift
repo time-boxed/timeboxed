@@ -1,5 +1,5 @@
 //
-//  LabelModifier.swift
+//  LeftLabelModifier.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/10/11.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LeftLabelModifier: ViewModifier {
+fileprivate struct LeftLabelModifier: ViewModifier {
     var label: String
     func body(content: Content) -> some View {
         HStack {

@@ -51,7 +51,7 @@ struct ProjectSelectorView: View {
                 Text("No Project")
             }
         }
-        .modifier(LabelModifier(label: "Project"))
+        .label(left: "Project")
         .sheet(isPresented: $isPresented) {
             ProjectSelectorList(selected: selected)
         }
