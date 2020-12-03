@@ -19,19 +19,19 @@ struct CountdownExtendView: View {
     var body: some View {
         Section(header: Text("Extend")) {
             Button(action: actionAddPomodoro) {
-                Text("25 Min")
+                Label("25 min", systemImage: "clock")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
 
             Button(action: actionAddHour) {
-                Text("60 Min")
+                Label("60 min", systemImage: "clock")
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
 
             Button(action: actionStop) {
-                Text("Stop")
+                Label("Stop", systemImage: "nosign")
             }
             .buttonStyle(DangerButtonStyle())
             .modifier(CenterModifier())

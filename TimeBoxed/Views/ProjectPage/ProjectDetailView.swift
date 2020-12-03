@@ -27,10 +27,13 @@ struct ProjectDetailView: View {
                     .frame(height: 128)
             }
             Section {
-                Button("Save", action: actionSave).disabled(
-                    [
-                        project.name.count > 1
-                    ].contains(false))
+                Button("Save", action: actionSave)
+                    .buttonStyle(ActionButtonStyle())
+                    .modifier(CenterModifier())
+                    .disabled(
+                        [
+                            project.name.count > 1
+                        ].contains(false))
             }
         }
         .listStyle(GroupedListStyle())

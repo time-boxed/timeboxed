@@ -29,8 +29,10 @@ struct FavoriteDetailView: View {
 
             Button("Start", action: actionStart)
                 .buttonStyle(ActionButtonStyle())
+                .modifier(CenterModifier())
             Button("Update", action: actionUpdate)
                 .buttonStyle(ActionButtonStyle())
+                .modifier(CenterModifier())
                 .disabled(
                     [
                         favorite.title.count > 0

@@ -22,6 +22,8 @@ struct LoginView: View {
             TextField("Username", text: $newLogin)
             SecureField("Password", text: $password)
             Button("Login", action: loginAction)
+                .buttonStyle(ActionButtonStyle())
+                .modifier(CenterModifier())
                 .disabled(
                     [
                         newLogin.contains("@"),
