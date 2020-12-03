@@ -28,14 +28,15 @@ struct CountdownParentView: View {
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationBarItems(
-                trailing: ReloadButton(source: store)
-            )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ReloadButton(source: store)
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
 #if DEBUG
 
     struct CountdownPageView_Previews: PreviewProvider {
