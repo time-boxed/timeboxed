@@ -22,8 +22,9 @@ struct CountdownTimerView: View {
 
                 DateTimeView(label: "Start", date: pomodoro.start)
                 DateTimeView(label: "End", date: pomodoro.end)
-
-                ProjectSelectorView(project: pomodoro.project, selected: updateProject)
+                if let project = pomodoro.project {
+                    ProjectRowView(project: project).label(left: "Project")
+                }
             }.modifier(CenterModifier())
         }
     }

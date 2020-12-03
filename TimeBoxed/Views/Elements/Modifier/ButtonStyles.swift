@@ -20,6 +20,18 @@ struct ActionButtonStyle: ButtonStyle {
     }
 }
 
+struct WarningButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .padding(.horizontal)
+            .foregroundColor(Color.white)
+            .background(Color.orange.opacity(0.90))
+            .cornerRadius(8)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+    }
+}
+
 struct DangerButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

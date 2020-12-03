@@ -11,6 +11,7 @@ import SwiftUI
 struct CountdownExtendView: View {
     @EnvironmentObject var store: PomodoroStore
     @Binding var pomodoro: Pomodoro
+    @State var showEdit = false
 
     init(pomodoro: Pomodoro) {
         self._pomodoro = .constant(pomodoro)
@@ -29,6 +30,15 @@ struct CountdownExtendView: View {
             }
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
+
+            Button(action: { showEdit = true }) {
+                Label("Edit", systemImage: "pencil")
+            }
+            .buttonStyle(WarningButtonStyle())
+            .modifier(CenterModifier())
+            .sheet(isPresented: $showEdit) {
+                HistoryDetailView(pomodoro: pomodoro)
+            }
 
             Button(action: actionStop) {
                 Label("Stop", systemImage: "nosign")
