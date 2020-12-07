@@ -31,15 +31,6 @@ struct CountdownExtendView: View {
             .buttonStyle(ActionButtonStyle())
             .modifier(CenterModifier())
 
-            Button(action: { showEdit = true }) {
-                Label("Edit", systemImage: "pencil")
-            }
-            .buttonStyle(WarningButtonStyle())
-            .modifier(CenterModifier())
-            .sheet(isPresented: $showEdit) {
-                HistoryDetailView(pomodoro: pomodoro)
-            }
-
             Button(action: actionStop) {
                 Label("Stop", systemImage: "nosign")
             }

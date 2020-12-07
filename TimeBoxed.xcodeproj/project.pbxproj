@@ -23,6 +23,7 @@
 		8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894E248FAEDB0056DCB9 /* Color+Extension.swift */; };
 		876CBB0725343C7700031AE1 /* ProjectCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
+		878B83DE257E45280002A9E2 /* HistoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B83DD257E45280002A9E2 /* HistoryEditView.swift */; };
 		8792C374248BA1CB0098F928 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8792C373248BA1CB0098F928 /* Project.swift */; };
 		879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C36342483AB8A00DF0B9F /* SelectUserView.swift */; };
 		87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */; };
@@ -78,6 +79,7 @@
 		8766894E248FAEDB0056DCB9 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreateSheet.swift; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
+		878B83DD257E45280002A9E2 /* HistoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditView.swift; sourceTree = "<group>"; };
 		8792C373248BA1CB0098F928 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
 		879C36342483AB8A00DF0B9F /* SelectUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
 				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
+				878B83DD257E45280002A9E2 /* HistoryEditView.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
 				87C6AAAB24826983002FAA74 /* DateView.swift in Sources */,
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,
+				878B83DE257E45280002A9E2 /* HistoryEditView.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
 				87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */,

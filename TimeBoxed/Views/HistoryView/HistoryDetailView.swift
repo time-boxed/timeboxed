@@ -14,7 +14,9 @@ struct ButtonRepeatPomodoro: View {
 
     var pomodoro: Pomodoro
     var body: some View {
-        Button("Repeat", action: action)
+        Button(action: action) {
+            Label("Repeat", systemImage: "repeat")
+        }
     }
 
     func action() {
@@ -27,31 +29,18 @@ struct ButtonRepeatPomodoro: View {
     }
 }
 
-struct ButtonUpdatePomodoro: View {
-    @EnvironmentObject var store: PomodoroStore
-    @EnvironmentObject var user: UserSettings
-
-    var pomodoro: Pomodoro
-    var body: some View {
-        Button("Update", action: action)
-    }
-
-    func action() {
-        store.update(object: pomodoro) { newPomodoro in
-            store.load()
-        }
-    }
-}
-
 struct ButtonDeletePomodoro: View {
     @EnvironmentObject var user: UserSettings
 
     var pomodoro: Pomodoro
     var body: some View {
-        Button("Update", action: action)
+        Button(action: action) {
+            Label("Delete", systemImage: "trash")
+        }
     }
 
     func action() {
+        // TODO: Not yet implemented
         user.currentTab = .countdown
     }
 }
@@ -62,8 +51,8 @@ struct HistoryDetailView: View {
     var body: some View {
         List {
             Section {
-                ProjectSelectorView(project: pomodoro.project) { project in
-                    pomodoro.project = project
+                if let project = pomodoro.project {
+                    ProjectRowView(project: project)
                 }
                 HStack {
                     DateTimeView(date: pomodoro.start)
@@ -76,16 +65,15 @@ struct HistoryDetailView: View {
             }
 
             Section(header: Text("Memo")) {
-                TextEditor(text: $pomodoro.memo)
-                    .frame(height: 128)
+                Text(pomodoro.memo)
             }
 
             Section {
                 ButtonRepeatPomodoro(pomodoro: pomodoro)
                     .buttonStyle(ActionButtonStyle())
                     .modifier(CenterModifier())
-                ButtonUpdatePomodoro(pomodoro: pomodoro)
-                    .buttonStyle(ActionButtonStyle())
+                EditHistoryButton(pomodoro: pomodoro)
+                    .buttonStyle(WarningButtonStyle())
                     .modifier(CenterModifier())
                 ButtonDeletePomodoro(pomodoro: pomodoro)
                     .buttonStyle(DangerButtonStyle())
