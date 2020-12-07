@@ -39,9 +39,11 @@ struct HistoryEditView: View {
                     pomodoro.project = project
                 }
                 HStack {
-                    DateTimeView(date: pomodoro.start)
+                    DatePicker("Start", selection: $pomodoro.start)
+                        .datePickerStyle(WheelDatePickerStyle())
                     Spacer()
-                    DateTimeView(date: pomodoro.end)
+                    DatePicker("End", selection: $pomodoro.end)
+                        .datePickerStyle(WheelDatePickerStyle())
                 }
             }
 
