@@ -16,12 +16,14 @@ struct EditHistoryButton: View {
             Label("Edit", systemImage: "pencil")
         }
         .sheet(isPresented: $showEdit) {
-            HistoryEditView(pomodoro: pomodoro)
-        }
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button("Cancel", action: { showEdit = false })
-            }
+            NavigationView {
+                HistoryEditView(pomodoro: pomodoro)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel", action: { showEdit = false })
+                        }
+                    }
+            }.navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
