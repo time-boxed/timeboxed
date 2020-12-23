@@ -10,12 +10,14 @@ import SwiftUI
 
 @main
 struct TimeBoxedApp: App {
+    var user = UserSettings()
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(UserSettings())
-                .environmentObject(ProjectStore())
-                .environmentObject(PomodoroStore())
-                .environmentObject(FavoriteStore())
+            ContentView()
+                .environmentObject(user)
+                .environmentObject(user.favorites)
+                .environmentObject(user.pomodoros)
+                .environmentObject(user.projects)
         }
     }
 }

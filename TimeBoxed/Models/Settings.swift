@@ -35,4 +35,14 @@ class UserSettings: ObservableObject {
     @AppStorage("current_user") var current_user: Login?
     @AppStorage("users") var users: [Login] = []
     @Published var currentTab = ContentView.Tab.countdown
+
+    let pomodoros = PomodoroStore()
+    let favorites = FavoriteStore()
+    let projects = ProjectStore()
+
+    func load() {
+        pomodoros.load()
+        favorites.load()
+        projects.load()
+    }
 }
