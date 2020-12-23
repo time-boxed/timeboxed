@@ -27,7 +27,14 @@ struct ProjectListView: View {
                                     .font(.footnote)
                             }
                         }
-                    }.onDelete(perform: store.delete)
+                    }
+                    .onDelete(perform: { indexSet in
+                        indexSet.forEach { index in
+                            store.delete(project: projects[index]) { _ in
+                                store.load()
+                            }
+                        }
+                    })
                 }
 
             }
