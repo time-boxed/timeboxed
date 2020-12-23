@@ -31,6 +31,17 @@ import SwiftUI
             count: 1
         )
 
+        static var project = Project(
+            id: "nil",
+            name: "Test Project",
+            html_link: URL(string: "http://example.com")!,
+            url: URL(string: "http://example.com")!,
+            color: .pink,
+            active: true,
+            memo: "Test Project Memo",
+            duration: 12345
+        )
+
         static var device = PreviewDevice(rawValue: "iPhone SE")
     }
 

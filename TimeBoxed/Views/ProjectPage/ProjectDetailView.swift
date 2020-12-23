@@ -10,46 +10,84 @@ import SwiftUI
 
 struct ProjectDetailView: View {
     @State var project: Project
+
     @EnvironmentObject var store: ProjectStore
+    @State private var isPresented = false
+    @State private var data = Project.Data()
 
     var body: some View {
-        List {
-            Section {
-                TextField("Name", text: $project.name)
-                if let url = project.url {
-                    Link("URL", destination: url)
+        Group {
+            List {
+                Section {
+                    Text(project.name)
+                    if let url = project.url {
+                        Link("URL", destination: url)
+                    }
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(project.color)
+                        .label(left: "Color")
                 }
-                ColorPicker("Color", selection: $project.color)
-                Toggle("Active", isOn: $project.active)
+
+                Section(header: Text("Memo")) {
+                    Text(project.memo)
+                }
+
+                Section(header: Text("Quickstart")) {
+                    Button("Quickstart", action: actionQuickstart)
+                        .buttonStyle(ActionButtonStyle())
+                }
             }
-            Section(header: Text("Memo")) {
-                TextEditor(text: $project.memo)
-                    .frame(height: 128)
-            }
-            Section {
-                Button("Save", action: actionSave)
-                    .buttonStyle(ActionButtonStyle())
-                    .modifier(CenterModifier())
-                    .disabled(
-                        [
-                            project.name.count > 1
-                        ].contains(false))
+            .listStyle(GroupedListStyle())
+            .navigationTitle(project.name)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit", action: actionShowEdit)
             }
         }
-        .listStyle(GroupedListStyle())
-        .navigationBarTitle(project.name)
+        .sheet(isPresented: $isPresented) {
+            NavigationView {
+                ProjectEditView(project: $data)
+                    .navigationTitle(project.name)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel", action: actionCancelEdit)
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done", action: actionSaveEdit)
+                        }
+                    }
+            }
+        }
     }
 
-    func actionSave() {
+    private func actionShowEdit() {
+        isPresented = true
+        data = project.data
+    }
+
+    private func actionCancelEdit() {
+        isPresented = false
+    }
+
+    private func actionSaveEdit() {
+        // Update our local copy for visual purposes
+        project.update(from: data)
+        // Then update the server version
         store.update(project: project) { updatedProject in
-            print(updatedProject)
+            isPresented = false
             store.load()
         }
     }
+
+    private func actionQuickstart() {
+
+    }
 }
 
-//struct ProjectDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProjectDetailView()
-//    }
-//}
+struct ProjectDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProjectDetailView(project: PreviewData.project)
+            .previewLayout(.sizeThatFits)
+    }
+}

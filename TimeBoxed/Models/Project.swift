@@ -73,7 +73,7 @@ final class ProjectStore: LoadableObject {
         // Stub
     }
 
-    func create(_ object: Project, completion: @escaping ((Project) -> Void)) {
+    func create(_ object: Project.Data, completion: @escaping ((Project) -> Void)) {
         var request = URLRequest.request(path: "/api/project")
         request.httpMethod = "POST"
         request.addBody(object: object)

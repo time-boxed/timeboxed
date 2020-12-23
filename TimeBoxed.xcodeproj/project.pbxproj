@@ -15,13 +15,12 @@
 		871E49832533F33D00355776 /* AsyncContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49822533F33D00355776 /* AsyncContentView.swift */; };
 		871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49852533F5D800355776 /* JSON+Extensions.swift */; };
 		871E498B253402DD00355776 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E498A253402DD00355776 /* Login.swift */; };
-		8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */; };
 		873A6B7625726A52004BAAD0 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */; };
 		873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D2F66252B21F900CC3DCF /* ImageButton.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
+		8758269E25931FD30054F19E /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758269D25931FD30054F19E /* ProjectEditView.swift */; };
 		8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectListView.swift */; };
 		8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894E248FAEDB0056DCB9 /* Color+Extension.swift */; };
-		876CBB0725343C7700031AE1 /* ProjectCreateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
 		878B83DE257E45280002A9E2 /* HistoryEditViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B83DD257E45280002A9E2 /* HistoryEditViewOld.swift */; };
 		8792C374248BA1CB0098F928 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8792C373248BA1CB0098F928 /* Project.swift */; };
@@ -38,6 +37,7 @@
 		87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763D248A74150030044C /* CountdownTimerView.swift */; };
 		87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763F248A74B50030044C /* CountdownCreateView.swift */; };
 		87E87642248A75160030044C /* CountdownExtendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E87641248A75160030044C /* CountdownExtendView.swift */; };
+		87EE836025932AFA00A7B381 /* FavoriteEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE835F25932AFA00A7B381 /* FavoriteEditPage.swift */; };
 		87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */; };
 		87F95B2C24808D0400255B29 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2B24808D0400255B29 /* Favorite.swift */; };
 		87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2D2480930200255B29 /* FavoriteRowView.swift */; };
@@ -71,13 +71,12 @@
 		871E49822533F33D00355776 /* AsyncContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContentView.swift; sourceTree = "<group>"; };
 		871E49852533F5D800355776 /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		871E498A253402DD00355776 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCreateSheet.swift; sourceTree = "<group>"; };
 		873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		873D2F66252B21F900CC3DCF /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
+		8758269D25931FD30054F19E /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
 		8766894C248FAB1F0056DCB9 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		8766894E248FAEDB0056DCB9 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCreateSheet.swift; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
 		878B83DD257E45280002A9E2 /* HistoryEditViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditViewOld.swift; sourceTree = "<group>"; };
 		8792C373248BA1CB0098F928 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		87E8763D248A74150030044C /* CountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerView.swift; sourceTree = "<group>"; };
 		87E8763F248A74B50030044C /* CountdownCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCreateView.swift; sourceTree = "<group>"; };
 		87E87641248A75160030044C /* CountdownExtendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownExtendView.swift; sourceTree = "<group>"; };
+		87EE835F25932AFA00A7B381 /* FavoriteEditPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEditPage.swift; sourceTree = "<group>"; };
 		87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		87F95B2B24808D0400255B29 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		87F95B2D2480930200255B29 /* FavoriteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowView.swift; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 				87F95B2D2480930200255B29 /* FavoriteRowView.swift */,
 				870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */,
 				C19BA160243F31D0004795A7 /* FavoriteListView.swift */,
-				8732575A2494B8C900E07208 /* FavoriteCreateSheet.swift */,
+				87EE835F25932AFA00A7B381 /* FavoriteEditPage.swift */,
 			);
 			path = FavoritePage;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 				870FE47924924BF000ED17C2 /* ProjectDetailView.swift */,
 				8766894C248FAB1F0056DCB9 /* ProjectListView.swift */,
 				87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */,
-				876CBB0625343C7700031AE1 /* ProjectCreateSheet.swift */,
+				8758269D25931FD30054F19E /* ProjectEditView.swift */,
 			);
 			path = ProjectPage;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
 				871C87B2253857B800920351 /* ReportView.swift in Sources */,
-				8732575B2494B8C900E07208 /* FavoriteCreateSheet.swift in Sources */,
+				87EE836025932AFA00A7B381 /* FavoriteEditPage.swift in Sources */,
 				8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */,
 				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
 				870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */,
@@ -425,6 +425,7 @@
 				878B83DE257E45280002A9E2 /* HistoryEditViewOld.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
+				8758269E25931FD30054F19E /* ProjectEditView.swift in Sources */,
 				87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */,
 				8708842F24826F14003D662F /* SettingsView.swift in Sources */,
 				876EF078245E90790021687C /* Pomodoro.swift in Sources */,
@@ -439,7 +440,6 @@
 				87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */,
 				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
 				87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */,
-				876CBB0725343C7700031AE1 /* ProjectCreateSheet.swift in Sources */,
 				87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */,
 				87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */,
 				871E498B253402DD00355776 /* Login.swift in Sources */,

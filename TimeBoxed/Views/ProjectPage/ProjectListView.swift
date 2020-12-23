@@ -11,38 +11,66 @@ import SwiftUI
 struct ProjectListView: View {
     @EnvironmentObject var store: ProjectStore
 
+    @State private var isPresented = false
+    @State private var data = Project.Data()
+
     var body: some View {
         NavigationView {
             List {
                 AsyncContentView(source: store) { projects in
-                    Section {
-                        ForEach(projects.sorted { $0.duration > $1.duration }) { project in
-                            NavigationLink(destination: ProjectDetailView(project: project)) {
-                                VStack(alignment: .leading) {
-                                    ProjectRowView(project: project)
-                                        .font(.title)
-                                    DurationView(duration: project.duration)
-                                        .font(.footnote)
-                                }
+                    ForEach(projects.sorted { $0.duration > $1.duration }) { project in
+                        NavigationLink(destination: ProjectDetailView(project: project)) {
+                            VStack(alignment: .leading) {
+                                ProjectRowView(project: project)
+                                    .font(.title)
+                                DurationView(duration: project.duration)
+                                    .font(.footnote)
                             }
-                        }.onDelete(perform: store.delete)
-                    }
+                        }
+                    }.onDelete(perform: store.delete)
                 }
 
             }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    AddProjectButton()
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add", action: actionShowAdd)
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
                     ReloadButton(source: store)
                 }
             }
+            .sheet(isPresented: $isPresented) {
+                NavigationView {
+                    ProjectEditView(project: $data)
+                        .navigationTitle("Add Project")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel", action: actionCancelEdit)
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Done", action: actionSaveEdit)
+                            }
+                        }
+                }
+            }
+        }
+    }
+
+    private func actionShowAdd() {
+        isPresented = true
+        data = .init()
+    }
+
+    private func actionCancelEdit() {
+        isPresented = false
+    }
+
+    private func actionSaveEdit() {
+        store.create(data) { newProject in
+            store.load()
+            isPresented = false
         }
     }
 }

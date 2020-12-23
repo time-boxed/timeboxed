@@ -37,7 +37,7 @@ struct ProjectSelectorList: View {
 
 struct ProjectSelectorView: View {
     @EnvironmentObject var store: ProjectStore
-    @State var isPresented = false
+    @State private var isPresented = false
 
     var project: Project?
 
