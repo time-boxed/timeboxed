@@ -29,13 +29,6 @@ struct FavoriteEditView: View {
     }
 }
 
-struct FavoriteEditPage_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteEditView(favorite: .constant(PreviewData.favorite.data))
-            .previewLayout(.sizeThatFits)
-    }
-}
-
 extension Favorite {
     struct Data: Encodable {
         var title: String = ""
@@ -57,3 +50,12 @@ extension Favorite {
         duration = data.duration
     }
 }
+
+#if DEBUG
+    struct FavoriteEditPage_Previews: PreviewProvider {
+        static var previews: some View {
+            FavoriteEditView(favorite: .constant(PreviewData.favorite.data))
+                .previewLayout(.sizeThatFits)
+        }
+    }
+#endif

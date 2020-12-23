@@ -25,13 +25,6 @@ struct ProjectEditView: View {
     }
 }
 
-struct ProjectEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectEditView(project: .constant(PreviewData.project.data))
-            .previewLayout(.sizeThatFits)
-    }
-}
-
 extension Project {
     struct Data: Codable {
         var name: String = ""
@@ -51,3 +44,12 @@ extension Project {
         memo = data.memo
     }
 }
+
+#if DEBUG
+    struct ProjectEditView_Previews: PreviewProvider {
+        static var previews: some View {
+            ProjectEditView(project: .constant(PreviewData.project.data))
+                .previewLayout(.sizeThatFits)
+        }
+    }
+#endif

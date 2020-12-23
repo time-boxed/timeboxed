@@ -31,12 +31,6 @@ struct HistoryEditView: View {
     }
 }
 
-struct HistoryEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryEditView(history: .constant(PreviewData.pomodoro.data))
-    }
-}
-
 extension Pomodoro {
     struct Data: Encodable {
         var title = ""
@@ -60,3 +54,11 @@ extension Pomodoro {
         end = data.end
     }
 }
+
+#if DEBUG
+    struct HistoryEditView_Previews: PreviewProvider {
+        static var previews: some View {
+            HistoryEditView(history: .constant(PreviewData.pomodoro.data))
+        }
+    }
+#endif

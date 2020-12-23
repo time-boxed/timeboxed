@@ -99,9 +99,11 @@ struct FavoriteDetailView: View {
     }
 }
 
-struct FavoriteDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoriteDetailView(favorite: PreviewData.favorite)
-            .previewLayout(.sizeThatFits)
+#if DEBUG
+    struct FavoriteDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            FavoriteDetailView(favorite: PreviewData.favorite)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
+#endif

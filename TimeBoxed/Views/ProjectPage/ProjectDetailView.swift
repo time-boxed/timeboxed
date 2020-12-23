@@ -84,10 +84,11 @@ struct ProjectDetailView: View {
 
     }
 }
-
-struct ProjectDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectDetailView(project: PreviewData.project)
-            .previewLayout(.sizeThatFits)
+#if DEBUG
+    struct ProjectDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            ProjectDetailView(project: PreviewData.project)
+                .previewLayout(.sizeThatFits)
+        }
     }
-}
+#endif
