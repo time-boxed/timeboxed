@@ -12,6 +12,9 @@ import SwiftUI
 struct FavoriteListView: View {
     @EnvironmentObject var store: FavoriteStore
 
+    @State private var isPresented = false
+    @State private var data = Favorite.Data()
+
     var body: some View {
         NavigationView {
             List {
@@ -28,17 +31,44 @@ struct FavoriteListView: View {
             }
             .listStyle(GroupedListStyle())
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    AddFavoriteButton()
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add", action: actionShowAdd)
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
                     ReloadButton(source: store)
                 }
             }
             .navigationBarTitle("Favorites")
+            .sheet(isPresented: $isPresented) {
+                NavigationView {
+                    FavoriteEditView(favorite: $data)
+                        .navigationTitle("New Favorite")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Cancel", action: actionCancelEdit)
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Done", action: actionSaveEdit)
+                            }
+                        }
+                }
+            }
+        }
+    }
+
+    private func actionShowAdd() {
+        isPresented = true
+        data = .init()
+    }
+
+    private func actionCancelEdit() {
+        isPresented = false
+    }
+
+    private func actionSaveEdit() {
+        store.create(data) { newFavorite in
+            isPresented = false
+            store.load()
         }
     }
 }

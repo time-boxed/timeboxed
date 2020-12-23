@@ -47,7 +47,7 @@ final class FavoriteStore: LoadableObject {
         state = .loaded(batch.results.sorted { $0.count > $1.count })
     }
 
-    func create(_ object: Favorite, completion: @escaping ((Favorite) -> Void)) {
+    func create(_ object: Favorite.Data, completion: @escaping ((Favorite) -> Void)) {
         var request = URLRequest.request(path: "/api/favorite")
         request.httpMethod = "POST"
         request.addBody(object: object)
@@ -67,6 +67,7 @@ final class FavoriteStore: LoadableObject {
             .dataTaskPublisher()
             .map { $0.data }
             .decode(type: Favorite.List.self, decoder: JSONDecoder.djangoDecoder)
+            .print()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)

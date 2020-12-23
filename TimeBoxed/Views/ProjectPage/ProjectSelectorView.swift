@@ -14,46 +14,35 @@ struct ProjectSelectorList: View {
     var selected: (Project?) -> Void = { _ in }
 
     var body: some View {
-        NavigationView {
-            List {
-                AsyncContentView(source: store) { projects in
-                    Section {
-                        ForEach(projects) { project in
-                            Button(action: {
-                                selected(project)
-                                self.presentationMode.wrappedValue.dismiss()
-                            }) {
-                                ProjectRowView(project: project)
-                            }
+        List {
+            AsyncContentView(source: store) { projects in
+                Section {
+                    ForEach(projects) { project in
+                        Button(action: {
+                            selected(project)
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            ProjectRowView(project: project)
                         }
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
-            .navigationBarTitle("Projects")
         }
+        .listStyle(GroupedListStyle())
+        .navigationBarTitle("Projects")
     }
 }
 
 struct ProjectSelectorView: View {
     @EnvironmentObject var store: ProjectStore
-    @State private var isPresented = false
 
     var project: Project?
-
     var selected: (Project?) -> Void = { _ in }
 
     var body: some View {
-        Button(action: { isPresented.toggle() }) {
-            if let project = project {
-                ProjectRowView(project: project)
-            } else {
-                Text("No Project")
-            }
-        }
-        .label(left: "Project")
-        .sheet(isPresented: $isPresented) {
-            ProjectSelectorList(selected: selected)
+        NavigationLink(destination: ProjectSelectorList(selected: selected)) {
+            ProjectOptionalView(project: project)
+                .label(left: "Project")
         }
     }
 }

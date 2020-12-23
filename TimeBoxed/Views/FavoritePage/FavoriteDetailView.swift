@@ -9,46 +9,69 @@
 import SwiftUI
 
 struct FavoriteDetailView: View {
+    @State var favorite: Favorite
+
+    @State private var isPresented = false
+    @State private var data = Favorite.Data()
+
     @EnvironmentObject var store: FavoriteStore
     @EnvironmentObject var user: UserSettings
     @EnvironmentObject var main: PomodoroStore
 
-    @State var favorite: Favorite
-
     var body: some View {
-        List {
-            Section {
-                TextField("Title", text: $favorite.title)
-                    .label(left: "Title")
-                Text("\(favorite.count)")
-                    .label(left: "Count")
-                ProjectSelectorView(project: favorite.project) { project in
-                    favorite.project = project
-                }
-                if let url = favorite.url {
-                    Link(destination: url) {
-                        Label(url.absoluteString, systemImage: "safari")
+        Group {
+            List {
+                Section {
+                    Text(favorite.title)
+                        .label(left: "Title")
+                    Text("\(favorite.count)")
+                        .label(left: "Count")
+                    if let project = favorite.project {
+                        ProjectRowView(project: project)
+                    }
+                    if let url = favorite.url {
+                        Link(destination: url) {
+                            Label(url.absoluteString, systemImage: "safari")
+                        }
+                    }
+                    Link(destination: favorite.html_link) {
+                        Label(favorite.html_link.absoluteString, systemImage: "link")
                     }
                 }
-                Link(destination: favorite.html_link) {
-                    Label(favorite.html_link.absoluteString, systemImage: "link")
+                if let memo = favorite.memo {
+                    Section(header: Text("Memo")) {
+                        Text(memo)
+                    }
                 }
             }
+            .navigationBarTitle(favorite.title)
+            .listStyle(GroupedListStyle())
 
             Button("Start", action: actionStart)
                 .buttonStyle(ActionButtonStyle())
                 .modifier(CenterModifier())
-            Button("Update", action: actionUpdate)
-                .buttonStyle(ActionButtonStyle())
-                .modifier(CenterModifier())
-                .disabled(
-                    [
-                        favorite.title.count > 0
-                    ].contains(false))
 
+            Spacer()
         }
-        .navigationBarTitle(favorite.title)
-        .listStyle(GroupedListStyle())
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit", action: actionShowEdit)
+            }
+        }
+        .sheet(isPresented: $isPresented) {
+            NavigationView {
+                FavoriteEditView(favorite: $data)
+                    .navigationTitle(favorite.title)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel", action: actionCancelEdit)
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done", action: actionSaveEdit)
+                        }
+                    }
+            }
+        }
     }
 
     func actionStart() {
@@ -58,15 +81,27 @@ struct FavoriteDetailView: View {
         }
     }
 
-    func actionUpdate() {
-        store.update(favorite: favorite) { (newFavorite) in
+    func actionShowEdit() {
+        isPresented = true
+        data = favorite.data
+    }
+
+    func actionCancelEdit() {
+        isPresented = false
+    }
+
+    func actionSaveEdit() {
+        favorite.update(from: data)
+        store.update(favorite: favorite) { _ in
+            isPresented = false
             store.load()
         }
     }
 }
 
-//struct FavoriteDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoriteDetailView()
-//    }
-//}
+struct FavoriteDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        FavoriteDetailView(favorite: PreviewData.favorite)
+            .previewLayout(.sizeThatFits)
+    }
+}
