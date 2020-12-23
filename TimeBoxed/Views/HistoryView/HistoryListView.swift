@@ -25,6 +25,7 @@ struct HistoryHeader: View {
 }
 
 struct GroupedHistory: View {
+    @EnvironmentObject var store: PomodoroStore
     var groups: [(key: Date, value: [Pomodoro])]
 
     var body: some View {
@@ -35,6 +36,13 @@ struct GroupedHistory: View {
                         HistoryRowView(pomodoro: pomodoro)
                     }
                 }
+                .onDelete(perform: { indexSet in
+                    indexSet.forEach { index in
+                        store.delete(pomodoros[index]) { _ in
+                            store.load()
+                        }
+                    }
+                })
             }
         }
     }

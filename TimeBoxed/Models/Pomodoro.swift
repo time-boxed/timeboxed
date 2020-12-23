@@ -116,27 +116,14 @@ final class PomodoroStore: LoadableObject {
             .store(in: &subscriptions)
     }
 
-    func delete(_ pomodoro: Pomodoro) {
+    func delete(_ pomodoro: Pomodoro, receiveValue: @escaping ((URLResponse) -> Void)) {
         var request = URLRequest.request(path: "/api/pomodoro/\(pomodoro.id)")
         request.httpMethod = "DELETE"
         request.dataTaskPublisher()
             .map { $0.response }
+            .mapError { $0 }
             .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { (failure) in
-                    print(failure)
-                },
-                receiveValue: { (response) in
-                    print(response)
-                }
-            )
+            .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
             .store(in: &subscriptions)
-    }
-
-    func delete(at offset: IndexSet) {
-        offset.forEach { (index) in
-            delete(pomodoros[index])
-        }
-        pomodoros.remove(atOffsets: offset)
     }
 }
