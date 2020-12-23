@@ -1,5 +1,5 @@
 //
-//  HistoryView.swift
+//  HistoryListView.swift
 //  TimeBoxed
 //
 //  Created by ST20638 on 2020/04/09.

@@ -22,11 +22,10 @@
 		8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894C248FAB1F0056DCB9 /* ProjectListView.swift */; };
 		8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8766894E248FAEDB0056DCB9 /* Color+Extension.swift */; };
 		876EF078245E90790021687C /* Pomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876EF077245E90790021687C /* Pomodoro.swift */; };
-		878B83DE257E45280002A9E2 /* HistoryEditViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B83DD257E45280002A9E2 /* HistoryEditViewOld.swift */; };
 		8792C374248BA1CB0098F928 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8792C373248BA1CB0098F928 /* Project.swift */; };
 		879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879C36342483AB8A00DF0B9F /* SelectUserView.swift */; };
 		87A1DAEE2532DB9400F48EB4 /* LeftLabelModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */; };
-		87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */; };
+		87A1DAF22532E41B00F48EB4 /* ProjectPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A1DAF12532E41B00F48EB4 /* ProjectPicker.swift */; };
 		87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B41D248B523D00F37761 /* PreviewData.swift */; };
 		87B1D507254AC3F40064BD4D /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 87B1D506254AC3F40064BD4D /* SwiftUICharts */; };
 		87B1D50A254ACF8B0064BD4D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */; };
@@ -38,6 +37,7 @@
 		87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763F248A74B50030044C /* CountdownCreateView.swift */; };
 		87E87642248A75160030044C /* CountdownExtendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E87641248A75160030044C /* CountdownExtendView.swift */; };
 		87EE836025932AFA00A7B381 /* FavoriteEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE835F25932AFA00A7B381 /* FavoriteEditView.swift */; };
+		87EE83682593486700A7B381 /* HistoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE83672593486700A7B381 /* HistoryEditView.swift */; };
 		87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */; };
 		87F95B2C24808D0400255B29 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2B24808D0400255B29 /* Favorite.swift */; };
 		87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F95B2D2480930200255B29 /* FavoriteRowView.swift */; };
@@ -51,7 +51,7 @@
 		C19BA14B243F2E36004795A7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19BA14A243F2E36004795A7 /* Preview Assets.xcassets */; };
 		C19BA156243F2E8F004795A7 /* CountdownParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA155243F2E8F004795A7 /* CountdownParentView.swift */; };
 		C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15A243F2F7C004795A7 /* CountdownView.swift */; };
-		C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryView.swift */; };
+		C19BA15F243F31A4004795A7 /* HistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA15E243F31A4004795A7 /* HistoryListView.swift */; };
 		C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA160243F31D0004795A7 /* FavoriteListView.swift */; };
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
@@ -78,12 +78,11 @@
 		8766894C248FAB1F0056DCB9 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		8766894E248FAEDB0056DCB9 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		876EF077245E90790021687C /* Pomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pomodoro.swift; sourceTree = "<group>"; };
-		878B83DD257E45280002A9E2 /* HistoryEditViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditViewOld.swift; sourceTree = "<group>"; };
 		8792C373248BA1CB0098F928 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		87962056247FCEA000A2A9A8 /* TimeBoxed.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeBoxed.entitlements; sourceTree = "<group>"; };
 		879C36342483AB8A00DF0B9F /* SelectUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectUserView.swift; sourceTree = "<group>"; };
 		87A1DAED2532DB9400F48EB4 /* LeftLabelModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelModifier.swift; sourceTree = "<group>"; };
-		87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectorView.swift; sourceTree = "<group>"; };
+		87A1DAF12532E41B00F48EB4 /* ProjectPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPicker.swift; sourceTree = "<group>"; };
 		87A4B41D248B523D00F37761 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
@@ -94,6 +93,7 @@
 		87E8763F248A74B50030044C /* CountdownCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCreateView.swift; sourceTree = "<group>"; };
 		87E87641248A75160030044C /* CountdownExtendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownExtendView.swift; sourceTree = "<group>"; };
 		87EE835F25932AFA00A7B381 /* FavoriteEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEditView.swift; sourceTree = "<group>"; };
+		87EE83672593486700A7B381 /* HistoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditView.swift; sourceTree = "<group>"; };
 		87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extensions.swift"; sourceTree = "<group>"; };
 		87F95B2B24808D0400255B29 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		87F95B2D2480930200255B29 /* FavoriteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowView.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		C19BA14F243F2E36004795A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C19BA155243F2E8F004795A7 /* CountdownParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownParentView.swift; sourceTree = "<group>"; };
 		C19BA15A243F2F7C004795A7 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
-		C19BA15E243F31A4004795A7 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		C19BA15E243F31A4004795A7 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
 		C19BA160243F31D0004795A7 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
 		C19BA162243F321F004795A7 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 			children = (
 				870FE47924924BF000ED17C2 /* ProjectDetailView.swift */,
 				8766894C248FAB1F0056DCB9 /* ProjectListView.swift */,
-				87A1DAF12532E41B00F48EB4 /* ProjectSelectorView.swift */,
+				87A1DAF12532E41B00F48EB4 /* ProjectPicker.swift */,
 				8758269D25931FD30054F19E /* ProjectEditView.swift */,
 			);
 			path = ProjectPage;
@@ -216,8 +216,8 @@
 			children = (
 				87C6AAA824825B6D002FAA74 /* HistoryDetailView.swift */,
 				87F95B2F2480933100255B29 /* HistoryRowView.swift */,
-				C19BA15E243F31A4004795A7 /* HistoryView.swift */,
-				878B83DD257E45280002A9E2 /* HistoryEditViewOld.swift */,
+				C19BA15E243F31A4004795A7 /* HistoryListView.swift */,
+				87EE83672593486700A7B381 /* HistoryEditView.swift */,
 			);
 			path = HistoryView;
 			sourceTree = "<group>";
@@ -402,7 +402,7 @@
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
 				87E87642248A75160030044C /* CountdownExtendView.swift in Sources */,
 				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
-				C19BA15F243F31A4004795A7 /* HistoryView.swift in Sources */,
+				C19BA15F243F31A4004795A7 /* HistoryListView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
 				871C87B2253857B800920351 /* ReportView.swift in Sources */,
 				87EE836025932AFA00A7B381 /* FavoriteEditView.swift in Sources */,
@@ -418,11 +418,11 @@
 				87C6AAA924825B6D002FAA74 /* HistoryDetailView.swift in Sources */,
 				87B1D50A254ACF8B0064BD4D /* Array+Extensions.swift in Sources */,
 				870FE478249248AF00ED17C2 /* ProjectRowView.swift in Sources */,
+				87EE83682593486700A7B381 /* HistoryEditView.swift in Sources */,
 				873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */,
 				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
 				87C6AAAB24826983002FAA74 /* DateView.swift in Sources */,
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,
-				878B83DE257E45280002A9E2 /* HistoryEditViewOld.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
 				8758269E25931FD30054F19E /* ProjectEditView.swift in Sources */,
@@ -443,7 +443,7 @@
 				87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */,
 				87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */,
 				871E498B253402DD00355776 /* Login.swift in Sources */,
-				87A1DAF22532E41B00F48EB4 /* ProjectSelectorView.swift in Sources */,
+				87A1DAF22532E41B00F48EB4 /* ProjectPicker.swift in Sources */,
 				87F95B2C24808D0400255B29 /* Favorite.swift in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,
 				874E6C842489215100E7153C /* CenterModifier.swift in Sources */,

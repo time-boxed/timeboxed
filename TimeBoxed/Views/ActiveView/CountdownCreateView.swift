@@ -17,7 +17,7 @@ struct CountdownCreateView: View {
         Section(header: Text("New")) {
             TextField("Title", text: $model.title)
 
-            ProjectSelectorView(project: model.project) { project in
+            ProjectPicker(project: model.project) { project in
                 model.project = project
             }
 

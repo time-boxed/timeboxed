@@ -18,7 +18,7 @@ struct FavoriteEditView: View {
                     Label("Duration", systemImage: "clock")
                 }
                 Text("\(Int(favorite.duration)) minutes")
-                ProjectSelectorView(project: favorite.project) { project in
+                ProjectPicker(project: favorite.project) { project in
                     favorite.project = project
                 }
             }

@@ -48,12 +48,14 @@ struct ButtonDeletePomodoro: View {
 struct HistoryDetailView: View {
     @State var pomodoro: Pomodoro
 
+    @State private var isPresented = false
+    @State private var data = Pomodoro.Data()
+    @EnvironmentObject var store: PomodoroStore
+
     var body: some View {
         List {
             Section {
-                if let project = pomodoro.project {
-                    ProjectRowView(project: project)
-                }
+                ProjectOptionalView(project: pomodoro.project)
                 HStack {
                     DateTimeView(date: pomodoro.start)
                     Spacer()
@@ -72,9 +74,6 @@ struct HistoryDetailView: View {
                 ButtonRepeatPomodoro(pomodoro: pomodoro)
                     .buttonStyle(ActionButtonStyle())
                     .modifier(CenterModifier())
-                EditHistoryButton(pomodoro: pomodoro)
-                    .buttonStyle(WarningButtonStyle())
-                    .modifier(CenterModifier())
                 ButtonDeletePomodoro(pomodoro: pomodoro)
                     .buttonStyle(DangerButtonStyle())
                     .modifier(CenterModifier())
@@ -82,6 +81,42 @@ struct HistoryDetailView: View {
         }
         .navigationBarTitle(pomodoro.title)
         .listStyle(GroupedListStyle())
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Edit", action: actionShowEdit)
+            }
+        }
+        .sheet(isPresented: $isPresented) {
+            NavigationView {
+                HistoryEditView(history: $data)
+                    .navigationTitle(pomodoro.title)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button("Cancel", action: actionCancelEdit)
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Done", action: actionSaveEdit)
+                        }
+                    }
+            }
+        }
+    }
+
+    func actionShowEdit() {
+        isPresented = true
+        data = pomodoro.data
+    }
+
+    func actionCancelEdit() {
+        isPresented = false
+    }
+
+    func actionSaveEdit() {
+        pomodoro.update(from: data)
+        store.update(object: pomodoro) { _ in
+            isPresented = false
+            store.load()
+        }
     }
 }
 

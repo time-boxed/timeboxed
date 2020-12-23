@@ -1,5 +1,5 @@
 //
-//  ProjectSelectorView.swift
+//  ProjectPicker.swift
 //  TimeBoxed
 //
 //  Created by Paul Traylor on 2020/10/11.
@@ -33,7 +33,7 @@ struct ProjectSelectorList: View {
     }
 }
 
-struct ProjectSelectorView: View {
+struct ProjectPicker: View {
     @EnvironmentObject var store: ProjectStore
 
     var project: Project?
@@ -49,6 +49,6 @@ struct ProjectSelectorView: View {
 
 struct ProjectSelector_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectSelectorView()
+        ProjectPicker()
     }
 }

@@ -32,7 +32,7 @@ struct ContentView: View {
             ProjectListView()
                 .tabItem { Label("Project", systemImage: "paperclip") }
                 .tag(Tab.project)
-            HistoryView()
+            HistoryListView()
                 .tabItem { Label("History", systemImage: "calendar") }
                 .tag(Tab.history)
             //            ReportView()
