@@ -16,7 +16,7 @@ struct CountdownParentView: View {
         NavigationView {
             List {
                 if let current = store.pomodoros.first {
-                    NavigationLink(destination: HistoryEditView(pomodoro: current)) {
+                    NavigationLink(destination: HistoryEditViewOld(pomodoro: current)) {
                         CountdownTimerView(pomodoro: current)
                     }
 

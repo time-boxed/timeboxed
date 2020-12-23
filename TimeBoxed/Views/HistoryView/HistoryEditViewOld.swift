@@ -17,7 +17,7 @@ struct EditHistoryButton: View {
         }
         .sheet(isPresented: $showEdit) {
             NavigationView {
-                HistoryEditView(pomodoro: pomodoro)
+                HistoryEditViewOld(pomodoro: pomodoro)
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel", action: { showEdit = false })
@@ -28,7 +28,7 @@ struct EditHistoryButton: View {
     }
 }
 
-struct HistoryEditView: View {
+struct HistoryEditViewOld: View {
     @State var pomodoro: Pomodoro
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var store: PomodoroStore
@@ -72,6 +72,6 @@ struct HistoryEditView: View {
 
 struct EditHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryEditView(pomodoro: PreviewData.pomodoro)
+        HistoryEditViewOld(pomodoro: PreviewData.pomodoro)
     }
 }
