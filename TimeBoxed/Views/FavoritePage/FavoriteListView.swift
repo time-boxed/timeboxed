@@ -28,7 +28,9 @@ struct GroupedFavorites: View {
         self.groups = Dictionary(
             grouping: favorites.filter { $0.project != nil },
             by: { $0.project! }
-        ).sorted { $0.key.name > $1.key.name }
+        ).sorted {
+            $0.value.reduce(0) { $0 + $1.count } > $1.value.reduce(0) { $0 + $1.count }
+        }
     }
 }
 
