@@ -9,6 +9,29 @@
 import Combine
 import SwiftUI
 
+struct GroupedFavorites: View {
+    var groups: [(key: Project, value: [Favorite])]
+
+    var body: some View {
+        ForEach(groups, id: \.key) { project, favorites in
+            Section(header: ProjectOptionalView(project: project)) {
+                ForEach(favorites) { favorite in
+                    NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
+                        FavoriteRowView(favorite: favorite)
+                    }
+                }
+            }
+        }
+    }
+
+    init(favorites: [Favorite]) {
+        self.groups = Dictionary(
+            grouping: favorites.filter { $0.project != nil },
+            by: { $0.project! }
+        ).sorted { $0.key.name > $1.key.name }
+    }
+}
+
 struct FavoriteListView: View {
     @EnvironmentObject var store: FavoriteStore
 
@@ -19,15 +42,8 @@ struct FavoriteListView: View {
         NavigationView {
             List {
                 AsyncContentView(source: store) { favorites in
-                    Section {
-                        ForEach(favorites) { item in
-                            NavigationLink(destination: FavoriteDetailView(favorite: item)) {
-                                FavoriteRowView(favorite: item)
-                            }
-                        }.onDelete(perform: store.delete)
-                    }
+                    GroupedFavorites(favorites: favorites)
                 }
-
             }
             .listStyle(GroupedListStyle())
             .toolbar {

@@ -12,22 +12,16 @@ struct FavoriteRowView: View {
     var favorite: Favorite
 
     var body: some View {
-        VStack {
-            HStack {
-                Text(favorite.title)
-                    .font(.title)
-                Spacer()
-                DurationView(duration: favorite.duration)
-            }
+        VStack(alignment: .leading) {
+            Text(favorite.title)
+                .font(.title)
 
             HStack {
-                ProjectOptionalView(project: favorite.project)
+                DurationView(duration: favorite.duration)
                 Spacer()
                 Text("Count: \(favorite.count)")
             }.font(.footnote)
-
         }
-
     }
 }
 
