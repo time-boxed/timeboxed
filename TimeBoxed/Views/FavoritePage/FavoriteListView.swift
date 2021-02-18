@@ -9,12 +9,33 @@
 import Combine
 import SwiftUI
 
+extension Array where Element == Favorite {
+    var groupedCount: Int {
+        self.reduce(0) { $0 + $1.count }
+    }
+}
+
+struct FavoriteHeader: View {
+    var project: Project
+    var favorites: [Favorite]
+
+    var body: some View {
+        HStack {
+            NavigationLink(destination: ProjectDetailView(project: project)) {
+                ProjectOptionalView(project: project)
+            }
+            Spacer()
+            Text("Count \(favorites.groupedCount)")
+        }
+    }
+}
+
 struct GroupedFavorites: View {
     var groups: [(key: Project, value: [Favorite])]
 
     var body: some View {
         ForEach(groups, id: \.key) { project, favorites in
-            Section(header: ProjectOptionalView(project: project)) {
+            Section(header: FavoriteHeader(project: project, favorites: favorites)) {
                 ForEach(favorites) { favorite in
                     NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
                         FavoriteRowView(favorite: favorite)
@@ -28,9 +49,7 @@ struct GroupedFavorites: View {
         self.groups = Dictionary(
             grouping: favorites.filter { $0.project != nil },
             by: { $0.project! }
-        ).sorted {
-            $0.value.reduce(0) { $0 + $1.count } > $1.value.reduce(0) { $0 + $1.count }
-        }
+        ).sorted { $0.value.groupedCount > $1.value.groupedCount }
     }
 }
 
