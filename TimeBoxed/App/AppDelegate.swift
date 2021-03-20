@@ -18,7 +18,6 @@ struct TimeBoxedApp: App {
             ContentView()
                 .environmentObject(store)
                 .environmentObject(user)
-                .environmentObject(user.favorites)
                 .environmentObject(user.pomodoros)
                 .environmentObject(user.projects)
         }

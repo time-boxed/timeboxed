@@ -15,8 +15,6 @@ struct FavoriteDetailView: View {
     @State private var data = Favorite.Data()
 
     @EnvironmentObject var store: AppStore
-    @EnvironmentObject var user: UserSettings
-    @EnvironmentObject var main: PomodoroStore
 
     var body: some View {
         Group {
@@ -89,10 +87,8 @@ struct FavoriteDetailView: View {
 
     func actionSaveEdit() {
         favorite.update(from: data)
-        store.update(favorite: favorite) { _ in
-            isPresented = false
-            store.load()
-        }
+        store.send(.favoriteUpdate(update: favorite))
+        isPresented = false
     }
 }
 

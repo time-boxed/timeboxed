@@ -18,11 +18,11 @@ struct ContentView: View {
         case report
     }
 
-    @EnvironmentObject var userSettings: UserSettings
+    @EnvironmentObject var store: AppStore
     @State private var showLogin = false
 
     var body: some View {
-        TabView(selection: $userSettings.currentTab) {
+        TabView(selection: .constant(store.state.tab)) {
             CountdownParentView()
                 .tabItem { Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)
@@ -45,10 +45,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showLogin) {
             LoginView()
-                .environmentObject(self.userSettings)
         }
         .onAppear {
-            self.showLogin = self.userSettings.current_user == nil
+            self.showLogin = store.state.login == nil
         }
     }
 }
