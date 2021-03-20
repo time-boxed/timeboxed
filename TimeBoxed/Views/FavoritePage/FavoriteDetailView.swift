@@ -73,7 +73,7 @@ struct FavoriteDetailView: View {
     }
 
     func actionStart() {
-        store.send(.favoriteState(param: favorite))
+        store.send(.favorite(.start(param: favorite)))
     }
 
     func actionShowEdit() {
@@ -87,7 +87,7 @@ struct FavoriteDetailView: View {
 
     func actionSaveEdit() {
         favorite.update(from: data)
-        store.send(.favoriteUpdate(update: favorite))
+        store.send(.favorite(.update(update: favorite)))
         isPresented = false
     }
 }

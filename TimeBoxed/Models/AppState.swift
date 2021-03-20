@@ -89,13 +89,7 @@ enum AppAction {
     case loginSet(user: Login)
 
     case history(HistoryAction)
-
-    case favoritesFetch
-    case favoritesSet(results: Favorite.List)
-    case favoriteState(param: Favorite)
-    case favoriteCreate(data: Favorite.Data)
-    case favoriteUpdate(update: Favorite)
-    case favoriteDelete(delete: Favorite)
+    case favorite(FavoriteAction)
 
     case projectsFetch
     case projectsSet(results: Project.List)
@@ -146,56 +140,8 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
 
     case .history(let action):
         return action.reducer(state: &state, environment: environment)
-
-    //MARK:- Favorites
-    case .favoritesFetch:
-        guard let login = state.login else { return nil }
-        var request: Request<Favorite.List> = login.request(path: "/api/favorite", method: .get([]))
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map { AppAction.favoritesSet(results: $0) }
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-    case .favoriteUpdate(update: let favorite):
-        guard let login = state.login else { return nil }
-        var request: Request<Favorite.List> = login.request(
-            path: "/api/favorite/\(favorite.id)", put: favorite)
-        request.addBasicAuth(login: login)
-        print(request)
-        return AppAction.favoritesFetch.eraseToAnyPublisher()
-    case .favoriteDelete(delete: let favorite):
-        guard let login = state.login else { return nil }
-        var request: Request<Favorite.List> = login.request(
-            path: "/api/favorite/\(favorite.id)", method: .delete)
-        request.addBasicAuth(login: login)
-        print(request)
-        return AppAction.history(.fetch).eraseToAnyPublisher()
-    case .favoriteState(param: let favorite):
-        guard let login = state.login else { return nil }
-        var request: Request<Pomodoro> = login.request(
-            path: "/api/favorite/\(favorite.id)/start", method: .post(nil))
-        request.addBasicAuth(login: login)
-        // TODO: Fix
-        state.tab = .countdown
-        return AppAction.history(.fetch).eraseToAnyPublisher()
-    //        return URLSession.shared.publisher(for: request)
-    //            .map { AppAction.loadHistory }
-    //            .catch { Just(AppAction.showError(result: $0)) }
-    //            .eraseToAnyPublisher()
-
-    case .favoriteCreate(let data):
-        guard let login = state.login else { return nil }
-        var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
-        request.addBasicAuth(login: login)
-        // TODO: Fix
-        return AppAction.favoritesFetch.eraseToAnyPublisher()
-    //        return URLSession.shared.publisher(for: request)
-    //            .map {  AppAction.loadFavorites }
-    //            .catch { Just(AppAction.showError(result: $0)) }
-    //            .eraseToAnyPublisher()
-
-    case .favoritesSet(let results):
-        state.favorites = results.results.sorted { $0.count > $1.count }
+    case .favorite(let action):
+        return action.reducer(state: &state, environment: environment)
 
     // MARK:- Projects
     case .projectsSet(results: let projects):
