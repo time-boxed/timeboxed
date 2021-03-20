@@ -26,10 +26,9 @@ struct CountdownParentView: View {
                         CountdownCreateView()
                     }
                 } else {
-                    Text("Loading...")
+                    Text("Loading...").onAppear(perform: fetch)
                 }
             }
-            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
         }
         .navigationViewStyle(StackNavigationViewStyle())

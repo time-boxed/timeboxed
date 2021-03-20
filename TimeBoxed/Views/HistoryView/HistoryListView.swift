@@ -56,8 +56,8 @@ struct HistoryListView: View {
         NavigationView {
             List {
                 GroupedHistory(pomodoros: store.state.pomodoros)
+                    .onAppear(perform: fetch)
             }
-            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
             .toolbar {

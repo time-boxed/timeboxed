@@ -104,7 +104,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .eraseToAnyPublisher()
     case .historySet(let results):
         state.pomodoros = results.results.sorted { $0.start > $1.start }
-    case .historyCreate(data: let data):
+    case .historyCreate(let data):
         guard let login = state.login else { return nil }
         var request: Request<Pomodoro> = login.request(path: "/api/pomodoro", post: data)
         request.addBasicAuth(login: login)
@@ -114,13 +114,14 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .eraseToAnyPublisher()
     case .historyUpdate(data: let pomodoro):
         guard let login = state.login else { return nil }
-        var request: Request<Pomodoro> = login.request(path: "/api/pomodoro/\(pomodoro.id)", put: pomodoro)
+        var request: Request<Pomodoro> = login.request(
+            path: "/api/pomodoro/\(pomodoro.id)", put: pomodoro)
         request.addBasicAuth(login: login)
         return URLSession.shared.publisher(for: request)
             .map(mapPomodoro)
             .catch { Just(AppAction.showError(result: $0)) }
             .eraseToAnyPublisher()
-    case .historyDate(id: let id, date: let date):
+    case .historyDate(let id, let date):
         guard let login = state.login else { return nil }
         let data = Pomodoro.DateRequest(end: date)
         var request: Request<Pomodoro> = login.request(path: "/api/pomodoro/\(id)", patch: data)
@@ -129,7 +130,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .map(mapPomodoro)
             .catch { Just(AppAction.showError(result: $0)) }
             .eraseToAnyPublisher()
-    case .historyDelete(offset: let offset):
+    case .historyDelete(let offset):
         print(offset)
 
     //MARK:- Favorites
@@ -182,7 +183,6 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
     case .favoritesSet(let results):
         state.favorites = results.results.sorted { $0.count > $1.count }
 
-
     // MARK:- Projects
     case .projectsSet(results: let projects):
         state.projects = projects.results
@@ -205,7 +205,8 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .eraseToAnyPublisher()
     case .projectUpdate(let project):
         guard let login = state.login else { return nil }
-        var request: Request<Project> = login.request(path: "/api/project/\(project.id)", put: project)
+        var request: Request<Project> = login.request(
+            path: "/api/project/\(project.id)", put: project)
         request.addBasicAuth(login: login)
         return URLSession.shared.publisher(for: request)
             .map(mapProject)

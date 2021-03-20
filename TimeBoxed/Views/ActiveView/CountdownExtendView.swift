@@ -39,7 +39,6 @@ struct CountdownExtendView: View {
         }
     }
 
-
     func actionAddPomodoro() {
         store.send(.historyDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60)))
     }

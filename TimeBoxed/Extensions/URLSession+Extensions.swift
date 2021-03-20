@@ -10,6 +10,10 @@ import Combine
 import Foundation
 import os.log
 
+extension OSLog {
+    static var network = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "network")
+}
+
 enum HttpMethod: Equatable {
     case get([URLQueryItem])
     case put(Data?)
