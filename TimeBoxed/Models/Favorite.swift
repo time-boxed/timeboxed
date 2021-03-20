@@ -37,6 +37,10 @@ enum FavoriteAction {
     case delete(delete: Favorite)
 }
 
+func mapFavorite(favorite: Favorite) -> AppAction {
+    return .favorite(.fetch)
+}
+
 extension FavoriteAction {
     func reducer(state: inout AppState, environment: AppEnvironment)
         -> AnyPublisher<AppAction, Never>?
@@ -57,14 +61,18 @@ extension FavoriteAction {
             var request: Request<Pomodoro> = login.request(
                 path: "/api/favorite/\(favorite.id)/start", method: .post(nil))
             request.addBasicAuth(login: login)
-            // TODO: Fix
             state.tab = .countdown
-            return AppAction.history(.fetch).eraseToAnyPublisher()
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
         case .create(let data):
             var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
             request.addBasicAuth(login: login)
-            // TODO: Fix
-            return AppAction.favorite(.fetch).eraseToAnyPublisher()
+            return URLSession.shared.publisher(for: request)
+                .map(mapFavorite)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
         case .update(let favorite):
             var request: Request<Favorite.List> = login.request(
                 path: "/api/favorite/\(favorite.id)", put: favorite)

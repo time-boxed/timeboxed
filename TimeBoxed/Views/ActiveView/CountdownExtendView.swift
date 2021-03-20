@@ -12,7 +12,7 @@ struct CountdownExtendView: View {
     var pomodoro: Pomodoro
 
     @EnvironmentObject var store: AppStore
-    @State var showEdit = false
+    @State private var showEdit = false
 
     var body: some View {
         Section(header: Text("Extend")) {

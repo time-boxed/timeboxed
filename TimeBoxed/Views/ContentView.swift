@@ -20,12 +20,13 @@ struct ContentView: View {
 
     @EnvironmentObject var store: AppStore
     @State private var showLogin = false
+    @State private var currentTab = Tab.countdown
 
     var body: some View {
         if let error = store.state.error {
             Text(error.localizedDescription)
         }
-        TabView(selection: .constant(store.state.tab)) {
+        TabView(selection: $currentTab) {
             CountdownParentView()
                 .tabItem { Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)

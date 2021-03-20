@@ -61,7 +61,7 @@ extension URLSession {
     )
         -> AnyPublisher<Value, Swift.Error>
     {
-        os_log(.info, log: .network, "%s", request.debugDescription)
+        os_log(.info, log: .network, "%s %s", request.httpMethod ?? "?", request.debugDescription)
 
         return dataTaskPublisher(for: request)
             .mapError(Error.networking)

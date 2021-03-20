@@ -16,10 +16,9 @@ struct CountdownParentView: View {
         NavigationView {
             List {
                 if let current = store.state.pomodoros.first {
-                    CountdownTimerView(pomodoro: current)
-                    //                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
-                    //                        CountdownTimerView(pomodoro: current)
-                    //                    }
+                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
+                        CountdownTimerView(pomodoro: current)
+                    }
                     if current.isActive {
                         CountdownExtendView(pomodoro: current)
                     } else {
@@ -39,11 +38,11 @@ struct CountdownParentView: View {
     }
 }
 #if DEBUG
-    struct CountdownPageView_Previews: PreviewProvider {
-        static var previews: some View {
-            Group {
-                CountdownParentView()
-            }.previewDevice(PreviewData.device)
-        }
+struct CountdownPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            CountdownParentView()
+        }.previewDevice(PreviewData.device)
     }
+}
 #endif

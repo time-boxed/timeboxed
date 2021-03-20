@@ -60,7 +60,7 @@ extension HistoryAction {
         switch self {
         case .fetch:
             var request: Request<Pomodoro.List> = login.request(
-                path: "/api/pomodoro", method: .get([]))
+                path: "/api/pomodoro", method: .get([.init(name: "limit", value: "100")]))
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map { HistoryAction.set($0) }
