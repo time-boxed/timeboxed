@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ButtonRepeatPomodoro: View {
     @EnvironmentObject var store: AppStore
-    @EnvironmentObject var user: UserSettings
 
     var pomodoro: Pomodoro
     var body: some View {
@@ -28,7 +27,7 @@ struct ButtonRepeatPomodoro: View {
 }
 
 struct ButtonDeletePomodoro: View {
-    @EnvironmentObject var user: UserSettings
+    @EnvironmentObject var store: AppStore
 
     var pomodoro: Pomodoro
     var body: some View {
@@ -39,7 +38,7 @@ struct ButtonDeletePomodoro: View {
 
     func action() {
         // TODO: Not yet implemented
-        user.currentTab = .countdown
+        store.send(.setTab(tab: .countdown))
     }
 }
 

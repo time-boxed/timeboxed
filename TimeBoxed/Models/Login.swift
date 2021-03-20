@@ -21,10 +21,9 @@ extension Login {
         return components(separatedBy: "@").last!
     }
 
-    //let password = Settings.keychain.string(for: self) ?? ""
     var password: String {
         set { try? keychain.set(newValue, key: self) }
-        get { keychain.string(for: self) ?? "" }
+        get { try! keychain.get(self) ?? "" }
     }
 
     func request(path: String, method: HttpMethod) -> URLRequest {
@@ -87,33 +86,6 @@ extension Login {
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         req.addValue("application/json", forHTTPHeaderField: "Accept")
         return req
-    }
-
-    func request(for path: String, qs: [URLQueryItem]) -> URLRequest {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = domain
-        components.path = path
-        components.queryItems = qs
-
-        guard let url = components.url else {
-            preconditionFailure(
-                "Invalid URL components: \(components)"
-            )
-        }
-
-        return URLRequest(url: url)
-    }
-
-    func request(authed path: String, with password: String, qs: [URLQueryItem]) -> URLRequest {
-        var request = self.request(for: path, qs: qs)
-        //        request.addBasicAuth(username: username, password: password)
-        return request
-    }
-
-    func request(authed path: String, qs: [URLQueryItem]) -> URLRequest {
-        let password = Settings.keychain.string(for: self) ?? ""
-        return self.request(authed: path, with: password, qs: qs)
     }
 }
 
