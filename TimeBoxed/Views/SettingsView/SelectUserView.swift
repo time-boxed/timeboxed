@@ -14,7 +14,7 @@ struct SelectUserView: View {
     var body: some View {
         List {
             ForEach(store.state.users, id: \.self) { user in
-                Button(action: { store.send(.setUser(user: user)) }) {
+                Button(action: { store.send(.loginSet(user: user)) }) {
                     Text(user)
                 }
             }.onDelete(perform: deleteItems)
@@ -28,7 +28,7 @@ struct SelectUserView: View {
     }
 
     func deleteItems(at offsets: IndexSet) {
-        store.send(.userRemove(offset: offsets))
+        store.send(.loginRemove(offset: offsets))
     }
 }
 

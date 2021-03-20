@@ -39,7 +39,7 @@ struct ProjectListView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reload") {
-                        store.send(.projectsLoad)
+                        store.send(.projectsFetch)
                     }
                 }
             }
@@ -75,7 +75,7 @@ struct ProjectListView: View {
     }
 
     private func fetch() {
-        store.send(.projectsLoad)
+        store.send(.projectsFetch)
     }
 }
 

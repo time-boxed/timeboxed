@@ -22,6 +22,9 @@ struct ContentView: View {
     @State private var showLogin = false
 
     var body: some View {
+        if let error = store.state.error {
+            Text(error.localizedDescription)
+        }
         TabView(selection: .constant(store.state.tab)) {
             CountdownParentView()
                 .tabItem { Label("Active", systemImage: "timer") }

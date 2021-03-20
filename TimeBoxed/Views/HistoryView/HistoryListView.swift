@@ -63,7 +63,7 @@ struct HistoryListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reload") {
-                        store.send(.loadHistory)
+                        store.send(.historyFetch)
                     }
                 }
             }
@@ -71,7 +71,7 @@ struct HistoryListView: View {
     }
 
     func fetch() {
-        store.send(.loadHistory)
+        store.send(.historyFetch)
     }
 }
 

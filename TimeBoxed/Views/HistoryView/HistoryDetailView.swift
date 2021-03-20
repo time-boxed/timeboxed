@@ -38,7 +38,7 @@ struct ButtonDeletePomodoro: View {
 
     func action() {
         // TODO: Not yet implemented
-        store.send(.setTab(tab: .countdown))
+        store.send(.tabSet(tab: .countdown))
     }
 }
 
