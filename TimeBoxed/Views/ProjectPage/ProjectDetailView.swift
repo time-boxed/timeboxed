@@ -74,7 +74,7 @@ struct ProjectDetailView: View {
         // Update our local copy for visual purposes
         project.update(from: data)
         isPresented = false
-        store.send(.projectUpdate(project: project))
+        store.send(.project(.update(project: project)))
     }
 
     private func actionQuickstart() {

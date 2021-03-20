@@ -27,7 +27,7 @@ struct ProjectListView: View {
                         }
                     }
                 }
-                .onDelete(perform: { store.send(.projectDelete(offset: $0)) })
+                .onDelete(perform: { store.send(.project(.delete(offset: $0))) })
 
             }
             .onAppear(perform: fetch)
@@ -39,7 +39,7 @@ struct ProjectListView: View {
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reload") {
-                        store.send(.projectsFetch)
+                        store.send(.project(.fetch))
                     }
                 }
             }
@@ -70,12 +70,12 @@ struct ProjectListView: View {
     }
 
     private func actionSaveEdit() {
-        store.send(.projectCreate(data: data))
+        store.send(.project(.create(data: data)))
         isPresented = false
     }
 
     private func fetch() {
-        store.send(.projectsFetch)
+        store.send(.project(.fetch))
     }
 }
 

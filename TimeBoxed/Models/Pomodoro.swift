@@ -48,6 +48,10 @@ enum HistoryAction {
     case delete(offset: IndexSet)
 }
 
+func mapPomodoro(pomodoro: Pomodoro) -> AppAction {
+    return .history(.fetch)
+}
+
 extension HistoryAction {
     func reducer(state: inout AppState, environment: AppEnvironment)
         -> AnyPublisher<AppAction, Never>?

@@ -34,12 +34,7 @@ enum AppAction {
 
     case history(HistoryAction)
     case favorite(FavoriteAction)
-
-    case projectsFetch
-    case projectsSet(results: Project.List)
-    case projectCreate(data: Project.Data)
-    case projectUpdate(project: Project)
-    case projectDelete(offset: IndexSet)
+    case project(ProjectAction)
 
     case tabSet(tab: ContentView.Tab)
     case showError(result: Swift.Error)
@@ -86,49 +81,10 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
         return action.reducer(state: &state, environment: environment)
     case .favorite(let action):
         return action.reducer(state: &state, environment: environment)
-
-    // MARK:- Projects
-    case .projectsSet(results: let projects):
-        state.projects = projects.results
-    case .projectsFetch:
-        guard let login = state.login else { return nil }
-        var request: Request<Project.List> = login.request(path: "/api/project", method: .get([]))
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map { AppAction.projectsSet(results: $0) }
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-
-    case .projectCreate(let data):
-        guard let login = state.login else { return nil }
-        var request: Request<Project> = login.request(path: "/api/project", post: data)
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map(mapProject)
-            .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
-            .eraseToAnyPublisher()
-    case .projectUpdate(let project):
-        guard let login = state.login else { return nil }
-        var request: Request<Project> = login.request(
-            path: "/api/project/\(project.id)", put: project)
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map(mapProject)
-            .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
-            .eraseToAnyPublisher()
-    case .projectDelete(let offset):
-        print(offset)
+    case .project(let action):
+        return action.reducer(state: &state, environment: environment)
     }
-
     return nil
-}
-
-func mapPomodoro(pomodoro: Pomodoro) -> AppAction {
-    return .history(.fetch)
-}
-
-func mapProject(project: Project) -> AppAction {
-    return .projectsFetch
 }
 
 typealias AppStore = Store<AppState, AppAction, AppEnvironment>
