@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import KeychainAccess
 
 typealias Login = String
+
+private let keychain = Keychain(service: Bundle.main.bundleIdentifier!)
 
 extension Login {
     var username: String {
@@ -16,6 +19,54 @@ extension Login {
     }
     var domain: String {
         return components(separatedBy: "@").last!
+    }
+
+    //let password = Settings.keychain.string(for: self) ?? ""
+    var password: String {
+        set { try? keychain.set(newValue, key: self) }
+        get { keychain.string(for: self) ?? "" }
+    }
+
+    func request(path: String, method: HttpMethod) -> URLRequest {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = domain
+        components.path = path
+
+        switch method {
+        case .get(let qs):
+            components.queryItems = qs
+        default:
+            break
+        }
+
+        guard let url = components.url else {
+            preconditionFailure(
+                "Invalid URL components: \(components)"
+            )
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = method.name
+
+        switch method {
+        case .post(let data), .put(let data):
+            request.httpBody = data
+        default:
+            break
+        }
+
+        return request
+    }
+
+    func request<T: Encodable>(path: String, post: T, using encoder: JSONEncoder = .djangoEncoder)
+        -> URLRequest
+    {
+        let data = try! encoder.encode(post)
+        var req = request(path: path, method: .post(data))
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("application/json", forHTTPHeaderField: "Accept")
+        return req
     }
 
     func request(for path: String, qs: [URLQueryItem]) -> URLRequest {

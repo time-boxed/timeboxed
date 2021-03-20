@@ -40,3 +40,11 @@ extension JSONDecoder {
         return decoder
     }
 }
+
+extension JSONEncoder {
+    static var djangoEncoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        return encoder
+    }
+}

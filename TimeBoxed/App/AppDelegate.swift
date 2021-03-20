@@ -10,10 +10,13 @@ import SwiftUI
 
 @main
 struct TimeBoxedApp: App {
+    let store = AppStore(initialState: .init(), reducer: appReducer, environment: AppEnvironment())
+
     var user = UserSettings()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(store)
                 .environmentObject(user)
                 .environmentObject(user.favorites)
                 .environmentObject(user.pomodoros)

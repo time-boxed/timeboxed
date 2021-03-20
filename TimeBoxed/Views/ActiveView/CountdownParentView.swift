@@ -10,38 +10,36 @@ import Combine
 import SwiftUI
 
 struct CountdownParentView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         NavigationView {
             List {
-                if let current = store.pomodoros.first {
-                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
-                        CountdownTimerView(pomodoro: current)
-                    }
-
+                if let current = store.state.pomodoros.first {
+                    CountdownTimerView(pomodoro: current)
+//                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
+//                        CountdownTimerView(pomodoro: current)
+//                    }
                     if current.isActive {
                         CountdownExtendView(pomodoro: current)
                     } else {
                         CountdownCreateView()
                     }
-                }
-                AsyncContentView(source: store) { _ in
-                    EmptyView()
+                } else {
+                    Text("Loading...")
                 }
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ReloadButton(source: store)
-                }
-            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+
+    func fetch() {
+        store.send(.loadHistory)
+    }
 }
 #if DEBUG
-
     struct CountdownPageView_Previews: PreviewProvider {
         static var previews: some View {
             Group {
@@ -49,5 +47,4 @@ struct CountdownParentView: View {
             }.previewDevice(PreviewData.device)
         }
     }
-
 #endif
