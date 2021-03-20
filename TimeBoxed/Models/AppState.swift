@@ -20,6 +20,7 @@ struct AppState {
     var error: Swift.Error?
 
     var pomodoros: [Pomodoro] = []
+    var favorites: [Favorite] = []
 }
 
 enum AppAction {
@@ -28,6 +29,9 @@ enum AppAction {
 
     case loadHistory
     case setHistory(results: Pomodoro.List)
+
+    case loadFavorites
+    case setFavorites(results: Favorite.List)
 
     case showError(result: Swift.Error)
 
@@ -63,6 +67,17 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .eraseToAnyPublisher()
     case .setHistory(let results):
         state.pomodoros = results.results.sorted { $0.start > $1.start }
+
+    case .loadFavorites:
+        guard let login = state.login else { return nil }
+        var request: Request<Favorite.List> = login.request(path: "/api/favorite", method: .get([]))
+        request.addBasicAuth(username: login.username, password: login.password)
+        return URLSession.shared.publisher(for: request)
+            .map { AppAction.setFavorites(results: $0) }
+            .catch { Just(AppAction.showError(result: $0)) }
+            .eraseToAnyPublisher()
+    case .setFavorites(let results):
+        state.favorites = results.results.sorted { $0.count > $1.count }
     }
     return nil
 }

@@ -17,9 +17,9 @@ struct CountdownParentView: View {
             List {
                 if let current = store.state.pomodoros.first {
                     CountdownTimerView(pomodoro: current)
-//                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
-//                        CountdownTimerView(pomodoro: current)
-//                    }
+                    //                    NavigationLink(destination: HistoryEditView(history: .constant(current.data))) {
+                    //                        CountdownTimerView(pomodoro: current)
+                    //                    }
                     if current.isActive {
                         CountdownExtendView(pomodoro: current)
                     } else {
