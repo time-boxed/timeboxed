@@ -32,6 +32,7 @@ enum AppAction {
 
     case loadFavorites
     case setFavorites(results: Favorite.List)
+    case createFavorite(data: Favorite.Data)
 
     case showError(result: Swift.Error)
 
@@ -76,6 +77,17 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             .map { AppAction.setFavorites(results: $0) }
             .catch { Just(AppAction.showError(result: $0)) }
             .eraseToAnyPublisher()
+    case .createFavorite(let data):
+        guard let login = state.login else { return nil }
+        var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
+        request.addBasicAuth(username: login.username, password: login.password)
+        // TODO: Fix
+        return Just(AppAction.loadFavorites).eraseToAnyPublisher()
+    //        return URLSession.shared.publisher(for: request)
+    //            .map {  AppAction.loadFavorites }
+    //            .catch { Just(AppAction.showError(result: $0)) }
+    //            .eraseToAnyPublisher()
+
     case .setFavorites(let results):
         state.favorites = results.results.sorted { $0.count > $1.count }
     }

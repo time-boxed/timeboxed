@@ -47,30 +47,8 @@ final class FavoriteStore: LoadableObject {
         state = .loaded(batch.results.sorted { $0.count > $1.count })
     }
 
-    func create(_ object: Favorite.Data, completion: @escaping ((Favorite) -> Void)) {
-        var request = URLRequest.request(path: "/api/favorite")
-        request.httpMethod = "POST"
-        request.addBody(object: object)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Favorite.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
-    }
-
     func load() {
-        state = .loading
-        URLRequest.request(path: "/api/favorite", qs: ["limit": 50])
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Favorite.List.self, decoder: JSONDecoder.djangoDecoder)
-            .print()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-            .store(in: &subscriptions)
+        fatalError("Remove me")
     }
 
     func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
