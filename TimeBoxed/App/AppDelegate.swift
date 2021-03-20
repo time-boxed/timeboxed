@@ -19,7 +19,6 @@ struct TimeBoxedApp: App {
                 .environmentObject(store)
                 .environmentObject(user)
                 .environmentObject(user.pomodoros)
-                .environmentObject(user.projects)
         }
     }
 }

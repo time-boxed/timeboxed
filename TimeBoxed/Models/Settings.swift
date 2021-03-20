@@ -37,10 +37,8 @@ class UserSettings: ObservableObject {
     @Published var currentTab = ContentView.Tab.countdown
 
     let pomodoros = PomodoroStore()
-    let projects = ProjectStore()
 
     func load() {
         pomodoros.load()
-        projects.load()
     }
 }

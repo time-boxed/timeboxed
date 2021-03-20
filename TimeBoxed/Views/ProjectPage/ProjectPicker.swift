@@ -9,21 +9,19 @@
 import SwiftUI
 
 struct ProjectSelectorList: View {
-    @EnvironmentObject var store: ProjectStore
+    @EnvironmentObject var store: AppStore
     @Environment(\.presentationMode) var presentationMode
     var selected: (Project?) -> Void = { _ in }
 
     var body: some View {
         List {
-            AsyncContentView(source: store) { projects in
-                Section {
-                    ForEach(projects) { project in
-                        Button(action: {
-                            selected(project)
-                            self.presentationMode.wrappedValue.dismiss()
-                        }) {
-                            ProjectRowView(project: project)
-                        }
+            Section {
+                ForEach(store.state.projects) { project in
+                    Button(action: {
+                        selected(project)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        ProjectRowView(project: project)
                     }
                 }
             }
@@ -34,8 +32,6 @@ struct ProjectSelectorList: View {
 }
 
 struct ProjectPicker: View {
-    @EnvironmentObject var store: ProjectStore
-
     var project: Project?
     var selected: (Project?) -> Void = { _ in }
 

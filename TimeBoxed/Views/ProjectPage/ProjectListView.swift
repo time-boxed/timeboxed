@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ProjectListView: View {
-    @EnvironmentObject var store: ProjectStore
+    @EnvironmentObject var store: AppStore
 
     @State private var isPresented = false
     @State private var data = Project.Data()
@@ -17,27 +17,20 @@ struct ProjectListView: View {
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { projects in
-                    ForEach(projects.sorted { $0.duration > $1.duration }) { project in
-                        NavigationLink(destination: ProjectDetailView(project: project)) {
-                            VStack(alignment: .leading) {
-                                ProjectRowView(project: project)
-                                    .font(.title)
-                                DurationView(duration: project.duration)
-                                    .font(.footnote)
-                            }
+                ForEach(store.state.projects.sorted { $0.duration > $1.duration }) { project in
+                    NavigationLink(destination: ProjectDetailView(project: project)) {
+                        VStack(alignment: .leading) {
+                            ProjectRowView(project: project)
+                                .font(.title)
+                            DurationView(duration: project.duration)
+                                .font(.footnote)
                         }
                     }
-                    .onDelete(perform: { indexSet in
-                        indexSet.forEach { index in
-                            store.delete(project: projects[index]) { _ in
-                                store.load()
-                            }
-                        }
-                    })
                 }
+                .onDelete(perform: { store.send(.projectDelete(offset: $0)) })
 
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
             .toolbar {
@@ -45,7 +38,9 @@ struct ProjectListView: View {
                     Button("Add", action: actionShowAdd)
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    ReloadButton(source: store)
+                    Button("Reload") {
+                        store.send(.projectsLoad)
+                    }
                 }
             }
             .sheet(isPresented: $isPresented) {
@@ -75,10 +70,12 @@ struct ProjectListView: View {
     }
 
     private func actionSaveEdit() {
-        store.create(data) { newProject in
-            store.load()
-            isPresented = false
-        }
+        store.send(.projectCreate(data: data))
+        isPresented = false
+    }
+
+    private func fetch() {
+        store.send(.projectsLoad)
     }
 }
 
