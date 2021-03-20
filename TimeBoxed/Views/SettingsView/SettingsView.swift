@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var userSettings: UserSettings
-
     var body: some View {
         NavigationView {
             List {

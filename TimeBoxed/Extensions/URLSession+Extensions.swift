@@ -29,6 +29,9 @@ enum HttpMethod: Equatable {
 }
 
 extension URLRequest {
+    mutating func addBasicAuth(login: Login) {
+        addBasicAuth(username: login.username, password: login.password)
+    }
     mutating func addBasicAuth(username: String, password: String) {
         let loginString = "\(username):\(password)"
         guard let loginData = loginString.data(using: String.Encoding.utf8) else {

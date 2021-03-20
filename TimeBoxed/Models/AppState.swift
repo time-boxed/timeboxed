@@ -17,6 +17,7 @@ struct AppEnvironment {
 
 struct AppState {
     @AppStorage("current_user") var login: Login?
+    @AppStorage("users") var users: [Login] = []
     var error: Swift.Error?
     var tab = ContentView.Tab.countdown
 
@@ -27,7 +28,9 @@ struct AppState {
 enum AppAction {
     case login(login: Login, password: String)
     case saveLogin(login: Login, password: String)
-    case setTab(tab: ContentView.Tab)
+    //    case userRemove(user: Login)
+    case userRemove(offset: IndexSet)
+    case setUser(user: Login)
 
     case loadHistory
     case setHistory(results: Pomodoro.List)
@@ -39,6 +42,7 @@ enum AppAction {
     case favoriteUpdate(update: Favorite)
     case favoriteDelete(delete: Favorite)
 
+    case setTab(tab: ContentView.Tab)
     case showError(result: Swift.Error)
 
     //    case loadHistory
@@ -57,18 +61,37 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
     switch action {
     case .showError(result: let error):
         print(error.localizedDescription)
-    case .setTab(tab: let tab):
+    case .setTab(let tab):
         state.tab = tab
 
-    case .login:
-        print("Login")
-    case .saveLogin:
-        print("saveLogin")
+    case .login(let login, let password):
+        var request: Request<Pomodoro.List> = login.request(path: "/api/pomodoro", method: .get([]))
+        request.addBasicAuth(username: login.username, password: password)
+        return Just(AppAction.saveLogin(login: login, password: password)).eraseToAnyPublisher()
+
+    case .saveLogin(var login, let password):
+        login.password = password
+        state.users.append(login)
+        return Just(AppAction.setUser(user: login)).eraseToAnyPublisher()
+
+    case .setUser(let user):
+        state.login = user
+        state.pomodoros = []
+        state.favorites = []
+        state.tab = .countdown
+        return Just(AppAction.loadHistory).eraseToAnyPublisher()
+    case .userRemove(let offset):
+        offset.forEach { key in
+            let login = state.users.remove(at: key)
+            if login == state.login {
+                state.login = state.users.first
+            }
+        }
 
     case .loadHistory:
         guard let login = state.login else { return nil }
         var request: Request<Pomodoro.List> = login.request(path: "/api/pomodoro", method: .get([]))
-        request.addBasicAuth(username: login.username, password: login.password)
+        request.addBasicAuth(login: login)
         return URLSession.shared.publisher(for: request)
             .map { AppAction.setHistory(results: $0) }
             .catch { Just(AppAction.showError(result: $0)) }
@@ -79,39 +102,42 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
     case .loadFavorites:
         guard let login = state.login else { return nil }
         var request: Request<Favorite.List> = login.request(path: "/api/favorite", method: .get([]))
-        request.addBasicAuth(username: login.username, password: login.password)
+        request.addBasicAuth(login: login)
         return URLSession.shared.publisher(for: request)
             .map { AppAction.setFavorites(results: $0) }
             .catch { Just(AppAction.showError(result: $0)) }
             .eraseToAnyPublisher()
     case .favoriteUpdate(update: let favorite):
         guard let login = state.login else { return nil }
-        var request: Request<Favorite.List> = login.request(path: "/api/favorite/\(favorite.id)", put: favorite)
-        request.addBasicAuth(username: login.username, password: login.password)
+        var request: Request<Favorite.List> = login.request(
+            path: "/api/favorite/\(favorite.id)", put: favorite)
+        request.addBasicAuth(login: login)
         print(request)
         return Just(AppAction.loadFavorites).eraseToAnyPublisher()
     case .favoriteDelete(delete: let favorite):
         guard let login = state.login else { return nil }
-        var request: Request<Favorite.List> = login.request(path: "/api/favorite/\(favorite.id)", method: .delete)
-        request.addBasicAuth(username: login.username, password: login.password)
+        var request: Request<Favorite.List> = login.request(
+            path: "/api/favorite/\(favorite.id)", method: .delete)
+        request.addBasicAuth(login: login)
         print(request)
         return Just(AppAction.loadHistory).eraseToAnyPublisher()
     case .startFavorite(param: let favorite):
         guard let login = state.login else { return nil }
-        var request: Request<Pomodoro> = login.request(path: "/api/favorite/\(favorite.id)/start", method: .post(nil))
-        request.addBasicAuth(username: login.username, password: login.password)
+        var request: Request<Pomodoro> = login.request(
+            path: "/api/favorite/\(favorite.id)/start", method: .post(nil))
+        request.addBasicAuth(login: login)
         // TODO: Fix
         state.tab = .countdown
         return Just(AppAction.loadHistory).eraseToAnyPublisher()
-//        return URLSession.shared.publisher(for: request)
-//            .map { AppAction.loadHistory }
-//            .catch { Just(AppAction.showError(result: $0)) }
-//            .eraseToAnyPublisher()
+    //        return URLSession.shared.publisher(for: request)
+    //            .map { AppAction.loadHistory }
+    //            .catch { Just(AppAction.showError(result: $0)) }
+    //            .eraseToAnyPublisher()
 
     case .createFavorite(let data):
         guard let login = state.login else { return nil }
         var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
-        request.addBasicAuth(username: login.username, password: login.password)
+        request.addBasicAuth(login: login)
         // TODO: Fix
         return Just(AppAction.loadFavorites).eraseToAnyPublisher()
     //        return URLSession.shared.publisher(for: request)

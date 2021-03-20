@@ -97,7 +97,7 @@ extension Login {
 
     func request(authed path: String, with password: String, qs: [URLQueryItem]) -> URLRequest {
         var request = self.request(for: path, qs: qs)
-        request.addBasicAuth(username: username, password: password)
+        //        request.addBasicAuth(username: username, password: password)
         return request
     }
 
