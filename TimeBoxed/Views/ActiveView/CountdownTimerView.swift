@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CountdownTimerView: View {
     @EnvironmentObject var store: AppStore
-    @Binding var pomodoro: Pomodoro
+    var pomodoro: Pomodoro
     var body: some View {
         Section {
             VStack {
@@ -27,9 +27,6 @@ struct CountdownTimerView: View {
                 }
             }.modifier(CenterModifier())
         }
-    }
-    init(pomodoro: Pomodoro) {
-        self._pomodoro = .constant(pomodoro)
     }
 
     func updateProject(project: Project?) {

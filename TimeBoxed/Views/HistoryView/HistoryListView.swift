@@ -31,7 +31,7 @@ struct GroupedHistory: View {
     var body: some View {
         ForEach(groups, id: \.key) { date, pomodoros in
             Section(header: HistoryHeader(date: date, pomodoros: pomodoros)) {
-                ForEach(store.state.pomodoros) { pomodoro in
+                ForEach(pomodoros) { pomodoro in
                     NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
                         HistoryRowView(pomodoro: pomodoro)
                     }
@@ -56,8 +56,8 @@ struct HistoryListView: View {
         NavigationView {
             List {
                 GroupedHistory(pomodoros: store.state.pomodoros)
-                    .onAppear(perform: fetch)
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
             .toolbar {

@@ -9,13 +9,10 @@
 import SwiftUI
 
 struct CountdownExtendView: View {
-    @EnvironmentObject var store: AppStore
-    @Binding var pomodoro: Pomodoro
-    @State var showEdit = false
+    var pomodoro: Pomodoro
 
-    init(pomodoro: Pomodoro) {
-        self._pomodoro = .constant(pomodoro)
-    }
+    @EnvironmentObject var store: AppStore
+    @State var showEdit = false
 
     var body: some View {
         Section(header: Text("Extend")) {
