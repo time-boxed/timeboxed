@@ -36,7 +36,7 @@ struct GroupedHistory: View {
                         HistoryRowView(pomodoro: pomodoro)
                     }
                 }
-                .onDelete(perform: { store.send(.historyDelete(offset: $0)) })
+                .onDelete(perform: { store.send(.history(.delete(offset: $0))) })
             }
         }
     }
@@ -63,7 +63,7 @@ struct HistoryListView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reload") {
-                        store.send(.historyFetch)
+                        store.send(.history(.fetch))
                     }
                 }
             }
@@ -71,7 +71,7 @@ struct HistoryListView: View {
     }
 
     func fetch() {
-        store.send(.historyFetch)
+        store.send(.history(.fetch))
     }
 }
 

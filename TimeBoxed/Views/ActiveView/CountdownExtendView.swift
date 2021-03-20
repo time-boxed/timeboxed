@@ -40,15 +40,15 @@ struct CountdownExtendView: View {
     }
 
     func actionAddPomodoro() {
-        store.send(.historyDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60)))
+        store.send(.history(.date(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60))))
     }
 
     func actionAddHour() {
-        store.send(.historyDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(60 * 60)))
+        store.send(.history(.date(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(60 * 60))))
     }
 
     func actionStop() {
-        store.send(.historyDate(id: pomodoro.id, date: Date()))
+        store.send(.history(.date(id: pomodoro.id, date: Date())))
     }
 }
 

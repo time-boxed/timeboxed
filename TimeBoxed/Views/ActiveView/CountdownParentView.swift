@@ -35,7 +35,7 @@ struct CountdownParentView: View {
     }
 
     func fetch() {
-        store.send(.historyFetch)
+        store.send(.history(.fetch))
     }
 }
 #if DEBUG

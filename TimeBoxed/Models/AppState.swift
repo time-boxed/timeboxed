@@ -26,18 +26,69 @@ struct AppState {
     var projects: [Project] = []
 }
 
+enum HistoryAction {
+    case fetch
+    case set(Pomodoro.List)
+    case create(Pomodoro)
+    case update(Pomodoro)
+    case date(id: Int, date: Date)
+    case delete(offset: IndexSet)
+}
+
+extension HistoryAction {
+    func reducer(state: inout AppState, environment: AppEnvironment)
+        -> AnyPublisher<AppAction, Never>?
+    {
+        guard let login = state.login else { return nil }
+        switch self {
+        case .fetch:
+            var request: Request<Pomodoro.List> = login.request(
+                path: "/api/pomodoro", method: .get([]))
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map { HistoryAction.set($0) }
+                .map { AppAction.history($0) }
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .set(let results):
+            state.pomodoros = results.results.sorted { $0.start > $1.start }
+        case .create(let data):
+            var request: Request<Pomodoro> = login.request(path: "/api/pomodoro", post: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .update(let pomodoro):
+            var request: Request<Pomodoro> = login.request(
+                path: "/api/pomodoro/\(pomodoro.id)", put: pomodoro)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .date(let id, let date):
+            let data = Pomodoro.DateRequest(end: date)
+            var request: Request<Pomodoro> = login.request(path: "/api/pomodoro/\(id)", patch: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .delete(let offset):
+            print(offset)
+        }
+        return nil
+    }
+}
+
 enum AppAction {
     case login(login: Login, password: String)
     case loginSave(login: Login, password: String)
     case loginRemove(offset: IndexSet)
     case loginSet(user: Login)
 
-    case historyFetch
-    case historySet(results: Pomodoro.List)
-    case historyCreate(data: Pomodoro)
-    case historyUpdate(data: Pomodoro)
-    case historyDate(id: Int, date: Date)
-    case historyDelete(offset: IndexSet)
+    case history(HistoryAction)
 
     case favoritesFetch
     case favoritesSet(results: Favorite.List)
@@ -84,7 +135,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
     case .loginSet(let user):
         state = .init()
         state.login = user
-        return AppAction.historyFetch.eraseToAnyPublisher()
+        return AppAction.history(.fetch).eraseToAnyPublisher()
     case .loginRemove(let offset):
         offset.forEach { key in
             let login = state.users.remove(at: key)
@@ -93,45 +144,8 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             }
         }
 
-    //MARK:- Pomodoro
-    case .historyFetch:
-        guard let login = state.login else { return nil }
-        var request: Request<Pomodoro.List> = login.request(path: "/api/pomodoro", method: .get([]))
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map { AppAction.historySet(results: $0) }
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-    case .historySet(let results):
-        state.pomodoros = results.results.sorted { $0.start > $1.start }
-    case .historyCreate(let data):
-        guard let login = state.login else { return nil }
-        var request: Request<Pomodoro> = login.request(path: "/api/pomodoro", post: data)
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map(mapPomodoro)
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-    case .historyUpdate(data: let pomodoro):
-        guard let login = state.login else { return nil }
-        var request: Request<Pomodoro> = login.request(
-            path: "/api/pomodoro/\(pomodoro.id)", put: pomodoro)
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map(mapPomodoro)
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-    case .historyDate(let id, let date):
-        guard let login = state.login else { return nil }
-        let data = Pomodoro.DateRequest(end: date)
-        var request: Request<Pomodoro> = login.request(path: "/api/pomodoro/\(id)", patch: data)
-        request.addBasicAuth(login: login)
-        return URLSession.shared.publisher(for: request)
-            .map(mapPomodoro)
-            .catch { Just(AppAction.showError(result: $0)) }
-            .eraseToAnyPublisher()
-    case .historyDelete(let offset):
-        print(offset)
+    case .history(let action):
+        return action.reducer(state: &state, environment: environment)
 
     //MARK:- Favorites
     case .favoritesFetch:
@@ -155,7 +169,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
             path: "/api/favorite/\(favorite.id)", method: .delete)
         request.addBasicAuth(login: login)
         print(request)
-        return AppAction.historyFetch.eraseToAnyPublisher()
+        return AppAction.history(.fetch).eraseToAnyPublisher()
     case .favoriteState(param: let favorite):
         guard let login = state.login else { return nil }
         var request: Request<Pomodoro> = login.request(
@@ -163,7 +177,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
         request.addBasicAuth(login: login)
         // TODO: Fix
         state.tab = .countdown
-        return AppAction.historyFetch.eraseToAnyPublisher()
+        return AppAction.history(.fetch).eraseToAnyPublisher()
     //        return URLSession.shared.publisher(for: request)
     //            .map { AppAction.loadHistory }
     //            .catch { Just(AppAction.showError(result: $0)) }
@@ -220,7 +234,7 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
 }
 
 func mapPomodoro(pomodoro: Pomodoro) -> AppAction {
-    return .historyFetch
+    return .history(.fetch)
 }
 
 func mapProject(project: Project) -> AppAction {

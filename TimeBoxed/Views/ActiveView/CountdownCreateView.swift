@@ -48,7 +48,7 @@ struct CountdownCreateView: View {
             id: 0, title: model.title, start: Date(), end: Date() + duration,
             memo: "", project: model.project
         )
-        store.send(.historyCreate(data: pomodoro))
+        store.send(.history(.create(pomodoro)))
         model.title = ""
     }
 

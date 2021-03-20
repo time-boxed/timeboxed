@@ -22,7 +22,7 @@ struct ButtonRepeatPomodoro: View {
         let start = Date()
         let end = start.addingTimeInterval(pomodoro.start.distance(to: pomodoro.end))
         let newPomodoro = Pomodoro(id: 0, title: pomodoro.title, start: start, end: end)
-        store.send(.historyCreate(data: newPomodoro))
+        store.send(.history(.create(newPomodoro)))
     }
 }
 
@@ -110,7 +110,7 @@ struct HistoryDetailView: View {
 
     func actionSaveEdit() {
         pomodoro.update(from: data)
-        store.send(.historyUpdate(data: pomodoro))
+        store.send(.history(.update(pomodoro)))
         isPresented = false
     }
 }

@@ -36,7 +36,7 @@ struct CountdownTimerView: View {
         let request = Pomodoro(
             id: pomodoro.id, title: pomodoro.title, start: pomodoro.start, end: pomodoro.end,
             memo: pomodoro.memo, project: project, url: pomodoro.url)
-        store.send(.historyUpdate(data: request))
+        store.send(.history(.update(request)))
     }
 }
 
