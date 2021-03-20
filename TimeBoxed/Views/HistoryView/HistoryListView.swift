@@ -25,24 +25,18 @@ struct HistoryHeader: View {
 }
 
 struct GroupedHistory: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
     var groups: [(key: Date, value: [Pomodoro])]
 
     var body: some View {
         ForEach(groups, id: \.key) { date, pomodoros in
             Section(header: HistoryHeader(date: date, pomodoros: pomodoros)) {
-                ForEach(pomodoros) { pomodoro in
+                ForEach(store.state.pomodoros) { pomodoro in
                     NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
                         HistoryRowView(pomodoro: pomodoro)
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    indexSet.forEach { index in
-                        store.delete(pomodoros[index]) { _ in
-                            store.load()
-                        }
-                    }
-                })
+                .onDelete(perform: { store.send(.historyDelete(offset: $0)) })
             }
         }
     }
@@ -56,23 +50,28 @@ struct GroupedHistory: View {
 }
 
 struct HistoryListView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { pomodoros in
-                    GroupedHistory(pomodoros: pomodoros)
-                }
+                GroupedHistory(pomodoros: store.state.pomodoros)
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    ReloadButton(source: store)
+                    Button("Reload") {
+                        store.send(.loadHistory)
+                    }
                 }
             }
         }
+    }
+
+    func fetch() {
+        store.send(.loadHistory)
     }
 }
 

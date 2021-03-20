@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CountdownExtendView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
     @Binding var pomodoro: Pomodoro
     @State var showEdit = false
 
@@ -39,23 +39,17 @@ struct CountdownExtendView: View {
         }
     }
 
-    private func onReceive(_ batch: Pomodoro) {
-        print(pomodoro)
-        store.load()
-    }
 
     func actionAddPomodoro() {
-        store.update(
-            id: pomodoro.id, end: pomodoro.end.addingTimeInterval(25 * 60), completion: onReceive)
+        store.send(.historyDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60)))
     }
 
     func actionAddHour() {
-        store.update(
-            id: pomodoro.id, end: pomodoro.end.addingTimeInterval(60 * 60), completion: onReceive)
+        store.send(.historyDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(60 * 60)))
     }
 
     func actionStop() {
-        store.update(id: pomodoro.id, end: Date(), completion: onReceive)
+        store.send(.historyDate(id: pomodoro.id, date: Date()))
     }
 }
 

@@ -79,6 +79,16 @@ extension Login {
         return req
     }
 
+    func request<T: Encodable>(path: String, patch: T, using encoder: JSONEncoder = .djangoEncoder)
+        -> URLRequest
+    {
+        let data = try! encoder.encode(patch)
+        var req = request(path: path, method: .patch(data))
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("application/json", forHTTPHeaderField: "Accept")
+        return req
+    }
+
     func request(for path: String, qs: [URLQueryItem]) -> URLRequest {
         var components = URLComponents()
         components.scheme = "https"

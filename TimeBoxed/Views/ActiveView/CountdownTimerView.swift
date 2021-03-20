@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CountdownTimerView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
     @Binding var pomodoro: Pomodoro
     var body: some View {
         Section {
@@ -36,9 +36,7 @@ struct CountdownTimerView: View {
         let request = Pomodoro(
             id: pomodoro.id, title: pomodoro.title, start: pomodoro.start, end: pomodoro.end,
             memo: pomodoro.memo, project: project, url: pomodoro.url)
-        store.update(object: request) { updatedPomodoro in
-            print(updatedPomodoro)
-        }
+        store.send(.historyUpdate(data: request))
     }
 }
 

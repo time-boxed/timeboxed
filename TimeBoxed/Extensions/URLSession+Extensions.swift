@@ -13,6 +13,7 @@ import os.log
 enum HttpMethod: Equatable {
     case get([URLQueryItem])
     case put(Data?)
+    case patch(Data?)
     case post(Data?)
     case delete
     case head
@@ -22,6 +23,7 @@ enum HttpMethod: Equatable {
         case .get: return "GET"
         case .put: return "PUT"
         case .post: return "POST"
+        case .patch: return "PATCH"
         case .delete: return "DELETE"
         case .head: return "HEAD"
         }
