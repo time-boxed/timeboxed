@@ -73,7 +73,7 @@ struct FavoriteDetailView: View {
     }
 
     func actionStart() {
-        store.send(.startFavorite(param: favorite))
+        store.send(.favoriteState(param: favorite))
     }
 
     func actionShowEdit() {

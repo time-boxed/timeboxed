@@ -94,7 +94,7 @@ struct FavoriteListView: View {
 
     }
     func fetch() {
-        store.send(.loadFavorites)
+        store.send(.favoritesLoad)
     }
     private func actionShowAdd() {
         isPresented = true
@@ -106,7 +106,7 @@ struct FavoriteListView: View {
     }
 
     private func actionSaveEdit() {
-        store.send(.createFavorite(data: data))
+        store.send(.favoriteCreate(data: data))
         isPresented = false
     }
 }
