@@ -51,19 +51,6 @@ final class FavoriteStore: LoadableObject {
         fatalError("Remove me")
     }
 
-    func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
-        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)/start")
-        request.httpMethod = "POST"
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
-            .store(in: &subscriptions)
-    }
-
     func update(favorite: Favorite, receiveOutput: @escaping ((Favorite) -> Void)) {
         var request = URLRequest.request(path: "/api/favorite/\(favorite.id)")
         request.httpMethod = "PUT"

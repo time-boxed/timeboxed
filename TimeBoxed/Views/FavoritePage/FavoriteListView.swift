@@ -108,10 +108,6 @@ struct FavoriteListView: View {
     private func actionSaveEdit() {
         store.send(.createFavorite(data: data))
         isPresented = false
-        //        store.create(data) { newFavorite in
-        //            isPresented = false
-        //            store.load()
-        //        }
     }
 }
 
