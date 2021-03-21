@@ -53,7 +53,7 @@ extension ProjectAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map { AppAction.project(.set(results: $0)) }
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .set(let projects):
             state.projects = projects.results
@@ -62,7 +62,7 @@ extension ProjectAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapProject)
-                .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
+                .catch { AppAction.errorShow(result: $0).eraseToAnyPublisher() }
                 .eraseToAnyPublisher()
         case .update(let project):
             var request: Request<Project> = login.request(
@@ -70,7 +70,7 @@ extension ProjectAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapProject)
-                .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
+                .catch { AppAction.errorShow(result: $0).eraseToAnyPublisher() }
                 .eraseToAnyPublisher()
         case .delete(let offset):
             // TODO: Implement Delete

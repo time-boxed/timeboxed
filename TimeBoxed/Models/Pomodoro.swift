@@ -65,7 +65,7 @@ extension HistoryAction {
             return URLSession.shared.publisher(for: request)
                 .map { HistoryAction.set($0) }
                 .map { AppAction.history($0) }
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .set(let results):
             state.pomodoros = results.results.sorted { $0.start > $1.start }
@@ -74,7 +74,7 @@ extension HistoryAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapPomodoro)
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .update(let pomodoro):
             var request: Request<Pomodoro> = login.request(
@@ -82,7 +82,7 @@ extension HistoryAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapPomodoro)
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .date(let id, let date):
             let data = Pomodoro.DateRequest(end: date)
@@ -90,7 +90,7 @@ extension HistoryAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapPomodoro)
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .delete(let offset):
             print(offset)

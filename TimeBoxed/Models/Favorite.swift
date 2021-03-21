@@ -53,7 +53,7 @@ extension FavoriteAction {
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map { AppAction.favorite(.set(results: $0)) }
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .set(let results):
             state.favorites = results.results.sorted { $0.count > $1.count }
@@ -64,14 +64,14 @@ extension FavoriteAction {
             state.tab = .countdown
             return URLSession.shared.publisher(for: request)
                 .map(mapPomodoro)
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .create(let data):
             var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
                 .map(mapFavorite)
-                .catch { Just(AppAction.showError(result: $0)) }
+                .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
         case .update(let favorite):
             var request: Request<Favorite.List> = login.request(

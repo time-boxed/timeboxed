@@ -37,7 +37,8 @@ enum AppAction {
     case project(ProjectAction)
 
     case tabSet(tab: ContentView.Tab)
-    case showError(result: Swift.Error)
+    case errorShow(result: Swift.Error)
+    case errorClear
 }
 
 extension AppAction {
@@ -50,8 +51,10 @@ func appReducer(state: inout AppState, action: AppAction, environment: AppEnviro
     -> AnyPublisher<AppAction, Never>?
 {
     switch action {
-    case .showError(result: let error):
+    case .errorShow(result: let error):
         state.error = error
+    case .errorClear:
+        state.error = nil
     case .tabSet(let tab):
         state.tab = tab
 
