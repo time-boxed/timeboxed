@@ -49,7 +49,7 @@ extension Login {
         request.httpMethod = method.name
 
         switch method {
-        case .post(let data), .put(let data):
+        case .post(let data), .put(let data), .patch(let data):
             request.httpBody = data
         default:
             break
