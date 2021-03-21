@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+fileprivate extension AppStore {
+    func sendDate(id: Int, date: Date) {
+        send(.history(.date(id: id, date: date)))
+    }
+}
+
 struct CountdownExtendView: View {
     var pomodoro: Pomodoro
 
@@ -36,16 +42,16 @@ struct CountdownExtendView: View {
         }
     }
 
-    func actionAddPomodoro() {
-        store.send(.history(.date(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60))))
+    private func actionAddPomodoro() {
+        store.sendDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(25 * 60))
     }
 
-    func actionAddHour() {
-        store.send(.history(.date(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(60 * 60))))
+    private func actionAddHour() {
+        store.sendDate(id: pomodoro.id, date: pomodoro.end.addingTimeInterval(60 * 60))
     }
 
-    func actionStop() {
-        store.send(.history(.date(id: pomodoro.id, date: Date())))
+    private func actionStop() {
+        store.sendDate(id: pomodoro.id, date: Date())
     }
 }
 
