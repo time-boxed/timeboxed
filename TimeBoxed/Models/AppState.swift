@@ -15,11 +15,11 @@ struct AppEnvironment {
     let encoder = JSONEncoder()
 }
 
-struct AppState {
+class AppState: ObservableObject {
     @AppStorage("current_user") var login: Login?
     @AppStorage("users") var users: [Login] = []
     var error: Swift.Error?
-    var tab = ContentView.Tab.countdown
+    @Published var tab = ContentView.Tab.countdown
 
     var pomodoros: [Pomodoro] = []
     var favorites: [Favorite] = []

@@ -53,7 +53,7 @@ struct ContentView: View {
         .onAppear {
             self.showLogin = store.state.login == nil
         }
-        .onChange(of: store.state.tab, perform: { value in
+        .onReceive(store.state.$tab, perform: { value in
             currentTab = value
         })
     }
