@@ -49,6 +49,7 @@ struct FavoriteListProjects: View {
 }
 
 struct FavoriteListSorted: View {
+    @EnvironmentObject var store: AppStore
     private var favorites: [Favorite]
 
     var body: some View {
@@ -57,12 +58,19 @@ struct FavoriteListSorted: View {
                 FavoriteRowView(favorite: favorite, showProject: true)
             }
         }
+        .onDelete(perform: actionDelete)
     }
     init(byCount: [Favorite]) {
         self.favorites = byCount.sorted { $0.count > $1.count }
     }
     init(byTitle: [Favorite]) {
         self.favorites = byTitle.sorted { $0.title < $1.title }
+    }
+
+    private func actionDelete(indexSet: IndexSet) {
+        //TODO Implement
+        print("Favorite::actionDelete \(indexSet)")
+        //        store.send(.favorite(.delete(offset: indexSet)))
     }
 }
 

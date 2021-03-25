@@ -31,10 +31,10 @@ struct ContentView: View {
                 .tabItem { Label("Active", systemImage: "timer") }
                 .tag(Tab.countdown)
             FavoriteListView()
-                .tabItem { Label("Favorite", systemImage: "star") }
+                .tabItem { Label("Favorites", systemImage: "star") }
                 .tag(Tab.favorites)
             ProjectListView()
-                .tabItem { Label("Project", systemImage: "paperclip") }
+                .tabItem { Label("Projects", systemImage: "paperclip") }
                 .tag(Tab.project)
             HistoryListView()
                 .tabItem { Label("History", systemImage: "calendar") }

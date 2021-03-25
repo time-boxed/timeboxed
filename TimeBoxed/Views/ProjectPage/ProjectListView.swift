@@ -22,7 +22,7 @@ struct ProjectListSorted: View {
                 }
             }
         }
-        .onDelete(perform: { store.send(.project(.delete(offset: $0))) })
+        .onDelete(perform: actionDelete)
     }
 
     init(byDuration: [Project]) {
@@ -31,6 +31,10 @@ struct ProjectListSorted: View {
 
     init(byName: [Project]) {
         projects = byName.sorted { $0.name > $1.name }
+    }
+
+    private func actionDelete(indexSet: IndexSet) {
+        store.send(.project(.delete(offset: indexSet)))
     }
 }
 
@@ -63,9 +67,7 @@ struct ProjectListView: View {
                     }.pickerStyle(MenuPickerStyle())
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reload") {
-                        store.send(.project(.fetch))
-                    }
+                    Button("Reload", action: fetch)
                 }
             }
             .sheet(isPresented: $isPresented) {
