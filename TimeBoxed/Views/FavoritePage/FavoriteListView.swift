@@ -30,7 +30,7 @@ struct FavoriteHeader: View {
     }
 }
 
-struct GroupedFavorites: View {
+struct FavoriteListProjects: View {
     var groups: [(key: Project, value: [Favorite])]
 
     var body: some View {
@@ -47,29 +47,80 @@ struct GroupedFavorites: View {
 
     init(favorites: [Favorite]) {
         self.groups = Dictionary(
-            grouping: favorites.filter { $0.project != nil },
-            by: { $0.project! }
+            grouping: favorites,
+            by: { $0.project }
         ).sorted { $0.value.groupedCount > $1.value.groupedCount }
     }
 }
 
+struct FavoriteListAlphabetic: View {
+    var favorites: [Favorite]
+    var body: some View {
+        ForEach(favorites) { favorite in
+            NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
+                FavoriteRowView(favorite: favorite, showProject: true)
+            }
+        }
+    }
+    init(favorites: [Favorite]) {
+        self.favorites = favorites.sorted { $0.title < $1.title }
+    }
+}
+
+struct FavoriteListCount: View {
+    var favorites: [Favorite]
+    var body: some View {
+        ForEach(favorites) { favorite in
+            NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
+                FavoriteRowView(favorite: favorite, showProject: true)
+            }
+        }
+    }
+    init(favorites: [Favorite]) {
+        self.favorites = favorites.sorted { $0.count > $1.count }
+    }
+}
+
 struct FavoriteListView: View {
+    enum Sorting {
+        case alphabetic
+        case project
+        case count
+    }
     @EnvironmentObject var store: AppStore
 
     @State private var isPresented = false
     @State private var data = Favorite.Data()
+    @State private var sorting = Sorting.alphabetic
+
+    var content: some View {
+        List {
+            switch sorting {
+            case .alphabetic:
+                FavoriteListAlphabetic(favorites: store.state.favorites)
+            case .project:
+                FavoriteListProjects(favorites: store.state.favorites)
+            case .count:
+                FavoriteListCount(favorites: store.state.favorites)
+            }
+        }
+    }
 
     var body: some View {
         NavigationView {
-            List {
-                GroupedFavorites(favorites: store.state.favorites)
-
+            Group {
+                content
             }
             .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Add", action: actionShowAdd)
+                    Picker("Sorting", selection: $sorting) {
+                        Text("Alphabetic").tag(Sorting.alphabetic)
+                        Text("Project").tag(Sorting.project)
+                        Text("Count").tag(Sorting.count)
+                    }.pickerStyle(MenuPickerStyle())
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reload", action: fetch)

@@ -28,7 +28,8 @@ import SwiftUI
             icon: nil,
             html_link: URL(string: "https://example.com")!,
             url: nil,
-            count: 1
+            count: 1,
+            project: PreviewData.project
         )
 
         static var project = Project(

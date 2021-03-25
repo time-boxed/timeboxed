@@ -18,7 +18,7 @@ struct Favorite: Codable, Identifiable {
     var html_link: URL
     var url: URL?
     var count: Int
-    var project: Project?
+    var project: Project
 
     struct List: Codable {
         let count: Int

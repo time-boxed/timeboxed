@@ -44,7 +44,7 @@ extension Favorite {
 
     mutating func update(from data: Data) {
         title = data.title
-        project = data.project
+        project = data.project!
         url = data.url
         memo = data.memo
         duration = data.duration

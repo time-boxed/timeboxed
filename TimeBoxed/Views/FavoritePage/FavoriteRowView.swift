@@ -10,11 +10,16 @@ import SwiftUI
 
 struct FavoriteRowView: View {
     var favorite: Favorite
+    var showProject = false
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(favorite.title)
                 .font(.title)
+
+            if showProject {
+                ProjectOptionalView(project: favorite.project)
+            }
 
             HStack {
                 DurationView(duration: favorite.duration)
