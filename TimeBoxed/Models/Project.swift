@@ -28,69 +28,54 @@ struct Project: Codable, Identifiable, Equatable, Hashable {
     }
 }
 
-final class ProjectStore: LoadableObject {
-    @Published private(set) var state = LoadingState<[Project]>.idle
-    private var subscriptions = Set<AnyCancellable>()
+enum ProjectAction {
+    case fetch
+    case set(results: Project.List)
+    case create(data: Project.Data)
+    case update(project: Project)
+    case delete(offset: IndexSet)
+}
 
-    private func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            print(error.localizedDescription)
-            state = .failed(error)
+func mapProject(project: Project) -> AppAction {
+    return .project(.fetch)
+}
+
+extension ProjectAction {
+    func reducer(state: inout AppState, environment: AppEnvironment)
+        -> AnyPublisher<AppAction, Never>?
+    {
+        guard let login = state.login else { return nil }
+        switch self {
+
+        case .fetch:
+            var request: Request<Project.List> = login.request(
+                path: "/api/project", method: .get([]))
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map { AppAction.project(.set(results: $0)) }
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .set(let projects):
+            state.projects = projects.results
+        case .create(let data):
+            var request: Request<Project> = login.request(path: "/api/project", post: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapProject)
+                .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
+                .eraseToAnyPublisher()
+        case .update(let project):
+            var request: Request<Project> = login.request(
+                path: "/api/project/\(project.id)", put: project)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapProject)
+                .catch { AppAction.showError(result: $0).eraseToAnyPublisher() }
+                .eraseToAnyPublisher()
+        case .delete(let offset):
+            // TODO: Implement Delete
+            print(offset)
         }
-    }
-
-    private func onReceive(_ batch: Project.List) {
-        state = .loaded(batch.results)
-    }
-
-    func load() {
-        state = .loading
-        URLRequest.request(path: "/api/project", qs: ["limit": 50])
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Project.List.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-            .store(in: &subscriptions)
-    }
-
-    func update(project: Project, receiveValue: @escaping ((Project) -> Void)) {
-        var request = URLRequest.request(path: "/api/project/\(project.id)")
-        request.httpMethod = "PUT"
-        request.addBody(object: project)
-        request.dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Project.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
-            .store(in: &subscriptions)
-    }
-
-    func delete(project: Project, receiveValue: @escaping ((Project) -> Void)) {
-        var request = URLRequest.request(path: "/api/project/\(project.id)")
-        request.httpMethod = "DELETE"
-        request.dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Project.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
-            .store(in: &subscriptions)
-    }
-
-    func create(_ object: Project.Data, completion: @escaping ((Project) -> Void)) {
-        var request = URLRequest.request(path: "/api/project")
-        request.httpMethod = "POST"
-        request.addBody(object: object)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Project.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
+        return nil
     }
 }

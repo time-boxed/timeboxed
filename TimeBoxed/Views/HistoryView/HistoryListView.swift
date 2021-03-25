@@ -25,7 +25,7 @@ struct HistoryHeader: View {
 }
 
 struct GroupedHistory: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
     var groups: [(key: Date, value: [Pomodoro])]
 
     var body: some View {
@@ -36,13 +36,7 @@ struct GroupedHistory: View {
                         HistoryRowView(pomodoro: pomodoro)
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    indexSet.forEach { index in
-                        store.delete(pomodoros[index]) { _ in
-                            store.load()
-                        }
-                    }
-                })
+                .onDelete(perform: { store.send(.history(.delete(offset: $0))) })
             }
         }
     }
@@ -56,23 +50,28 @@ struct GroupedHistory: View {
 }
 
 struct HistoryListView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { pomodoros in
-                    GroupedHistory(pomodoros: pomodoros)
-                }
+                GroupedHistory(pomodoros: store.state.pomodoros)
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    ReloadButton(source: store)
+                    Button("Reload") {
+                        store.send(.history(.fetch))
+                    }
                 }
             }
         }
+    }
+
+    func fetch() {
+        store.send(.history(.fetch))
     }
 }
 

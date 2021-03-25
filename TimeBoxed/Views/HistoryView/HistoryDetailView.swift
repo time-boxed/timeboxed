@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct ButtonRepeatPomodoro: View {
-    @EnvironmentObject var store: PomodoroStore
-    @EnvironmentObject var user: UserSettings
+    @EnvironmentObject var store: AppStore
 
     var pomodoro: Pomodoro
     var body: some View {
@@ -22,15 +21,13 @@ struct ButtonRepeatPomodoro: View {
     func action() {
         let start = Date()
         let end = start.addingTimeInterval(pomodoro.start.distance(to: pomodoro.end))
-        store.create(Pomodoro(id: 0, title: pomodoro.title, start: start, end: end)) {
-            newPomodoro in
-            user.currentTab = .countdown
-        }
+        let newPomodoro = Pomodoro(id: 0, title: pomodoro.title, start: start, end: end)
+        store.send(.history(.create(newPomodoro)))
     }
 }
 
 struct ButtonDeletePomodoro: View {
-    @EnvironmentObject var user: UserSettings
+    @EnvironmentObject var store: AppStore
 
     var pomodoro: Pomodoro
     var body: some View {
@@ -41,7 +38,7 @@ struct ButtonDeletePomodoro: View {
 
     func action() {
         // TODO: Not yet implemented
-        user.currentTab = .countdown
+        store.send(.tabSet(tab: .countdown))
     }
 }
 
@@ -50,7 +47,7 @@ struct HistoryDetailView: View {
 
     @State private var isPresented = false
     @State private var data = Pomodoro.Data()
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         List {
@@ -113,10 +110,8 @@ struct HistoryDetailView: View {
 
     func actionSaveEdit() {
         pomodoro.update(from: data)
-        store.update(object: pomodoro) { _ in
-            isPresented = false
-            store.load()
-        }
+        store.send(.history(.update(pomodoro)))
+        isPresented = false
     }
 }
 

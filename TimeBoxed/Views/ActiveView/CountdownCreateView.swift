@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 struct CountdownCreateView: View {
-    @EnvironmentObject var store: PomodoroStore
+    @EnvironmentObject var store: AppStore
     @State var model = Pomodoro(id: 0, title: "", start: Date(), end: Date())
 
     var body: some View {
@@ -48,11 +48,8 @@ struct CountdownCreateView: View {
             id: 0, title: model.title, start: Date(), end: Date() + duration,
             memo: "", project: model.project
         )
-
-        store.create(pomodoro) { _ in
-            store.load()
-            model.title = ""
-        }
+        store.send(.history(.create(pomodoro)))
+        model.title = ""
     }
 
     func actionSubmit25() {

@@ -39,91 +39,62 @@ extension Pomodoro {
     }
 }
 
-typealias PomodoroCompletion = ((Pomodoro) -> Void)
+enum HistoryAction {
+    case fetch
+    case set(Pomodoro.List)
+    case create(Pomodoro)
+    case update(Pomodoro)
+    case date(id: Int, date: Date)
+    case delete(offset: IndexSet)
+}
 
-final class PomodoroStore: LoadableObject {
-    @Published private(set) var state = LoadingState<[Pomodoro]>.idle
-    private var subscriptions = Set<AnyCancellable>()
+func mapPomodoro(pomodoro: Pomodoro) -> AppAction {
+    return .history(.fetch)
+}
 
-    @Published private(set) var pomodoros: [Pomodoro] = []
-
-    func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            state = .failed(error)
+extension HistoryAction {
+    func reducer(state: inout AppState, environment: AppEnvironment)
+        -> AnyPublisher<AppAction, Never>?
+    {
+        guard let login = state.login else { return nil }
+        switch self {
+        case .fetch:
+            var request: Request<Pomodoro.List> = login.request(
+                path: "/api/pomodoro", method: .get([.init(name: "limit", value: "100")]))
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map { HistoryAction.set($0) }
+                .map { AppAction.history($0) }
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .set(let results):
+            state.pomodoros = results.results.sorted { $0.start > $1.start }
+        case .create(let data):
+            var request: Request<Pomodoro> = login.request(path: "/api/pomodoro", post: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .update(let pomodoro):
+            var request: Request<Pomodoro> = login.request(
+                path: "/api/pomodoro/\(pomodoro.id)", put: pomodoro)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .date(let id, let date):
+            let data = Pomodoro.DateRequest(end: date)
+            var request: Request<Pomodoro> = login.request(path: "/api/pomodoro/\(id)", patch: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .delete(let offset):
+            print(offset)
         }
-    }
-
-    private func onReceive(_ batch: Pomodoro.List) {
-        pomodoros = batch.results.sorted { $0.start > $1.start }
-        state = .loaded(pomodoros)
-    }
-
-    func load() {
-        state = .loading
-
-        URLRequest.request(path: "/api/pomodoro", qs: ["limit": 100])
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.List.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-            .store(in: &subscriptions)
-    }
-
-    func create(_ object: Pomodoro, completion: @escaping ((Pomodoro) -> Void)) {
-        var request = URLRequest.request(path: "/api/pomodoro")
-        request.httpMethod = "POST"
-        request.addBody(object: object)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
-    }
-
-    func update(object: Pomodoro, completion: @escaping ((Pomodoro) -> Void)) {
-        var request = URLRequest.request(path: "/api/pomodoro/\(object.id)")
-        request.httpMethod = "PUT"
-        request.addBody(object: object)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
-    }
-
-    func update(id: Int, end: Date, completion: @escaping ((Pomodoro) -> Void)) {
-        let update = Pomodoro.DateRequest(end: end)
-        var request = URLRequest.request(path: "/api/pomodoro/\(id)")
-        request.httpMethod = "PATCH"
-        request.addBody(object: update)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
-    }
-
-    func delete(_ pomodoro: Pomodoro, receiveValue: @escaping ((URLResponse) -> Void)) {
-        var request = URLRequest.request(path: "/api/pomodoro/\(pomodoro.id)")
-        request.httpMethod = "DELETE"
-        request.dataTaskPublisher()
-            .map { $0.response }
-            .mapError { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveValue)
-            .store(in: &subscriptions)
+        return nil
     }
 }

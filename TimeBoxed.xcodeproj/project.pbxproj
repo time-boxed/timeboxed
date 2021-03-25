@@ -12,10 +12,8 @@
 		870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47924924BF000ED17C2 /* ProjectDetailView.swift */; };
 		870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */; };
 		871C87B2253857B800920351 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871C87B1253857B800920351 /* ReportView.swift */; };
-		871E49832533F33D00355776 /* AsyncContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49822533F33D00355776 /* AsyncContentView.swift */; };
 		871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E49852533F5D800355776 /* JSON+Extensions.swift */; };
 		871E498B253402DD00355776 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E498A253402DD00355776 /* Login.swift */; };
-		873A6B7625726A52004BAAD0 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */; };
 		873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873D2F66252B21F900CC3DCF /* ImageButton.swift */; };
 		874E6C842489215100E7153C /* CenterModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874E6C832489215100E7153C /* CenterModifier.swift */; };
 		8758269E25931FD30054F19E /* ProjectEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758269D25931FD30054F19E /* ProjectEditView.swift */; };
@@ -33,6 +31,8 @@
 		87C6AAAB24826983002FAA74 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAA24826983002FAA74 /* DateView.swift */; };
 		87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAC248269B9002FAA74 /* TimeView.swift */; };
 		87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6AAAE24826B02002FAA74 /* IntervalView.swift */; };
+		87DDE0A62605E53E000BA99E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DDE0A52605E53E000BA99E /* AppState.swift */; };
+		87DDE0A92605E553000BA99E /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DDE0A82605E553000BA99E /* State.swift */; };
 		87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763D248A74150030044C /* CountdownTimerView.swift */; };
 		87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8763F248A74B50030044C /* CountdownCreateView.swift */; };
 		87E87642248A75160030044C /* CountdownExtendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E87641248A75160030044C /* CountdownExtendView.swift */; };
@@ -56,9 +56,6 @@
 		C19BA163243F321F004795A7 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = C19BA162243F321F004795A7 /* Makefile */; };
 		C19BA168243F3331004795A7 /* SwiftMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA167243F3331004795A7 /* SwiftMQTT */; };
 		C19BA16B243F3396004795A7 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = C19BA16A243F3396004795A7 /* KeychainAccess */; };
-		C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */; };
-		C19BA170243F3407004795A7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA16F243F3407004795A7 /* Settings.swift */; };
-		C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA171243F346D004795A7 /* Keychain+Extensions.swift */; };
 		C19BA174243F35E8004795A7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19BA173243F35E8004795A7 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,10 +65,8 @@
 		870FE47924924BF000ED17C2 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		870FE47B24924F8D00ED17C2 /* FavoriteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDetailView.swift; sourceTree = "<group>"; };
 		871C87B1253857B800920351 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		871E49822533F33D00355776 /* AsyncContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContentView.swift; sourceTree = "<group>"; };
 		871E49852533F5D800355776 /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		871E498A253402DD00355776 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		873D2F66252B21F900CC3DCF /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		874E6C832489215100E7153C /* CenterModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterModifier.swift; sourceTree = "<group>"; };
 		8758269D25931FD30054F19E /* ProjectEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEditView.swift; sourceTree = "<group>"; };
@@ -89,6 +84,8 @@
 		87C6AAAA24826983002FAA74 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		87C6AAAC248269B9002FAA74 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
 		87C6AAAE24826B02002FAA74 /* IntervalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
+		87DDE0A52605E53E000BA99E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		87DDE0A82605E553000BA99E /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		87E8763D248A74150030044C /* CountdownTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownTimerView.swift; sourceTree = "<group>"; };
 		87E8763F248A74B50030044C /* CountdownCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownCreateView.swift; sourceTree = "<group>"; };
 		87E87641248A75160030044C /* CountdownExtendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownExtendView.swift; sourceTree = "<group>"; };
@@ -112,9 +109,6 @@
 		C19BA15E243F31A4004795A7 /* HistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListView.swift; sourceTree = "<group>"; };
 		C19BA160243F31D0004795A7 /* FavoriteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListView.swift; sourceTree = "<group>"; };
 		C19BA162243F321F004795A7 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
-		C19BA16F243F3407004795A7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		C19BA171243F346D004795A7 /* Keychain+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain+Extensions.swift"; sourceTree = "<group>"; };
 		C19BA173243F35E8004795A7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,11 +166,12 @@
 		876EF076245E90650021687C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				87DDE0A52605E53E000BA99E /* AppState.swift */,
 				87F95B2B24808D0400255B29 /* Favorite.swift */,
 				876EF077245E90790021687C /* Pomodoro.swift */,
 				8792C373248BA1CB0098F928 /* Project.swift */,
-				C19BA16F243F3407004795A7 /* Settings.swift */,
 				871E498A253402DD00355776 /* Login.swift */,
+				87DDE0A82605E553000BA99E /* State.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,7 +279,6 @@
 				878C37C824C43A0600BA9F5B /* ProjectPage */,
 				87E998B024C43C09008A25AD /* SettingsView */,
 				C19BA145243F2E33004795A7 /* ContentView.swift */,
-				871E49822533F33D00355776 /* AsyncContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -309,12 +303,9 @@
 			isa = PBXGroup;
 			children = (
 				8766894E248FAEDB0056DCB9 /* Color+Extension.swift */,
-				C19BA171243F346D004795A7 /* Keychain+Extensions.swift */,
 				87F95B2924808A8C00255B29 /* URLSession+Extensions.swift */,
-				C19BA16D243F33B9004795A7 /* UserDefaults+Extensions.swift */,
 				871E49852533F5D800355776 /* JSON+Extensions.swift */,
 				87B1D509254ACF8B0064BD4D /* Array+Extensions.swift */,
-				873A6B7525726A52004BAAD0 /* OSLog+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -401,7 +392,6 @@
 			files = (
 				C19BA142243F2E33004795A7 /* AppDelegate.swift in Sources */,
 				87E87642248A75160030044C /* CountdownExtendView.swift in Sources */,
-				C19BA16E243F33B9004795A7 /* UserDefaults+Extensions.swift in Sources */,
 				C19BA15F243F31A4004795A7 /* HistoryListView.swift in Sources */,
 				C19BA161243F31D0004795A7 /* FavoriteListView.swift in Sources */,
 				871C87B2253857B800920351 /* ReportView.swift in Sources */,
@@ -409,7 +399,6 @@
 				8766894D248FAB1F0056DCB9 /* ProjectListView.swift in Sources */,
 				87F95B2E2480930200255B29 /* FavoriteRowView.swift in Sources */,
 				870FE47A24924BF000ED17C2 /* ProjectDetailView.swift in Sources */,
-				C19BA170243F3407004795A7 /* Settings.swift in Sources */,
 				871E49862533F5D800355776 /* JSON+Extensions.swift in Sources */,
 				87F95B322480944700255B29 /* DurationView.swift in Sources */,
 				C19BA15B243F2F7C004795A7 /* CountdownView.swift in Sources */,
@@ -422,6 +411,7 @@
 				873D2F67252B21F900CC3DCF /* ImageButton.swift in Sources */,
 				87F95B302480933100255B29 /* HistoryRowView.swift in Sources */,
 				87C6AAAB24826983002FAA74 /* DateView.swift in Sources */,
+				87DDE0A92605E553000BA99E /* State.swift in Sources */,
 				87F95B362480A2B400255B29 /* ButtonStyles.swift in Sources */,
 				C19BA174243F35E8004795A7 /* LoginView.swift in Sources */,
 				87F95B2A24808A8C00255B29 /* URLSession+Extensions.swift in Sources */,
@@ -432,17 +422,15 @@
 				87E8763E248A74150030044C /* CountdownTimerView.swift in Sources */,
 				8766894F248FAEDB0056DCB9 /* Color+Extension.swift in Sources */,
 				879C36352483AB8A00DF0B9F /* SelectUserView.swift in Sources */,
-				873A6B7625726A52004BAAD0 /* OSLog+Extensions.swift in Sources */,
 				C19BA156243F2E8F004795A7 /* CountdownParentView.swift in Sources */,
 				C19BA163243F321F004795A7 /* Makefile in Sources */,
 				870FE47C24924F8D00ED17C2 /* FavoriteDetailView.swift in Sources */,
-				871E49832533F33D00355776 /* AsyncContentView.swift in Sources */,
 				87C6AAAD248269B9002FAA74 /* TimeView.swift in Sources */,
-				C19BA172243F346D004795A7 /* Keychain+Extensions.swift in Sources */,
 				87C6AAAF24826B02002FAA74 /* IntervalView.swift in Sources */,
 				87E87640248A74B50030044C /* CountdownCreateView.swift in Sources */,
 				87A4B41E248B523D00F37761 /* PreviewData.swift in Sources */,
 				871E498B253402DD00355776 /* Login.swift in Sources */,
+				87DDE0A62605E53E000BA99E /* AppState.swift in Sources */,
 				87A1DAF22532E41B00F48EB4 /* ProjectPicker.swift in Sources */,
 				87F95B2C24808D0400255B29 /* Favorite.swift in Sources */,
 				C19BA146243F2E33004795A7 /* ContentView.swift in Sources */,

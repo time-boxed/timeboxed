@@ -28,99 +28,64 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
-typealias FavoriteCompletion = ((Favorite) -> Void)
+enum FavoriteAction {
+    case fetch
+    case set(results: Favorite.List)
+    case start(param: Favorite)
+    case create(data: Favorite.Data)
+    case update(update: Favorite)
+    case delete(delete: Favorite)
+}
 
-final class FavoriteStore: LoadableObject {
-    @Published private(set) var state = LoadingState<[Favorite]>.idle
-    private var subscriptions = Set<AnyCancellable>()
+func mapFavorite(favorite: Favorite) -> AppAction {
+    return .favorite(.fetch)
+}
 
-    func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            state = .failed(error)
+extension FavoriteAction {
+    func reducer(state: inout AppState, environment: AppEnvironment)
+        -> AnyPublisher<AppAction, Never>?
+    {
+        guard let login = state.login else { return nil }
+        switch self {
+        case .fetch:
+            var request: Request<Favorite.List> = login.request(
+                path: "/api/favorite", method: .get([]))
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map { AppAction.favorite(.set(results: $0)) }
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .set(let results):
+            state.favorites = results.results.sorted { $0.count > $1.count }
+        case .start(let favorite):
+            var request: Request<Pomodoro> = login.request(
+                path: "/api/favorite/\(favorite.id)/start", method: .post(nil))
+            request.addBasicAuth(login: login)
+            state.tab = .countdown
+            return URLSession.shared.publisher(for: request)
+                .map(mapPomodoro)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .create(let data):
+            var request: Request<Favorite> = login.request(path: "/api/favorite", post: data)
+            request.addBasicAuth(login: login)
+            return URLSession.shared.publisher(for: request)
+                .map(mapFavorite)
+                .catch { Just(AppAction.showError(result: $0)) }
+                .eraseToAnyPublisher()
+        case .update(let favorite):
+            var request: Request<Favorite.List> = login.request(
+                path: "/api/favorite/\(favorite.id)", put: favorite)
+            request.addBasicAuth(login: login)
+            print(request)
+            return AppAction.favorite(.fetch).eraseToAnyPublisher()
+        case .delete(let favorite):
+            var request: Request<Favorite.List> = login.request(
+                path: "/api/favorite/\(favorite.id)", method: .delete)
+            request.addBasicAuth(login: login)
+            print(request)
+            return AppAction.favorite(.fetch).eraseToAnyPublisher()
         }
-    }
-
-    private func onReceive(_ batch: Favorite.List) {
-        state = .loaded(batch.results.sorted { $0.count > $1.count })
-    }
-
-    func create(_ object: Favorite.Data, completion: @escaping ((Favorite) -> Void)) {
-        var request = URLRequest.request(path: "/api/favorite")
-        request.httpMethod = "POST"
-        request.addBody(object: object)
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Favorite.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: completion)
-            .store(in: &subscriptions)
-    }
-
-    func load() {
-        state = .loading
-        URLRequest.request(path: "/api/favorite", qs: ["limit": 50])
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Favorite.List.self, decoder: JSONDecoder.djangoDecoder)
-            .print()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-            .store(in: &subscriptions)
-    }
-
-    func start(favorite: Favorite, receiveOutput: @escaping ((Pomodoro) -> Void)) {
-        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)/start")
-        request.httpMethod = "POST"
-
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Pomodoro.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
-            .store(in: &subscriptions)
-    }
-
-    func update(favorite: Favorite, receiveOutput: @escaping ((Favorite) -> Void)) {
-        var request = URLRequest.request(path: "/api/favorite/\(favorite.id)")
-        request.httpMethod = "PUT"
-        request.addBody(object: favorite)
-        request
-            .dataTaskPublisher()
-            .map { $0.data }
-            .decode(type: Favorite.self, decoder: JSONDecoder.djangoDecoder)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: receiveOutput)
-            .store(in: &subscriptions)
-    }
-
-    func delete(_ object: Favorite) {
-        var request = URLRequest.request(path: "/api/favorite/\(object.id)")
-        request.httpMethod = "DELETE"
-        request.dataTaskPublisher()
-            .map { $0.response }
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { (failure) in
-                    print(failure)
-                },
-                receiveValue: { (response) in
-                    print(response)
-                }
-            )
-            .store(in: &subscriptions)
-    }
-
-    func delete(at offset: IndexSet) {
-        //        offset.forEach { (index) in
-        //            delete(favorites[index])
-        //        }
-        //        favorites.remove(atOffsets: offset)
-        //        //        reload()
+        return nil
     }
 }

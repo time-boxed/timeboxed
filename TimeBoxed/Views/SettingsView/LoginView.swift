@@ -14,8 +14,7 @@ struct LoginView: View {
     @State var newLogin: Login = ""
     @State var password: String = ""
 
-    @EnvironmentObject var userSettings: UserSettings
-    @State private var subscriptions = Set<AnyCancellable>()
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         Form {
@@ -35,29 +34,7 @@ struct LoginView: View {
     }
 
     func loginAction() {
-        var request = newLogin.request(for: "/api/pomodoro", qs: [])
-        request.addBasicAuth(username: newLogin.username, password: password)
-
-        URLSession.shared.dataTaskPublisher(for: request)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: onReceive, receiveValue: onRecieve)
-            .store(in: &subscriptions)
-    }
-
-    private func onReceive(completion: Subscribers.Completion<URLError>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
-    }
-
-    private func onRecieve(data: Data, response: URLResponse) {
-        userSettings.current_user = newLogin
-        userSettings.users.append(newLogin)
-        try? Settings.keychain.set(password, key: newLogin)
-        userSettings.currentTab = .countdown
+        store.send(.login(login: newLogin, password: password))
     }
 }
 

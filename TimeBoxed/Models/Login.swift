@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import KeychainAccess
 
 typealias Login = String
+
+private let keychain = Keychain(service: Bundle.main.bundleIdentifier!)
 
 extension Login {
     var username: String {
@@ -18,12 +21,23 @@ extension Login {
         return components(separatedBy: "@").last!
     }
 
-    func request(for path: String, qs: [URLQueryItem]) -> URLRequest {
+    var password: String {
+        set { try? keychain.set(newValue, key: self) }
+        get { try! keychain.get(self) ?? "" }
+    }
+
+    func request(path: String, method: HttpMethod) -> URLRequest {
         var components = URLComponents()
         components.scheme = "https"
         components.host = domain
         components.path = path
-        components.queryItems = qs
+
+        switch method {
+        case .get(let qs):
+            components.queryItems = qs
+        default:
+            break
+        }
 
         guard let url = components.url else {
             preconditionFailure(
@@ -31,18 +45,47 @@ extension Login {
             )
         }
 
-        return URLRequest(url: url)
-    }
+        var request = URLRequest(url: url)
+        request.httpMethod = method.name
 
-    func request(authed path: String, with password: String, qs: [URLQueryItem]) -> URLRequest {
-        var request = self.request(for: path, qs: qs)
-        request.addBasicAuth(username: username, password: password)
+        switch method {
+        case .post(let data), .put(let data):
+            request.httpBody = data
+        default:
+            break
+        }
+
         return request
     }
 
-    func request(authed path: String, qs: [URLQueryItem]) -> URLRequest {
-        let password = Settings.keychain.string(for: self) ?? ""
-        return self.request(authed: path, with: password, qs: qs)
+    func request<T: Encodable>(path: String, post: T, using encoder: JSONEncoder = .djangoEncoder)
+        -> URLRequest
+    {
+        let data = try! encoder.encode(post)
+        var req = request(path: path, method: .post(data))
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("application/json", forHTTPHeaderField: "Accept")
+        return req
+    }
+
+    func request<T: Encodable>(path: String, put: T, using encoder: JSONEncoder = .djangoEncoder)
+        -> URLRequest
+    {
+        let data = try! encoder.encode(put)
+        var req = request(path: path, method: .put(data))
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("application/json", forHTTPHeaderField: "Accept")
+        return req
+    }
+
+    func request<T: Encodable>(path: String, patch: T, using encoder: JSONEncoder = .djangoEncoder)
+        -> URLRequest
+    {
+        let data = try! encoder.encode(patch)
+        var req = request(path: path, method: .patch(data))
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.addValue("application/json", forHTTPHeaderField: "Accept")
+        return req
     }
 }
 

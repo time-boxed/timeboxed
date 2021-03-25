@@ -9,16 +9,12 @@
 import SwiftUI
 
 struct SelectUserView: View {
-    @EnvironmentObject var settings: UserSettings
+    @EnvironmentObject var store: AppStore
 
     var body: some View {
         List {
-            ForEach(settings.users, id: \.self) { user in
-                Button(action: {
-                    settings.current_user = user
-                    settings.load()
-                    settings.currentTab = .countdown
-                }) {
+            ForEach(store.state.users, id: \.self) { user in
+                Button(action: { store.send(.loginSet(user: user)) }) {
                     Text(user)
                 }
             }.onDelete(perform: deleteItems)
@@ -32,7 +28,7 @@ struct SelectUserView: View {
     }
 
     func deleteItems(at offsets: IndexSet) {
-        settings.users.remove(atOffsets: offsets)
+        store.send(.loginRemove(offset: offsets))
     }
 }
 

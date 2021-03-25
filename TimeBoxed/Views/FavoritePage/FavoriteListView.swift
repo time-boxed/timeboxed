@@ -54,7 +54,7 @@ struct GroupedFavorites: View {
 }
 
 struct FavoriteListView: View {
-    @EnvironmentObject var store: FavoriteStore
+    @EnvironmentObject var store: AppStore
 
     @State private var isPresented = false
     @State private var data = Favorite.Data()
@@ -62,17 +62,17 @@ struct FavoriteListView: View {
     var body: some View {
         NavigationView {
             List {
-                AsyncContentView(source: store) { favorites in
-                    GroupedFavorites(favorites: favorites)
-                }
+                GroupedFavorites(favorites: store.state.favorites)
+
             }
+            .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add", action: actionShowAdd)
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    ReloadButton(source: store)
+                    Button("Reload", action: fetch)
                 }
             }
             .navigationBarTitle("Favorites")
@@ -91,8 +91,11 @@ struct FavoriteListView: View {
                 }
             }
         }
-    }
 
+    }
+    func fetch() {
+        store.send(.favorite(.fetch))
+    }
     private func actionShowAdd() {
         isPresented = true
         data = .init()
@@ -103,10 +106,8 @@ struct FavoriteListView: View {
     }
 
     private func actionSaveEdit() {
-        store.create(data) { newFavorite in
-            isPresented = false
-            store.load()
-        }
+        store.send(.favorite(.create(data: data)))
+        isPresented = false
     }
 }
 

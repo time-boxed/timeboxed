@@ -11,7 +11,7 @@ import SwiftUI
 struct ProjectDetailView: View {
     @State var project: Project
 
-    @EnvironmentObject var store: ProjectStore
+    @EnvironmentObject var store: AppStore
     @State private var isPresented = false
     @State private var data = Project.Data()
 
@@ -73,11 +73,8 @@ struct ProjectDetailView: View {
     private func actionSaveEdit() {
         // Update our local copy for visual purposes
         project.update(from: data)
-        // Then update the server version
-        store.update(project: project) { updatedProject in
-            isPresented = false
-            store.load()
-        }
+        isPresented = false
+        store.send(.project(.update(project: project)))
     }
 
     private func actionQuickstart() {
