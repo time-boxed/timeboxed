@@ -38,11 +38,11 @@ struct CountdownParentView: View {
     }
 }
 #if DEBUG
-struct CountdownPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            CountdownParentView()
-        }.previewDevice(PreviewData.device)
+    struct CountdownPageView_Previews: PreviewProvider {
+        static var previews: some View {
+            Group {
+                CountdownParentView()
+            }.previewDevice(PreviewData.device)
+        }
     }
-}
 #endif

@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-fileprivate extension AppStore {
-    func sendDate(id: Int, date: Date) {
+extension AppStore {
+    fileprivate func sendDate(id: Int, date: Date) {
         send(.history(.date(id: id, date: date)))
     }
 }

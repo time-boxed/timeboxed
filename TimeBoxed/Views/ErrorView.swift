@@ -15,10 +15,14 @@ struct ErrorView: View {
     var body: some View {
         HStack {
             Text(error.localizedDescription)
-            Button("X") {
-                store.send(.errorClear)
+            Button(action: actionClose) {
+                Label("Close", systemImage: "xmark.circle")
             }
         }
+    }
+
+    func actionClose() {
+        store.send(.errorClear)
     }
 }
 
