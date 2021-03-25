@@ -93,23 +93,10 @@ struct FavoriteListView: View {
     @State private var data = Favorite.Data()
     @State private var sorting = Sorting.alphabetic
 
-    var content: some View {
-        List {
-            switch sorting {
-            case .alphabetic:
-                FavoriteListAlphabetic(favorites: store.state.favorites)
-            case .project:
-                FavoriteListProjects(favorites: store.state.favorites)
-            case .count:
-                FavoriteListCount(favorites: store.state.favorites)
-            }
-        }
-    }
-
     var body: some View {
         NavigationView {
-            Group {
-                content
+            List {
+                sorting.content(favorites: store.state.favorites)
             }
             .onAppear(perform: fetch)
             .listStyle(GroupedListStyle())
@@ -159,6 +146,19 @@ struct FavoriteListView: View {
     private func actionSaveEdit() {
         store.send(.favorite(.create(data: data)))
         isPresented = false
+    }
+}
+
+extension FavoriteListView.Sorting {
+    @ViewBuilder func content(favorites: [Favorite]) -> some View {
+        switch self {
+        case .alphabetic:
+            FavoriteListAlphabetic(favorites: favorites)
+        case .project:
+            FavoriteListProjects(favorites: favorites)
+        case .count:
+            FavoriteListCount(favorites: favorites)
+        }
     }
 }
 
