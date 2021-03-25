@@ -15,11 +15,10 @@ extension Array where Element == Favorite {
     }
 }
 
-struct FavoriteHeader: View {
-    var project: Project
-    var favorites: [Favorite]
+struct FavoriteListProjects: View {
+    private var groups: [(key: Project, value: [Favorite])]
 
-    var body: some View {
+    @ViewBuilder func header(project: Project, favorites: [Favorite]) -> some View {
         HStack {
             NavigationLink(destination: ProjectDetailView(project: project)) {
                 ProjectOptionalView(project: project)
@@ -28,14 +27,10 @@ struct FavoriteHeader: View {
             Text("Count \(favorites.groupedCount)")
         }
     }
-}
-
-struct FavoriteListProjects: View {
-    var groups: [(key: Project, value: [Favorite])]
 
     var body: some View {
         ForEach(groups, id: \.key) { project, favorites in
-            Section(header: FavoriteHeader(project: project, favorites: favorites)) {
+            Section(header: header(project: project, favorites: favorites)) {
                 ForEach(favorites) { favorite in
                     NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
                         FavoriteRowView(favorite: favorite)
@@ -53,22 +48,9 @@ struct FavoriteListProjects: View {
     }
 }
 
-struct FavoriteListAlphabetic: View {
-    var favorites: [Favorite]
-    var body: some View {
-        ForEach(favorites) { favorite in
-            NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
-                FavoriteRowView(favorite: favorite, showProject: true)
-            }
-        }
-    }
-    init(favorites: [Favorite]) {
-        self.favorites = favorites.sorted { $0.title < $1.title }
-    }
-}
+struct FavoriteListSorted: View {
+    private var favorites: [Favorite]
 
-struct FavoriteListCount: View {
-    var favorites: [Favorite]
     var body: some View {
         ForEach(favorites) { favorite in
             NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
@@ -76,8 +58,11 @@ struct FavoriteListCount: View {
             }
         }
     }
-    init(favorites: [Favorite]) {
-        self.favorites = favorites.sorted { $0.count > $1.count }
+    init(byCount: [Favorite]) {
+        self.favorites = byCount.sorted { $0.count > $1.count }
+    }
+    init(byTitle: [Favorite]) {
+        self.favorites = byTitle.sorted { $0.title < $1.title }
     }
 }
 
@@ -153,11 +138,11 @@ extension FavoriteListView.Sorting {
     @ViewBuilder func content(favorites: [Favorite]) -> some View {
         switch self {
         case .alphabetic:
-            FavoriteListAlphabetic(favorites: favorites)
+            FavoriteListSorted(byTitle: favorites)
         case .project:
             FavoriteListProjects(favorites: favorites)
         case .count:
-            FavoriteListCount(favorites: favorites)
+            FavoriteListSorted(byCount: favorites)
         }
     }
 }
