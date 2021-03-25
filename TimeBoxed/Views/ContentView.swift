@@ -24,7 +24,7 @@ struct ContentView: View {
 
     var body: some View {
         if let error = store.state.error {
-            Text(error.localizedDescription)
+            ErrorView(error: error)
         }
         TabView(selection: $currentTab) {
             CountdownParentView()
@@ -53,6 +53,9 @@ struct ContentView: View {
         .onAppear {
             self.showLogin = store.state.login == nil
         }
+        .onReceive(store.state.$tab, perform: { value in
+            currentTab = value
+        })
     }
 }
 
