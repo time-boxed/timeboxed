@@ -62,13 +62,9 @@ struct HistoryListView: View {
                 GroupedHistory(pomodoros: store.state.pomodoros)
             }
             .onAppear(perform: fetch)
+            .refreshable(action: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reload", action: fetch)
-                }
-            }
         }
     }
 

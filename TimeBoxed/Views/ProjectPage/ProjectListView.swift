@@ -56,6 +56,7 @@ struct ProjectListView: View {
                 sorting.content(projects: store.state.projects)
             }
             .onAppear(perform: fetch)
+            .refreshable(action: fetch)
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
             .toolbar {
@@ -65,9 +66,6 @@ struct ProjectListView: View {
                         Text("Alphabetic").tag(Sorting.alphabetic)
                         Text("Duration").tag(Sorting.duration)
                     }.pickerStyle(MenuPickerStyle())
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reload", action: fetch)
                 }
             }
             .sheet(isPresented: $isPresented) {

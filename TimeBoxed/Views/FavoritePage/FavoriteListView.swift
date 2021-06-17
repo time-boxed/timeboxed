@@ -92,6 +92,7 @@ struct FavoriteListView: View {
                 sorting.content(favorites: store.state.favorites)
             }
             .onAppear(perform: fetch)
+            .refreshable(action: fetch)
             .listStyle(GroupedListStyle())
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -101,9 +102,6 @@ struct FavoriteListView: View {
                         Text("Project").tag(Sorting.project)
                         Text("Count").tag(Sorting.count)
                     }.pickerStyle(MenuPickerStyle())
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Reload", action: fetch)
                 }
             }
             .navigationBarTitle("Favorites")

@@ -29,6 +29,7 @@ struct CountdownParentView: View {
                 }
             }
             .listStyle(GroupedListStyle())
+            .refreshable(action: fetch)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
