@@ -43,9 +43,9 @@ struct ProjectListView: View {
 
     @State private var isPresented = false
     @State private var data = Project.Data()
-    @State private var sorting = Sorting.alphabetic
+    @AppStorage("projectSort") private var sorting = Sorting.alphabetic
 
-    enum Sorting {
+    enum Sorting: String {
         case alphabetic
         case duration
     }
