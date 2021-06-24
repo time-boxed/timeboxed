@@ -75,7 +75,7 @@ struct FavoriteListSorted: View {
 }
 
 struct FavoriteListView: View {
-    enum Sorting {
+    enum Sorting: String {
         case alphabetic
         case project
         case count
@@ -84,7 +84,7 @@ struct FavoriteListView: View {
 
     @State private var isPresented = false
     @State private var data = Favorite.Data()
-    @State private var sorting = Sorting.alphabetic
+    @AppStorage("favoriteSort") private var sorting = Sorting.alphabetic
 
     var body: some View {
         NavigationView {
