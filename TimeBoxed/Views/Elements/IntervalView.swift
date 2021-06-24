@@ -20,8 +20,7 @@ struct IntervalView: View {
     }
 
     var body: some View {
-        // Ensure that we always print the absolute value of our timer
-        Text(formatter.string(from: elapsed > 0 ? elapsed : elapsed * -1)!)
+        Text(formatter.string(from: elapsed)!)
     }
 
     init(elapsed: TimeInterval) {

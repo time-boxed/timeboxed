@@ -39,7 +39,7 @@ struct ColorInterval: View {
         }
     }
     var body: some View {
-        IntervalView(elapsed: elapsed)
+        IntervalView(elapsed: abs(elapsed))
             .foregroundColor(color)
     }
 }
