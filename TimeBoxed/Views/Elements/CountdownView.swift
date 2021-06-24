@@ -12,33 +12,34 @@ import SwiftUI
 struct CountdownView: View {
     var date: Date
 
-    @State private var color = Color.white
-    @State private var elapsed = TimeInterval()
-
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
-    private func tick(tick: Date) {
-        elapsed = Date().timeIntervalSince(date).rounded()
-
-        switch elapsed {
-        case _ where elapsed < 0:
-            color = .green
-        case _ where elapsed > 600:
-            color = .red
-        default:
-            color = .blue
-        }
-    }
-
     var body: some View {
-        IntervalView(elapsed: elapsed)
-            .foregroundColor(color)
-            .onReceive(timer, perform: tick)
+        TimelineView(PeriodicTimelineSchedule(from: Date(), by: 1)) { context in
+            ColorInterval(elapsed: context.date.timeIntervalSince(date))
+        }
     }
 }
 
 struct CountdownView_Previews: PreviewProvider {
     static var previews: some View {
         CountdownView(date: Date()).previewLayout(.sizeThatFits)
+    }
+}
+
+
+struct ColorInterval: View {
+    var elapsed: TimeInterval
+    var color: Color  {
+        switch elapsed {
+        case _ where elapsed < 0:
+            return.green
+        case _ where elapsed > 600:
+            return .red
+        default:
+            return .blue
+        }
+    }
+    var body: some View {
+        IntervalView(elapsed: elapsed)
+            .foregroundColor(color)
     }
 }
