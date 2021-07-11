@@ -19,6 +19,9 @@ struct LoginView: View {
     var body: some View {
         Form {
             TextField("Username", text: $newLogin)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .keyboardType(.emailAddress)
             SecureField("Password", text: $password)
             Button("Login", action: loginAction)
                 .buttonStyle(ActionButtonStyle())
