@@ -16,6 +16,7 @@ extension Array where Element == Favorite {
 }
 
 struct FavoriteListProjects: View {
+    @EnvironmentObject var store: AppStore
     private var groups: [(key: Project, value: [Favorite])]
 
     @ViewBuilder func header(project: Project, favorites: [Favorite]) -> some View {
@@ -34,6 +35,15 @@ struct FavoriteListProjects: View {
                 ForEach(favorites) { favorite in
                     NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
                         FavoriteRowView(favorite: favorite)
+                    }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button("Delete", role:.destructive) {
+                            store.send(.favorite(.delete(delete: favorite)))
+                        }
+                        Button("Move") {
+
+                        }
+                        .tint(.blue)
                     }
                 }
             }
@@ -57,20 +67,22 @@ struct FavoriteListSorted: View {
             NavigationLink(destination: FavoriteDetailView(favorite: favorite)) {
                 FavoriteRowView(favorite: favorite, showProject: true)
             }
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button("Delete", role:.destructive) {
+                    store.send(.favorite(.delete(delete: favorite)))
+                }
+                Button("Move") {
+
+                }
+                .tint(.blue)
+            }
         }
-        .onDelete(perform: actionDelete)
     }
     init(byCount: [Favorite]) {
         self.favorites = byCount.sorted { $0.count > $1.count }
     }
     init(byTitle: [Favorite]) {
         self.favorites = byTitle.sorted { $0.title < $1.title }
-    }
-
-    private func actionDelete(indexSet: IndexSet) {
-        //TODO Implement
-        print("Favorite::actionDelete \(indexSet)")
-        //        store.send(.favorite(.delete(offset: indexSet)))
     }
 }
 
@@ -93,7 +105,7 @@ struct FavoriteListView: View {
             }
             .refreshable { await fetch() }
             .task { await fetch() }
-            .listStyle(GroupedListStyle())
+            .listStyle(.grouped)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button("Add", action: actionShowAdd)
@@ -101,7 +113,7 @@ struct FavoriteListView: View {
                         Text("Alphabetic").tag(Sorting.alphabetic)
                         Text("Project").tag(Sorting.project)
                         Text("Count").tag(Sorting.count)
-                    }.pickerStyle(MenuPickerStyle())
+                    }.pickerStyle(.menu)
                 }
             }
             .navigationBarTitle("Favorites")

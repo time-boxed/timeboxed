@@ -28,23 +28,24 @@ struct Favorite: Codable, Identifiable {
     }
 }
 
-enum FavoriteAction {
-    case fetch
-    case set(results: Favorite.List)
-    case start(param: Favorite)
-    case create(data: Favorite.Data)
-    case update(update: Favorite)
-    case delete(delete: Favorite)
+extension Favorite {
+    enum Action {
+        case fetch
+        case set(results: Favorite.List)
+        case start(param: Favorite)
+        case create(data: Favorite.Data)
+        case update(update: Favorite)
+        case delete(delete: Favorite)
+    }
 }
 
 func mapFavorite(favorite: Favorite) -> AppAction {
     return .favorite(.fetch)
 }
 
-extension FavoriteAction {
+extension Favorite.Action {
     func reducer(state: inout AppState, environment: AppEnvironment)
-        -> AnyPublisher<AppAction, Never>?
-    {
+        -> AnyPublisher<AppAction, Never>? {
         guard let login = state.login else { return nil }
         switch self {
         case .fetch:
@@ -54,6 +55,7 @@ extension FavoriteAction {
             return URLSession.shared.publisher(for: request)
                 .map { AppAction.favorite(.set(results: $0)) }
                 .catch { Just(AppAction.errorShow(result: $0)) }
+                .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         case .set(let results):
             state.favorites = results.results.sorted { $0.count > $1.count }

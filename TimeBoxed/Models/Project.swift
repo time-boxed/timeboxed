@@ -56,6 +56,7 @@ extension Project.Action {
             return URLSession.shared.publisher(for: request)
                 .map { AppAction.project(.set(results: $0)) }
                 .catch { Just(AppAction.errorShow(result: $0)) }
+                .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         case .set(let projects):
             state.projects = projects.results

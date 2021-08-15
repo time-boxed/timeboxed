@@ -33,7 +33,7 @@ enum AppAction {
     case loginSet(user: Login)
 
     case history(Pomodoro.Action)
-    case favorite(FavoriteAction)
+    case favorite(Favorite.Action)
     case project(Project.Action)
 
     case tabSet(tab: ContentView.Tab)

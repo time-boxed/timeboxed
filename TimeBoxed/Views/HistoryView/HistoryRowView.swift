@@ -14,12 +14,13 @@ struct HistoryRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(pomodoro.title)
+                .lineLimit(1)
                 .font(.title)
             HStack(alignment: .top) {
                 ProjectOptionalView(project: pomodoro.project)
                 Spacer()
                 IntervalView(from: pomodoro.start, to: pomodoro.end)
-            }
+            }.font(.subheadline)
             HStack(alignment: .top) {
                 TimeView(date: pomodoro.start, style: .medium)
                 Spacer()

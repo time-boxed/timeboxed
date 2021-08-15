@@ -68,6 +68,7 @@ extension Pomodoro.Action {
                 .map { Pomodoro.Action.set($0) }
                 .map { AppAction.history($0) }
                 .catch { Just(AppAction.errorShow(result: $0)) }
+                .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         case .set(let results):
             state.pomodoros = results.results.sorted { $0.start > $1.start }
