@@ -8,21 +8,34 @@
 
 import SwiftUI
 
+struct ProjectRow: View {
+    let project: Project
+    var body: some View {
+        VStack(alignment: .leading) {
+            ProjectRowView(project: project)
+                .font(.title)
+            DurationView(duration: project.duration)
+                .font(.footnote)
+        }
+    }
+}
+
 struct ProjectListSorted: View {
     @EnvironmentObject var store: AppStore
     var projects: [Project]
     var body: some View {
-        ForEach(projects) { project in
-            NavigationLink(destination: ProjectDetailView(project: project)) {
-                VStack(alignment: .leading) {
-                    ProjectRowView(project: project)
-                        .font(.title)
-                    DurationView(duration: project.duration)
-                        .font(.footnote)
+        List {
+            ForEach(projects) { project in
+                NavigationLink(destination: ProjectDetailView(project: project)) {
+                    ProjectRow(project: project)
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button("Delete", role: .destructive) {
+                        store.send(.project(.delete(project: project)))
+                    }
                 }
             }
         }
-        .onDelete(perform: actionDelete)
     }
 
     init(byDuration: [Project]) {
@@ -31,10 +44,6 @@ struct ProjectListSorted: View {
 
     init(byName: [Project]) {
         projects = byName.sorted { $0.name > $1.name }
-    }
-
-    private func actionDelete(indexSet: IndexSet) {
-        store.send(.project(.delete(offset: indexSet)))
     }
 }
 
@@ -52,9 +61,7 @@ struct ProjectListView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                sorting.content(projects: store.state.projects)
-            }
+            sorting.content(projects: store.state.projects)
             .task { await fetch() }
             .refreshable { await fetch() }
             .listStyle(GroupedListStyle())

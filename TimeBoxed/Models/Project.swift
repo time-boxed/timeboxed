@@ -28,19 +28,21 @@ struct Project: Codable, Identifiable, Equatable, Hashable {
     }
 }
 
-enum ProjectAction {
-    case fetch
-    case set(results: Project.List)
-    case create(data: Project.Data)
-    case update(project: Project)
-    case delete(offset: IndexSet)
+extension Project {
+    enum Action {
+        case fetch
+        case set(results: Project.List)
+        case create(data: Project.Data)
+        case update(project: Project)
+        case delete(project: Project)
+    }
 }
 
 func mapProject(project: Project) -> AppAction {
     return .project(.fetch)
 }
 
-extension ProjectAction {
+extension Project.Action {
     func reducer(state: inout AppState, environment: AppEnvironment)
         -> AnyPublisher<AppAction, Never>?
     {
@@ -72,9 +74,9 @@ extension ProjectAction {
                 .map(mapProject)
                 .catch { AppAction.errorShow(result: $0).eraseToAnyPublisher() }
                 .eraseToAnyPublisher()
-        case .delete(let offset):
+        case .delete(let project):
             // TODO: Implement Delete
-            print(offset)
+            print(project)
         }
         return nil
     }

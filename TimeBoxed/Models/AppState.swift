@@ -34,7 +34,7 @@ enum AppAction {
 
     case history(HistoryAction)
     case favorite(FavoriteAction)
-    case project(ProjectAction)
+    case project(Project.Action)
 
     case tabSet(tab: ContentView.Tab)
     case errorShow(result: Swift.Error)
