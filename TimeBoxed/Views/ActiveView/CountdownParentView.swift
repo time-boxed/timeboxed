@@ -25,16 +25,18 @@ struct CountdownParentView: View {
                         CountdownCreateView()
                     }
                 } else {
-                    Text("Loading...").onAppear(perform: fetch)
+                    Text("Loading...")
+                        .task { await fetch() }
                 }
             }
             .listStyle(GroupedListStyle())
-            .refreshable(action: fetch)
+            .refreshable { await fetch() }
+
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
-    func fetch() {
+    private func fetch() async {
         store.send(.history(.fetch))
     }
 }

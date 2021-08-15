@@ -13,7 +13,7 @@ struct CountdownView: View {
     var date: Date
 
     var body: some View {
-        TimelineView(PeriodicTimelineSchedule(from: Date(), by: 1)) { context in
+        TimelineView(.periodic(from: Date(), by: 1)) { context in
             ColorInterval(elapsed: context.date.timeIntervalSince(date))
         }
     }

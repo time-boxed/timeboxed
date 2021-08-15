@@ -55,8 +55,8 @@ struct ProjectListView: View {
             List {
                 sorting.content(projects: store.state.projects)
             }
-            .onAppear(perform: fetch)
-            .refreshable(action: fetch)
+            .task { await fetch() }
+            .refreshable { await fetch() }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("Projects")
             .toolbar {
@@ -99,7 +99,7 @@ struct ProjectListView: View {
         isPresented = false
     }
 
-    private func fetch() {
+    private func fetch() async {
         store.send(.project(.fetch))
     }
 }

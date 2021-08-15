@@ -61,14 +61,14 @@ struct HistoryListView: View {
             List {
                 GroupedHistory(pomodoros: store.state.pomodoros)
             }
-            .onAppear(perform: fetch)
-            .refreshable(action: fetch)
+            .task { await fetch() }
+            .refreshable { await fetch() }
             .listStyle(GroupedListStyle())
             .navigationBarTitle("History")
         }
     }
 
-    func fetch() {
+    private func fetch() async {
         store.send(.history(.fetch))
     }
 }

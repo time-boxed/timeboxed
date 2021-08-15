@@ -91,8 +91,8 @@ struct FavoriteListView: View {
             List {
                 sorting.content(favorites: store.state.favorites)
             }
-            .onAppear(perform: fetch)
-            .refreshable(action: fetch)
+            .refreshable { await fetch() }
+            .task { await fetch() }
             .listStyle(GroupedListStyle())
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -122,7 +122,7 @@ struct FavoriteListView: View {
         }
 
     }
-    func fetch() {
+    private func fetch() async {
         store.send(.favorite(.fetch))
     }
     private func actionShowAdd() {
