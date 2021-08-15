@@ -32,7 +32,7 @@ enum AppAction {
     case loginRemove(offset: IndexSet)
     case loginSet(user: Login)
 
-    case history(HistoryAction)
+    case history(Pomodoro.Action)
     case favorite(FavoriteAction)
     case project(Project.Action)
 

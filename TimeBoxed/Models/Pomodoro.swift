@@ -39,20 +39,22 @@ extension Pomodoro {
     }
 }
 
-enum HistoryAction {
-    case fetch
-    case set(Pomodoro.List)
-    case create(Pomodoro)
-    case update(Pomodoro)
-    case date(id: Int, date: Date)
-    case delete(offset: IndexSet)
+extension Pomodoro {
+    enum Action {
+        case fetch
+        case set(Pomodoro.List)
+        case create(Pomodoro)
+        case update(Pomodoro)
+        case date(id: Int, date: Date)
+        case delete(Pomodoro)
+    }
 }
 
 func mapPomodoro(pomodoro: Pomodoro) -> AppAction {
     return .history(.fetch)
 }
 
-extension HistoryAction {
+extension Pomodoro.Action {
     func reducer(state: inout AppState, environment: AppEnvironment)
         -> AnyPublisher<AppAction, Never>?
     {
@@ -63,7 +65,7 @@ extension HistoryAction {
                 path: "/api/pomodoro", method: .get([.init(name: "limit", value: "100")]))
             request.addBasicAuth(login: login)
             return URLSession.shared.publisher(for: request)
-                .map { HistoryAction.set($0) }
+                .map { Pomodoro.Action.set($0) }
                 .map { AppAction.history($0) }
                 .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
@@ -92,8 +94,8 @@ extension HistoryAction {
                 .map(mapPomodoro)
                 .catch { Just(AppAction.errorShow(result: $0)) }
                 .eraseToAnyPublisher()
-        case .delete(let offset):
-            print(offset)
+        case .delete(let pomodoro):
+            print(pomodoro)
         }
         return nil
     }

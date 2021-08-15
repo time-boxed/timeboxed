@@ -35,8 +35,15 @@ struct GroupedHistory: View {
                     NavigationLink(destination: HistoryDetailView(pomodoro: pomodoro)) {
                         HistoryRowView(pomodoro: pomodoro)
                     }
+                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                        Button("Delete", role:.destructive) {
+                            store.send(.history(.delete(pomodoro)))
+                        }
+                        Button("Move") {
+
+                        }.tint(.blue)
+                    }
                 }
-                .onDelete(perform: actionDelete)
             }
         }
     }
@@ -46,10 +53,6 @@ struct GroupedHistory: View {
             grouping: pomodoros,
             by: { Calendar.current.startOfDay(for: $0.end) }
         ).sorted { $0.key > $1.key }
-    }
-
-    private func actionDelete(indexSet: IndexSet) {
-        store.send(.history(.delete(offset: indexSet)))
     }
 }
 
