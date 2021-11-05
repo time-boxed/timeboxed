@@ -8,7 +8,18 @@
 
 import SwiftUI
 
+extension Bundle {
+    var version: String {
+        infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+    var build: String {
+        infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
+}
+
 struct SettingsView: View {
+    @EnvironmentObject var store: AppStore
+
     var body: some View {
         NavigationView {
             List {
@@ -19,15 +30,9 @@ struct SettingsView: View {
                     Link(destination: URL(string: "https://github.com/kfdm/timeboxed/issues")!) {
                         Label("Issues", systemImage: "ant")
                     }
-                    if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
-                        as? String,
-                        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-                    {
-                        Label("Version \(version) Build: \(build)", systemImage: "note.text")
-                    }
-
+                    Label("Version \(Bundle.main.version) Build: \(Bundle.main.build)", systemImage: "note.text")
                 }
-                Section(header: Text("User")) {
+                Section(header: Text(store.state.login ?? "Logged Out")) {
                     NavigationLink(destination: LoginView()) {
                         Label("New User", systemImage: "person.badge.plus")
                     }
